@@ -50,30 +50,27 @@
 
   <main>
     <!-- Section 1: Hero Section -->
-    <section class="hero-section" id="home">
-      <div class="hero-media">
-        <img src="assets/images/Hero 2.gif" alt="African wilderness safari landscape" class="hero-media-element" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-        <div class="hero-video-fallback" style="display: none; background: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;"></div>
+    <section class="hero-inspo-layout" id="home">
+      <div class="hero-bg-wrapper">
+        <img src="assets/images/Hero 2.gif" alt="African wilderness safari landscape" class="hero-gif-bg" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=80';">
         <div class="hero-overlay"></div>
       </div>
-      
-      <div class="hero-content text-center">
-        <span class="hero-eyebrow">✦ Ultra-Luxury Travel Concierge</span>
-        <h1 class="hero-title">Where Extraordinary Journeys Begin</h1>
-        <p class="hero-subtitle">
-          Unforgettable African safaris, pristine beachfront sanctuaries, and rare global encounters curated exclusively for your vision.
-        </p>
 
-        <!-- Single Primary CTA -->
-        <div class="hero-actions">
-          <button type="button" class="btn btn-primary btn-large concierge-trigger" id="heroPrimaryCta">Plan My Trip</button>
-        </div>
+      <div class="container hero-container-grid">
+        <div class="hero-content-left">
+          <span class="hero-tag">✦ Ultra-Luxury Travel Concierge</span>
+          <h1 class="hero-title">Where Extraordinary Journeys Begin</h1>
+          <p class="hero-description">
+            Unforgettable African safaris, pristine beachfront sanctuaries, and rare global encounters curated exclusively for your vision.
+          </p>
 
-        <div class="hero-audio-controls">
-          <button type="button" class="btn-audio-toggle" id="playMusicBtn" aria-label="Toggle background theme music">
-            <span class="audio-icon" id="playIcon">▶</span>
-            <span class="audio-label" id="playText">Play Theme Music</span>
-          </button>
+          <div class="hero-cta-group">
+            <button type="button" class="btn btn-inspo-primary concierge-trigger" id="heroPrimaryCta">Plan My Trip</button>
+            <button type="button" class="btn-play-trigger" id="playMusicBtn" aria-label="Toggle background theme music">
+              <span class="play-icon" id="playIcon">▶</span>
+              <span class="play-text" id="playText">Play Theme Music</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>

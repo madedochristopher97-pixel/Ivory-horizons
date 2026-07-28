@@ -1882,25 +1882,6 @@ img {
    STICKY HEADER, FULL PAGE VIEWS & MOBILE STACKING
    ========================================================================== */
 
-/* Sticky Header Accessibility & Dark Translucent Theme */
-.site-header {
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: transparent;
-  transition: var(--transition-fast);
-}
-
-.site-header.scrolled {
-  background-color: rgba(26, 15, 10, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: var(--space-2) 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
 /* Mobile Handpicked Lands Stacking (Requirement 6) */
 @media (max-width: 768px) {
   .destination-card {
