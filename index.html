@@ -3,51 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ivory Horizons | Bespoke African Journeys & Luxury Travel Concierge</title>
-  <meta name="description" content="Ivory Horizons crafts personalized luxury African journeys, safaris, beach escapes, and cultural experiences beyond the familiar. Connect with extraordinary landscapes.">
+  <title>Ivory Horizons | Luxury Travel Concierge & Bespoke African Safaris</title>
+  <meta name="description" content="Ivory Horizons is an ultra-luxury travel concierge specializing in bespoke African safaris, private wilderness expeditions, and high-end retreats tailored to discerning global travelers.">
   
-  <!-- Favicon System -->
-  <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/Tour Icons/Favicon Set/Ivory 16px.svg">
-  <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/Tour Icons/Favicon Set/Ivory 32px.svg">
-  <link rel="icon" type="image/svg+xml" sizes="48x48" href="assets/Tour Icons/Favicon Set/Ivory 48px.svg">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/Tour Icons/Favicon Set/Ivory 180px.svg">
-  <link rel="icon" type="image/svg+xml" sizes="192x192" href="assets/Tour Icons/Favicon Set/Ivory 192px.svg">
-  <link rel="icon" type="image/svg+xml" sizes="512x512" href="assets/Tour Icons/Favicon Set/Ivory 512px.svg">
-
-  <!-- Preconnect & Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/audio/Hero 2 bg theme music.mp3" type="audio/mpeg">
+  </audio>
 
-  <!-- Hidden Background Audio Player -->
-  <audio id="bgMusic" src="assets/Background Music/Masai-Mara-v2-mastered-by-John-Elleson-Hartley.mp3" preload="none" loop></audio>
-
-  <!-- Top Navigation Header -->
+  <!-- Navigation Header -->
   <header class="site-header" id="siteHeader">
     <div class="header-container">
-      <a href="#" class="brand-logo" aria-label="Ivory Horizons Home">
+      <a href="index.html" class="brand-logo" aria-label="Ivory Horizons Home">
         <img src="assets/images/Ivory Dark No Bg.png" alt="Ivory Horizons Luxury Concierge Logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <span class="logo-mark-text" style="display: none;"><span class="logo-accent">Ivory</span> Horizons</span>
       </a>
 
       <nav class="main-nav" aria-label="Main Navigation">
         <ul class="nav-list">
-          <li><a href="#home" class="nav-link nav-page-link" data-page="home">Home</a></li>
-          <li><a href="#destinations" class="nav-link nav-page-link" data-page="home">Destinations</a></li>
-          <li><a href="#experiences" class="nav-link nav-page-link" data-page="home">Experiences</a></li>
-          <li><a href="#accommodation" class="nav-link nav-page-link" data-page="accommodation">Accommodation</a></li>
-          <li><a href="#about" class="nav-link nav-page-link" data-page="home">About</a></li>
-          <li><a href="#blog" class="nav-link nav-page-link" data-page="blog">Blog</a></li>
-          <li><a href="#contact" class="nav-link nav-page-link" data-page="home">Contact</a></li>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="#destinations" class="nav-link">Destinations</a></li>
+          <li><a href="#experiences" class="nav-link">Experiences</a></li>
+          <li><a href="#journeys" class="nav-link">Tours</a></li>
+          <li><a href="accommodation.html" class="nav-link">Accommodation</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
-        <button type="button" class="btn btn-header-cta" id="openConciergeHeaderBtn">Plan My Trip</button>
+        <button type="button" class="btn btn-header-cta concierge-trigger">Plan My Trip</button>
         <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
           <span></span>
           <span></span>
@@ -57,170 +49,107 @@
   </header>
 
   <main>
-    <!-- Section 1: Hero Section (Updated with Hero 2.gif & Audio Toggle Button) -->
-    <section class="hero-section hero-inspo-layout" id="hero">
-      <div class="hero-bg-wrapper">
-        <img src="assets/Hero/Hero 2.gif" alt="Explorative animated GIF over golden African horizon" class="hero-bg-img hero-gif-bg" loading="eager" onerror="this.src='assets/images/hero_sunset.jpg';">
+    <!-- Section 1: Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="hero-media">
+        <img src="assets/images/Hero 2.gif" alt="African wilderness safari landscape" class="hero-media-element" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="hero-video-fallback" style="display: none; background: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;"></div>
         <div class="hero-overlay"></div>
       </div>
       
-      <div class="container hero-container-grid">
-        <div class="hero-content-left">
-          <div class="hero-tag">Travel Across Africa</div>
-          <h1 class="hero-title">
-            Beyond The Horizon, Your Story Begins <span class="headline-icon">🧭</span>
-          </h1>
-          <p class="hero-description">
-            We help you discover Africa through trips designed around what you love.
-          </p>
-          
-          <div class="hero-cta-group">
-            <button type="button" class="btn btn-inspo-primary" id="heroPrimaryCta">Plan My Trip</button>
-            <button type="button" class="btn-play-trigger" id="playMusicBtn" aria-label="Play background theme music">
-              <span class="play-icon" id="playIcon">▶</span>
-              <span class="play-text" id="playText">Play Theme Music</span>
-            </button>
-          </div>
+      <div class="hero-content text-center">
+        <span class="hero-eyebrow">✦ Ultra-Luxury Travel Concierge</span>
+        <h1 class="hero-title">Where Extraordinary Journeys Begin</h1>
+        <p class="hero-subtitle">
+          Unforgettable African safaris, pristine beachfront sanctuaries, and rare global encounters curated exclusively for your vision.
+        </p>
+
+        <!-- Single Primary CTA -->
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary btn-large concierge-trigger" id="heroPrimaryCta">Plan My Trip</button>
         </div>
 
-        <!-- Bottom Right Micro-Stat / Scroll Widget -->
-        <div class="hero-bottom-widget">
-          <a href="#experiences" class="widget-circle-btn" aria-label="Scroll to discover">↓</a>
-          <p class="widget-text">
-            <strong>15,000+ guests</strong> have experienced a world where every African journey is a handcrafted masterpiece.
-          </p>
+        <div class="hero-audio-controls">
+          <button type="button" class="btn-audio-toggle" id="playMusicBtn" aria-label="Toggle background theme music">
+            <span class="audio-icon" id="playIcon">▶</span>
+            <span class="audio-label" id="playText">Play Theme Music</span>
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- Section 2: Experience Categories -->
+    <!-- Section 2: Curated Modalities (Experiences) -->
     <section class="section section-experiences" id="experiences">
       <div class="container">
         <div class="section-header text-center">
-          <span class="section-badge">Curated Modalities</span>
-          <h2 class="section-title">Find The Journey That Speaks To You</h2>
+          <span class="section-badge">Bespoke Modalities</span>
+          <h2 class="section-title">Curated Experience Styles</h2>
           <p class="section-subtitle">
-            Every traveler holds a unique relationship with discovery. Choose the lens through which you wish to experience Africa.
+            Whether pursuing wildlife migrations, pristine island sands, or cultural heritage, each style is tailored to perfection.
           </p>
         </div>
 
         <div class="experience-grid">
-          <!-- Card 1: Safari Adventures -->
+          <!-- Modality 1: Safari Adventure -->
           <article class="experience-card">
-            <div class="card-image-wrap">
-              <img src="assets/images/Curated Modalities/Safari Adventure.jpg" alt="Safari Adventure in Maasai Mara" loading="lazy" onerror="this.src='assets/images/safari_adventure.jpg';">
-              <div class="card-overlay"></div>
+            <div class="exp-image-box">
+              <img src="assets/images/Curated Modalities/Safari Adventure.jpg" alt="Safari Adventure in East Africa" loading="lazy" onerror="this.src='assets/images/safari_adventure.jpg';">
+              <div class="exp-overlay"></div>
             </div>
-            <div class="card-content">
-              <span class="card-category">Wilderness</span>
-              <h3 class="card-title">Safari Adventures</h3>
-              <p class="card-desc">Immerse in private game reserves, golden savannahs, and intimate encounters with Africa's majestic wildlife.</p>
-              <button type="button" class="card-link concierge-trigger" data-type="Safari">Design Safari Trip &rarr;</button>
+            <div class="exp-content">
+              <span class="exp-badge">Wilderness</span>
+              <h3 class="exp-title">Safari Adventures</h3>
+              <p class="exp-desc">Fly-in safaris, private game drives, dawn hot air ballooning, and luxury tented bush stays.</p>
+              <button type="button" class="btn-text concierge-trigger" data-type="Safari Adventures">Plan Safari Escape &rarr;</button>
             </div>
           </article>
 
-          <!-- Card 2: Beach Escapes -->
+          <!-- Modality 2: Honeymoon Journeys -->
           <article class="experience-card">
-            <div class="card-image-wrap">
-              <img src="assets/images/beach_escape.jpg" alt="Beach Escapes in Zanzibar" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80';">
-              <div class="card-overlay"></div>
+            <div class="exp-image-box">
+              <img src="assets/images/Curated Modalities/Honeymoon Journeys.jpg" alt="Honeymoon Journeys in Zanzibar and Mauritius" loading="lazy" onerror="this.src='assets/images/honeymoon_journeys.jpg';">
+              <div class="exp-overlay"></div>
             </div>
-            <div class="card-content">
-              <span class="card-category">Coastal Sanctuary</span>
-              <h3 class="card-title">Beach Escapes</h3>
-              <p class="card-desc">Pristine turquoise waters, private spice island villas, and sunset sailing across the tranquil Indian Ocean.</p>
-              <button type="button" class="card-link concierge-trigger" data-type="Beach">Design Beach Escape &rarr;</button>
+            <div class="exp-content">
+              <span class="exp-badge">Romance</span>
+              <h3 class="exp-title">Honeymoon Journeys</h3>
+              <p class="exp-desc">Intimate beachfront villas, private dhow dinners, couples' spa rituals, and secluded stargazing.</p>
+              <button type="button" class="btn-text concierge-trigger" data-type="Honeymoon Journeys">Plan Honeymoon &rarr;</button>
             </div>
           </article>
 
-          <!-- Card 3: Luxury Retreats -->
+          <!-- Modality 3: Cultural Discoveries -->
           <article class="experience-card">
-            <div class="card-image-wrap">
-              <img src="assets/images/luxury_retreat.jpg" alt="Luxury Retreats and private lodges" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80';">
-              <div class="card-overlay"></div>
+            <div class="exp-image-box">
+              <img src="assets/images/Curated Modalities/Cultural Discoveries.jpg" alt="Cultural Discoveries in Ghana and Egypt" loading="lazy" onerror="this.src='assets/images/cultural_discoveries.jpg';">
+              <div class="exp-overlay"></div>
             </div>
-            <div class="card-content">
-              <span class="card-category">Secluded Elegance</span>
-              <h3 class="card-title">Luxury Retreats</h3>
-              <p class="card-desc">Private clifftop eco-villas, exclusive-use wilderness estates, and bespoke 5-star hospitality.</p>
-              <button type="button" class="card-link concierge-trigger" data-type="Luxury">Design Luxury Retreat &rarr;</button>
+            <div class="exp-content">
+              <span class="exp-badge">Heritage</span>
+              <h3 class="exp-title">Cultural Discoveries</h3>
+              <p class="exp-desc">Historic West African heritage, pharaonic wonders, Swahili spice traditions, and ancestral connection.</p>
+              <button type="button" class="btn-text concierge-trigger" data-type="Cultural Discoveries">Plan Cultural Journey &rarr;</button>
             </div>
           </article>
 
-          <!-- Card 4: Honeymoon Journeys -->
+          <!-- Modality 4: Wildlife Encounters -->
           <article class="experience-card">
-            <div class="card-image-wrap">
-              <img src="assets/images/Curated Modalities/Honeymoon Journeys.jpg" alt="Romantic Honeymoon Journeys" loading="lazy" onerror="this.src='assets/images/honeymoon_journey.jpg';">
-              <div class="card-overlay"></div>
+            <div class="exp-image-box">
+              <img src="assets/images/Curated Modalities/Wildlife experiences.jpg" alt="Wildlife experiences mountain gorilla trekking" loading="lazy" onerror="this.src='assets/images/wildlife_experiences.jpg';">
+              <div class="exp-overlay"></div>
             </div>
-            <div class="card-content">
-              <span class="card-category">Romance</span>
-              <h3 class="card-title">Honeymoon Journeys</h3>
-              <p class="card-desc">Unforgettable bush-and-beach pairings created specifically for intimate celebrations of love.</p>
-              <button type="button" class="card-link concierge-trigger" data-type="Honeymoon">Design Honeymoon &rarr;</button>
-            </div>
-          </article>
-
-          <!-- Card 5: Cultural Discoveries -->
-          <article class="experience-card">
-            <div class="card-image-wrap">
-              <img src="assets/images/Curated Modalities/Cultural Discoveries.jpg" alt="Cultural Discoveries in Africa" loading="lazy" onerror="this.src='assets/images/cultural_discovery.jpg';">
-              <div class="card-overlay"></div>
-            </div>
-            <div class="card-content">
-              <span class="card-category">Heritage & Identity</span>
-              <h3 class="card-title">Cultural Discoveries</h3>
-              <p class="card-desc">Deep cultural immersion connecting you with local elders, ancient traditions, and vibrant modern art scenes.</p>
-              <button type="button" class="card-link concierge-trigger" data-type="Culture">Design Cultural Trip &rarr;</button>
-            </div>
-          </article>
-
-          <!-- Card 6: Wildlife Experiences -->
-          <article class="experience-card">
-            <div class="card-image-wrap">
-              <img src="assets/images/Curated Modalities/Wildlife experiences.jpg" alt="Mountain Gorilla and Wildlife Encounters" loading="lazy" onerror="this.src='assets/images/wildlife_experience.jpg';">
-              <div class="card-overlay"></div>
-            </div>
-            <div class="card-content">
-              <span class="card-category">Conservation</span>
-              <h3 class="card-title">Wildlife Experiences</h3>
-              <p class="card-desc">Rare mountain gorilla treks, conservation research tracking, and marine life expeditions with experts.</p>
-              <button type="button" class="card-link concierge-trigger" data-type="Wildlife">Design Wildlife Trip &rarr;</button>
-            </div>
-          </article>
-
-          <!-- Card 7: Family Adventures -->
-          <article class="experience-card">
-            <div class="card-image-wrap">
-              <img src="assets/images/Curated Modalities/Family Adventures.jpg" alt="Family Safari Adventure" loading="lazy" onerror="this.src='assets/images/family_adventure.jpg';">
-              <div class="card-overlay"></div>
-            </div>
-            <div class="card-content">
-              <span class="card-category">Multigenerational</span>
-              <h3 class="card-title">Family Adventures</h3>
-              <p class="card-desc">Thoughtfully paced family journeys featuring private guides, educational ranger activities, and safety.</p>
-              <button type="button" class="card-link concierge-trigger" data-type="Family">Design Family Trip &rarr;</button>
-            </div>
-          </article>
-
-          <!-- Card 8: Adventure Experiences -->
-          <article class="experience-card">
-            <div class="card-image-wrap">
-              <img src="assets/images/adventure_experience.jpg" alt="Adventure Experiences hot air balloon safari" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=1200&q=80';">
-              <div class="card-overlay"></div>
-            </div>
-            <div class="card-content">
-              <span class="card-category">Exhilaration</span>
-              <h3 class="card-title">Adventure Experiences</h3>
-              <p class="card-desc">Helicopter safaris over dramatic rifts, hot air ballooning, and summit treks beyond boundaries.</p>
-              <button type="button" class="card-link concierge-trigger" data-type="Adventure">Design Adventure &rarr;</button>
+            <div class="exp-content">
+              <span class="exp-badge">Primate Trekking</span>
+              <h3 class="exp-title">Wildlife Encounters</h3>
+              <p class="exp-desc">Gorilla trekking in mist rainforests, Big Five tracking, and marine conservation explorations.</p>
+              <button type="button" class="btn-text concierge-trigger" data-type="Wildlife Encounters">Plan Wildlife Expedition &rarr;</button>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Section 3: Iconic Horizons (Destinations - Updated Tanzania & Uganda User Images) -->
+    <!-- Section 3: Iconic Horizons (Destinations) -->
     <section class="section section-destinations" id="destinations">
       <div class="container">
         <div class="section-header">
@@ -245,12 +174,12 @@
               <p class="dest-text">The birthplace of legendary safaris, where endless landscapes meet unforgettable wildlife encounters.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 5–10 Days</span>
-                <button type="button" class="btn-text explore-dest-trigger" data-dest="Kenya">Explore Kenya &rarr;</button>
+                <a href="destination.html?dest=Kenya" class="btn-text">Explore Kenya &rarr;</a>
               </div>
             </div>
           </article>
 
-          <!-- Destination 2: Tanzania (Handpicked Lands User Image: Tanzania.jpg) -->
+          <!-- Destination 2: Tanzania -->
           <article class="destination-card">
             <div class="dest-image-box">
               <img src="assets/images/Handpicked Lands/Tanzania.jpg" alt="Tanzania Serengeti savannah" loading="lazy" onerror="this.src='assets/images/dest_tanzania.jpg';">
@@ -261,12 +190,12 @@
               <p class="dest-text">Vast wilderness plains, the Great Migration, and the majestic snow-capped peak of Mount Kilimanjaro.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 7–12 Days</span>
-                <button type="button" class="btn-text explore-dest-trigger" data-dest="Tanzania">Explore Tanzania &rarr;</button>
+                <a href="destination.html?dest=Tanzania" class="btn-text">Explore Tanzania &rarr;</a>
               </div>
             </div>
           </article>
 
-          <!-- Destination 3: Uganda (Handpicked Lands User Image: Uganda.jpg) -->
+          <!-- Destination 3: Uganda -->
           <article class="destination-card">
             <div class="dest-image-box">
               <img src="assets/images/Handpicked Lands/Uganda.jpg" alt="Uganda Bwindi mountain gorilla sanctuary" loading="lazy" onerror="this.src='assets/images/dest_uganda.jpg';">
@@ -277,7 +206,7 @@
               <p class="dest-text">The Pearl of Africa, home to lush misty rainforests and rare mountain gorilla encounters.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 4–8 Days</span>
-                <button type="button" class="btn-text explore-dest-trigger" data-dest="Uganda">Explore Uganda &rarr;</button>
+                <a href="destination.html?dest=Uganda" class="btn-text">Explore Uganda &rarr;</a>
               </div>
             </div>
           </article>
@@ -293,7 +222,7 @@
               <p class="dest-text">Spiced breeze, turquoise Indian Ocean waters, and ancient Swahili Stone Town heritage.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 4–7 Days</span>
-                <button type="button" class="btn-text explore-dest-trigger" data-dest="Zanzibar">Explore Zanzibar &rarr;</button>
+                <a href="destination.html?dest=Zanzibar" class="btn-text">Explore Zanzibar &rarr;</a>
               </div>
             </div>
           </article>
@@ -309,7 +238,7 @@
               <p class="dest-text">Land of a thousand hills, pioneering conservation, and sublime world-class luxury eco-lodges.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 4–6 Days</span>
-                <button type="button" class="btn-text explore-dest-trigger" data-dest="Rwanda">Explore Rwanda &rarr;</button>
+                <a href="destination.html?dest=Rwanda" class="btn-text">Explore Rwanda &rarr;</a>
               </div>
             </div>
           </article>
@@ -325,7 +254,7 @@
               <p class="dest-text">Vibrant coastal heritage, rich West African history, warm community spirit, and soulful cultural rhythms.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 6–10 Days</span>
-                <button type="button" class="btn-text explore-dest-trigger" data-dest="Ghana">Explore Ghana &rarr;</button>
+                <a href="destination.html?dest=Ghana" class="btn-text">Explore Ghana &rarr;</a>
               </div>
             </div>
           </article>
@@ -341,7 +270,7 @@
               <p class="dest-text">Dramatic volcanic peaks, vibrant coral reefs, and legendary luxury island hospitality.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 5–8 Days</span>
-                <button type="button" class="btn-text explore-dest-trigger" data-dest="Mauritius">Explore Mauritius &rarr;</button>
+                <a href="destination.html?dest=Mauritius" class="btn-text">Explore Mauritius &rarr;</a>
               </div>
             </div>
           </article>
@@ -357,7 +286,7 @@
               <p class="dest-text">Timeless wonders along the Nile, ancient pharaonic monuments, and private desert luxury cruises.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 7–12 Days</span>
-                <button type="button" class="btn-text explore-dest-trigger" data-dest="Egypt">Explore Egypt &rarr;</button>
+                <a href="destination.html?dest=Egypt" class="btn-text">Explore Egypt &rarr;</a>
               </div>
             </div>
           </article>
@@ -373,7 +302,7 @@
               <p class="dest-text">Lush ancient rainforests, exotic wildlife sanctuaries, and serene island archipelagos for global explorers.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 6–10 Days</span>
-                <button type="button" class="btn-text explore-dest-trigger" data-dest="Malaysia">Explore Malaysia &rarr;</button>
+                <a href="destination.html?dest=Malaysia" class="btn-text">Explore Malaysia &rarr;</a>
               </div>
             </div>
           </article>
@@ -389,7 +318,7 @@
               <p class="dest-text">A futuristic garden city gateway blending ultra-luxury hospitality with rich Asian cultural heritage.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 3–5 Days</span>
-                <button type="button" class="btn-text explore-dest-trigger" data-dest="Singapore">Explore Singapore &rarr;</button>
+                <a href="destination.html?dest=Singapore" class="btn-text">Explore Singapore &rarr;</a>
               </div>
             </div>
           </article>
@@ -404,25 +333,12 @@
           <span class="section-badge">Handcrafted Itineraries</span>
           <h2 class="section-title">Signature Tours</h2>
           <p class="section-subtitle">
-            Not pre-packaged tours, but meticulously curated masterworks designed to awaken wonder.
+            Meticulously curated masterworks designed to awaken wonder and deliver unforgettable luxury.
           </p>
         </div>
 
-        <!-- Filter Tabs for Experience Categories -->
-        <div class="experience-filter-bar" id="experienceFilterBar">
-          <button type="button" class="filter-pill active" data-filter="all">All Experiences</button>
-          <button type="button" class="filter-pill" data-filter="Safari">Safari Adventures</button>
-          <button type="button" class="filter-pill" data-filter="Beach">Beach Escapes</button>
-          <button type="button" class="filter-pill" data-filter="Honeymoon">Honeymoon Journeys</button>
-          <button type="button" class="filter-pill" data-filter="Family">Family Holidays</button>
-          <button type="button" class="filter-pill" data-filter="Luxury">Luxury Journeys</button>
-          <button type="button" class="filter-pill" data-filter="Adventure">Adventure</button>
-          <button type="button" class="filter-pill" data-filter="Culture">Culture & Heritage</button>
-          <button type="button" class="filter-pill" data-filter="Wildlife">Wildlife</button>
-        </div>
-
         <div class="journey-showcase">
-          <!-- Journey 1 -->
+          <!-- Journey 1: Kenya Classic Safari -->
           <article class="journey-featured-card" data-category="Safari">
             <div class="journey-img-wrap">
               <img src="assets/images/journey_kenya.jpg" alt="Kenya Classic Safari" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80';">
@@ -442,12 +358,12 @@
                 <li>Guided evening bush walks with Maasai warriors</li>
               </ul>
               <div class="journey-cta">
-                <button type="button" class="btn btn-primary view-itinerary-trigger" data-journey-id="mara-classic">View Full Itinerary</button>
+                <a href="journey.html?id=mara-classic" class="btn btn-primary">View Full Itinerary</a>
               </div>
             </div>
           </article>
 
-          <!-- Journey 2 -->
+          <!-- Journey 2: Great Migration Safari -->
           <article class="journey-featured-card reverse" data-category="Safari">
             <div class="journey-img-wrap">
               <img src="assets/images/Signature tours Imgs/Great Migration Safari.jpg" alt="Great Migration Safari" loading="lazy" onerror="this.src='assets/images/journey_migration.jpg';">
@@ -467,12 +383,12 @@
                 <li>Expert conservationist-led tracking sessions</li>
               </ul>
               <div class="journey-cta">
-                <button type="button" class="btn btn-primary view-itinerary-trigger" data-journey-id="great-migration">View Full Itinerary</button>
+                <a href="journey.html?id=great-migration" class="btn btn-primary">View Full Itinerary</a>
               </div>
             </div>
           </article>
 
-          <!-- Journey 3 -->
+          <!-- Journey 3: Gorilla Kingdom Expedition -->
           <article class="journey-featured-card" data-category="Wildlife">
             <div class="journey-img-wrap">
               <img src="assets/images/Signature tours Imgs/Gorilla Kingdom.jpg" alt="Gorilla Kingdom Expedition" loading="lazy" onerror="this.src='assets/images/journey_gorilla.jpg';">
@@ -492,12 +408,12 @@
                 <li>Private helicopter transfer between Kigali and Bwindi</li>
               </ul>
               <div class="journey-cta">
-                <button type="button" class="btn btn-primary view-itinerary-trigger" data-journey-id="gorilla-kingdom">View Full Itinerary</button>
+                <a href="journey.html?id=gorilla-kingdom" class="btn btn-primary">View Full Itinerary</a>
               </div>
             </div>
           </article>
 
-          <!-- Journey 4 -->
+          <!-- Journey 4: Bush & Beach Escape -->
           <article class="journey-featured-card reverse" data-category="Beach">
             <div class="journey-img-wrap">
               <img src="assets/images/journey_bush_beach.jpg" alt="Bush & Beach Escape" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80';">
@@ -517,7 +433,7 @@
                 <li>Dedicated concierge managing every seamless transit</li>
               </ul>
               <div class="journey-cta">
-                <button type="button" class="btn btn-primary view-itinerary-trigger" data-journey-id="bush-beach">View Full Itinerary</button>
+                <a href="journey.html?id=bush-beach" class="btn btn-primary">View Full Itinerary</a>
               </div>
             </div>
           </article>
@@ -538,125 +454,80 @@
 
         <div class="standard-grid">
           <div class="standard-card">
-            <div class="standard-icon-wrap">
-              <img src="assets/Tour Icons/Homepage Crafted Around you Icon.svg" alt="Crafted Around You Icon" class="standard-svg-icon">
-            </div>
-            <h3 class="standard-card-title">Crafted Around You</h3>
-            <p class="standard-card-text">
-              Every journey is personalized around your interests, pace, and travel style. No two itineraries are ever identical.
+            <div class="standard-icon">🛡️</div>
+            <h3 class="standard-title">24/7 Dedicated Concierge</h3>
+            <p class="standard-desc">
+              Your personal travel manager is available at any hour via private WhatsApp or phone to coordinate last-minute requests, private charters, or dietary adjustments.
             </p>
           </div>
 
           <div class="standard-card">
-            <div class="standard-icon-wrap">
-              <img src="assets/Tour Icons/Home Global excellence Icon.svg" alt="Local Knowledge, Global Excellence Icon" class="standard-svg-icon">
-            </div>
-            <h3 class="standard-card-title">Local Knowledge, Global Excellence</h3>
-            <p class="standard-card-text">
-              Authentic experiences supported by expert local curators, 24/7 on-ground assistance, and world-class standards.
+            <div class="standard-icon">✈️</div>
+            <h3 class="standard-title">Private Aviation & Transfers</h3>
+            <p class="standard-desc">
+              Bypass commercial transit with direct bush airstrip landings, private charter helicopters, and VIP airfield arrivals.
             </p>
           </div>
 
           <div class="standard-card">
-            <div class="standard-icon-wrap">
-              <img src="assets/Tour Icons/Home page Every Detail Considered Icon.svg" alt="Every Detail Considered Icon" class="standard-svg-icon">
-            </div>
-            <h3 class="standard-card-title">Every Detail Considered</h3>
-            <p class="standard-card-text">
-              From charter flights and dietary arrangements to visa guidance and luggage handling, we manage every detail effortlessly.
+            <div class="standard-icon">🌱</div>
+            <h3 class="standard-title">Conservation Impact</h3>
+            <p class="standard-desc">
+              Every luxury journey directly contributes to wildlife habitat preservation, anti-poaching units, and indigenous community development initiatives.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 6: Founder / Story Section -->
+    <!-- Section 6: Founder's Story (Viv) -->
     <section class="section section-story" id="about">
       <div class="container">
         <div class="story-layout">
           <div class="story-image-wrap">
-            <img src="assets/images/Where Passion meets Horizon .jpg" alt="Where Passion Meets The Horizon - Ivory Horizons" loading="lazy" onerror="this.src='assets/images/founder_story.jpg';">
-            <div class="story-caption">
-              <span class="caption-title">Ivory Horizons Sanctuary</span>
-              <span class="caption-sub">Curated with passion for Africa</span>
+            <img src="assets/images/Founders Story/Vivian (Viv) - Founder & Principal Concierge.jpg" alt="Vivian (Viv) Founder & Principal Concierge of Ivory Horizons" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80';">
+            <div class="story-badge-floating">
+              <span class="badge-number">10+</span>
+              <span class="badge-text">Years Crafting Bespoke Journeys</span>
             </div>
           </div>
 
           <div class="story-content">
-            <span class="section-badge">Our Origin</span>
-            <h2 class="story-title">Where Passion Meets The Horizon</h2>
-            
-            <p class="story-paragraph lead-p">
-              "Ivory Horizons was born from a deep, enduring reverence for the continent of Africa—its endless skies, its resilient cultures, and its majestic wildlife."
-            </p>
-
-            <p class="story-paragraph">
-              We recognized that true luxury lies not merely in lavish accommodations, but in <strong>meaningful access</strong>—the privilege of sitting beside Maasai elders around a crackling fire, hearing the whisper of wind across the Serengeti, or watching dawn unfold over pristine turquoise waters without another soul in sight.
-            </p>
-
-            <p class="story-paragraph">
-              Whether you are an African diaspora traveler reconnecting with ancestral roots, a local connoisseur seeking hidden retreats, or an international guest yearning for authentic discovery, we design your journey with meticulous care, deep local expertise, and absolute discretion.
-            </p>
-
-            <div class="story-signature">
-              <span class="sig-name">Ivory Horizons Travel Concierge</span>
-              <span class="sig-title">Nairobi • Arusha • Kigali • London</span>
+            <span class="section-badge">Behind Ivory Horizons</span>
+            <h2 class="section-title">A Message From Our Founder</h2>
+            <div class="quote-box">
+              <p class="quote-text">
+                "Travel shouldn't just take you places; it should awaken your spirit. At Ivory Horizons, we don't build generic vacations. We design deeply personal, seamless journeys that allow you to feel Africa's soul without sacrificing standard, safety, or elegance."
+              </p>
+              <div class="quote-author">
+                <strong>Vivian (Viv)</strong>
+                <span>Founder & Principal Travel Concierge</span>
+              </div>
             </div>
+            <div class="story-highlights-list">
+              <div class="story-item">
+                <span class="check-icon">✓</span>
+                <span>Personalized end-to-end itinerary design with zero cookie-cutter templates</span>
+              </div>
+              <div class="story-item">
+                <span class="check-icon">✓</span>
+                <span>Direct relationships with top-tier lodge owners and wildlife conservancies</span>
+              </div>
+              <div class="story-item">
+                <span class="check-icon">✓</span>
+                <span>Direct 1-on-1 contact with Viv on WhatsApp (+254 740 199 975)</span>
+              </div>
+            </div>
+            <button type="button" class="btn btn-outline concierge-trigger">Plan Your Trip With Viv</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 7: Testimonials -->
-    <section class="section section-testimonials">
-      <div class="container">
-        <div class="section-header text-center">
-          <span class="section-badge">Guest Reverie</span>
-          <h2 class="section-title">Stories From The Horizon</h2>
-          <p class="section-subtitle">Read how our discerning travelers experienced Africa through the Ivory Horizons lens.</p>
-        </div>
-
-        <div class="testimonial-slider">
-          <div class="testimonial-card">
-            <div class="quote-mark">“</div>
-            <p class="testimonial-text">
-              "Ivory Horizons didn't just book a safari; they curated an emotional experience that reconnected our family with Africa in ways we will treasure forever. From the private airstrips to the warmth of our Maasai guide, every moment was perfection."
-            </p>
-            <div class="testimonial-author">
-              <span class="author-name">Dr. Amara & Family</span>
-              <span class="author-location">Diaspora Traveler • London & Atlanta</span>
-            </div>
-          </div>
-
-          <div class="testimonial-card">
-            <div class="quote-mark">“</div>
-            <p class="testimonial-text">
-              "The gorilla trekking expedition in Rwanda was flawless. Being met at the aircraft door and taken through private customs set the tone. Ivory Horizons truly understands the standard of true modern luxury."
-            </p>
-            <div class="testimonial-author">
-              <span class="author-name">Marcus Sterling</span>
-              <span class="author-location">Luxury Local Traveler • Johannesburg</span>
-            </div>
-          </div>
-
-          <div class="testimonial-card">
-            <div class="quote-mark">“</div>
-            <p class="testimonial-text">
-              "Our bush and beach honeymoon in Kenya and Zanzibar felt like living inside an international travel magazine. Exceptional care, absolute privacy, and stunning attention to detail."
-            </p>
-            <div class="testimonial-author">
-              <span class="author-name">Elena & Julian V.</span>
-              <span class="author-location">International Guests • Geneva</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 8: Final CTA -->
-    <section class="section section-cta-final">
-      <div class="cta-bg-layer">
-        <img src="assets/images/hero_sunset.jpg" alt="African horizon" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1600&q=85';">
+    <!-- Section 7: Testimonials & Invitation -->
+    <section class="section section-cta">
+      <div class="cta-background">
+        <img src="assets/images/dest_tanzania.jpg" alt="Savannah sunset banner" class="cta-bg-img" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=80';">
         <div class="cta-overlay"></div>
       </div>
       
@@ -667,104 +538,21 @@
           <p class="final-cta-subtext">
             Let our travel specialists design an extraordinary trip tailored exclusively to your vision.
           </p>
-          <button type="button" class="btn btn-primary btn-large" id="finalCtaBtn">Plan My Trip</button>
+          <button type="button" class="btn btn-primary btn-large concierge-trigger" id="finalCtaBtn">Plan My Trip</button>
         </div>
       </div>
+    </section>
   </main>
-
-  <!-- PAGE VIEW: DEDICATED ACCOMMODATION PAGE -->
-  <div class="page-view" id="pageViewAccommodation" style="display: none;">
-    <section class="section section-hero-mini">
-      <div class="container text-center">
-        <span class="section-badge">Curated Sanctuaries</span>
-        <h1 class="section-title">Luxury Accommodations & Lodges</h1>
-        <p class="section-subtitle">Handpicked luxury lodges, private wilderness camps, and 5-star beachfront resorts across our iconic destinations.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="destination-filter-bar" id="accommodationFilterBar">
-          <button type="button" class="filter-pill active" data-dest-filter="all">All Destinations</button>
-          <button type="button" class="filter-pill" data-dest-filter="Kenya">Kenya</button>
-          <button type="button" class="filter-pill" data-dest-filter="Tanzania">Tanzania</button>
-          <button type="button" class="filter-pill" data-dest-filter="Uganda">Uganda</button>
-          <button type="button" class="filter-pill" data-dest-filter="Rwanda">Rwanda</button>
-          <button type="button" class="filter-pill" data-dest-filter="Zanzibar">Zanzibar</button>
-          <button type="button" class="filter-pill" data-dest-filter="Mauritius">Mauritius</button>
-          <button type="button" class="filter-pill" data-dest-filter="Egypt">Egypt</button>
-          <button type="button" class="filter-pill" data-dest-filter="Ghana">Ghana</button>
-          <button type="button" class="filter-pill" data-dest-filter="Malaysia">Malaysia</button>
-          <button type="button" class="filter-pill" data-dest-filter="Singapore">Singapore</button>
-        </div>
-
-        <div class="accommodation-grid" id="accommodationGrid">
-          <!-- Rendered dynamically by app.js -->
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- PAGE VIEW: DEDICATED DESTINATION PAGE -->
-  <div class="page-view" id="pageViewDestination" style="display: none;">
-    <div class="container py-6">
-      <button type="button" class="btn btn-outline back-to-home-btn">&larr; Back to Destinations</button>
-      <div id="destinationPageContent">
-        <!-- Rendered dynamically by app.js -->
-      </div>
-    </div>
-  </div>
-
-  <!-- PAGE VIEW: DEDICATED JOURNEY DETAILS PAGE -->
-  <div class="page-view" id="pageViewJourney" style="display: none;">
-    <div class="container py-6">
-      <button type="button" class="btn btn-outline back-to-home-btn">&larr; Back to Journeys</button>
-      <div id="journeyPageContent">
-        <!-- Rendered dynamically by app.js -->
-      </div>
-    </div>
-  </div>
-
-  <!-- PAGE VIEW: DEDICATED BLOG PAGE -->
-  <div class="page-view" id="pageViewBlog" style="display: none;">
-    <section class="section section-hero-mini">
-      <div class="container text-center">
-        <span class="section-badge">Travel Journal</span>
-        <h1 class="section-title">Insights, Stories & Safari Tips</h1>
-        <p class="section-subtitle">Destination guides, seasonal travel advice, and cultural inspirations curated by Ivory Horizons specialists.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="blog-filter-bar" id="blogFilterBar">
-          <button type="button" class="filter-pill active" data-blog-filter="all">All Articles</button>
-          <button type="button" class="filter-pill" data-blog-filter="Safari Tips">Safari Tips</button>
-          <button type="button" class="filter-pill" data-blog-filter="Destination Guides">Destination Guides</button>
-          <button type="button" class="filter-pill" data-blog-filter="Culture">Culture</button>
-          <button type="button" class="filter-pill" data-blog-filter="Travel Advice">Travel Advice</button>
-        </div>
-
-        <div class="blog-grid" id="blogGrid">
-          <!-- Rendered dynamically by app.js -->
-        </div>
-      </div>
-    </section>
-  </div>
 
   <!-- Site Footer -->
   <div class="footer-outer-wrapper">
     <footer class="site-footer footer-popout-card" id="contact">
       <div class="footer-card-inner">
-        <!-- Top Section of Popout Footer -->
         <div class="footer-card-top">
           <div class="footer-tag-badge">✦ Contact Travel Planning</div>
-          <h2 class="footer-headline">
-            Interested in creating a bespoke trip, exploring private safaris, or simply learning more?
-          </h2>
+          <h2 class="footer-headline">Interested in creating a bespoke trip, exploring private safaris, or simply learning more?</h2>
         </div>
 
-        <!-- Middle Section of Popout Footer -->
         <div class="footer-card-middle">
           <div class="footer-contact-direct">
             <span class="contact-label">Contact Ivory Horizons at:</span>
@@ -773,167 +561,119 @@
           </div>
 
           <div class="footer-nav-menu">
-            <a href="#destinations" class="nav-page-link" data-page="home">Destinations</a>
-            <a href="#experiences" class="nav-page-link" data-page="home">Experiences</a>
-            <a href="#journeys" class="nav-page-link" data-page="home">Tours</a>
-            <a href="#accommodation" class="nav-page-link" data-page="accommodation">Accommodation</a>
-            <a href="#blog" class="nav-page-link" data-page="blog">Blog Journal</a>
-            <a href="#about" class="nav-page-link" data-page="home">About Us</a>
-            <a href="#contact" class="nav-page-link" data-page="home">Private Offices</a>
+            <a href="#destinations">Destinations</a>
+            <a href="#experiences">Experiences</a>
+            <a href="#journeys">Tours</a>
+            <a href="accommodation.html">Accommodation</a>
+            <a href="blog.html">Blog Journal</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Private Offices</a>
           </div>
         </div>
 
-        <!-- Giant Display Title: IVORY in Fraunces 72pt Soft Light -->
         <div class="footer-giant-brand-wrap">
           <span class="footer-giant-title">IVORY</span>
         </div>
 
-        <!-- Bottom Copyright & Updated Social / WhatsApp Links -->
         <div class="footer-card-bottom">
-          <p class="copyright-text">&copy; 2026 Ivory Horizons. All rights reserved.</p>
+          <div class="footer-copyright-text">
+            © 2026 Ivory Horizons Luxury Concierge. All Rights Reserved.
+          </div>
           <div class="footer-social-links">
-            <a href="https://www.facebook.com/profile.php?id=61590286088939" target="_blank" rel="noopener">Facebook</a>
-            <a href="https://www.instagram.com/ivoryhorizons/" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://wa.me/254740199975" target="_blank" rel="noopener" class="whatsapp-btn-link">WhatsApp Chat 💬</a>
+            <a href="https://wa.me/254740199975" target="_blank" rel="noopener" class="footer-social-btn">WhatsApp Concierge</a>
+            <a href="mailto:hello@ivoryhorizons.com" class="footer-social-btn">Private Email</a>
           </div>
         </div>
       </div>
     </footer>
   </div>
 
-  <!-- CONCIERGE MODAL / STEP-BY-STEP JOURNEY PLANNER -->
+  <!-- CONCIERGE MODAL -->
   <dialog class="concierge-modal" id="conciergeModal">
-    <div class="modal-content-wrapper">
-      <button type="button" class="modal-close" id="closeConciergeBtn" aria-label="Close modal">&times;</button>
-      
-      <div class="modal-header">
-        <span class="modal-step-badge" id="stepBadge">Step 1 of 4</span>
-        <h3 class="modal-title" id="modalTitle">What type of trip are you imagining?</h3>
-        <p class="modal-subtitle" id="modalSubtitle">Select the experience that best captures your dream African escape.</p>
+    <div class="concierge-modal-inner">
+      <div class="concierge-modal-header">
+        <div class="modal-brand-badge">
+          <span class="badge-icon">✦</span>
+          <span class="badge-text" id="stepBadge">Step 1 of 4</span>
+        </div>
+        <button type="button" class="close-modal-btn" id="closeConciergeBtn" aria-label="Close dialog">&times;</button>
       </div>
 
-      <!-- Step Progress Bar -->
-      <div class="modal-progress-bar">
+      <div class="concierge-progress-bar">
         <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
       </div>
 
-      <form id="conciergeForm" onsubmit="return false;">
-        <!-- STEP 1: JOURNEY TYPE -->
+      <div class="modal-headings">
+        <h3 class="modal-title" id="modalTitle">What type of trip are you imagining?</h3>
+        <p class="modal-subtitle" id="modalSubtitle">Select the experience that best captures your dream escape.</p>
+      </div>
+
+      <form id="conciergeForm" class="concierge-form">
+        <!-- STEP 1: EXPERIENCE TYPE -->
         <div class="concierge-step step-active" data-step="1">
-          <div class="option-grid">
-            <label class="option-card">
-              <input type="radio" name="journeyType" value="Safari" checked>
-              <span class="card-box">
-                <img src="assets/Tour Icons/Safari Adventure Icon.svg" alt="Safari" class="option-svg-icon">
-                <span class="option-label">Safari Adventure</span>
-              </span>
+          <div class="cards-selection-grid">
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Safari Adventures" checked>
+              <div class="card-content">
+                <span class="card-icon">🦁</span>
+                <span class="card-label">Safari Adventures</span>
+              </div>
             </label>
-
-            <label class="option-card">
-              <input type="radio" name="journeyType" value="Beach">
-              <span class="card-box">
-                <img src="assets/Tour Icons/Beach Escape Icon.svg" alt="Beach" class="option-svg-icon">
-                <span class="option-label">Beach Escape</span>
-              </span>
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Beach Escapes">
+              <div class="card-content">
+                <span class="card-icon">🏖️</span>
+                <span class="card-label">Beach Escapes</span>
+              </div>
             </label>
-
-            <label class="option-card">
-              <input type="radio" name="journeyType" value="Honeymoon">
-              <span class="card-box">
-                <img src="assets/Tour Icons/Honeymoon Icon.svg" alt="Honeymoon" class="option-svg-icon">
-                <span class="option-label">Honeymoon</span>
-              </span>
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Honeymoon Journeys">
+              <div class="card-content">
+                <span class="card-icon">💍</span>
+                <span class="card-label">Honeymoon Journeys</span>
+              </div>
             </label>
-
-            <label class="option-card">
-              <input type="radio" name="journeyType" value="Luxury">
-              <span class="card-box">
-                <img src="assets/Tour Icons/Lucury Retreat Icon.svg" alt="Luxury" class="option-svg-icon">
-                <span class="option-label">Luxury Retreat</span>
-              </span>
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Family Holidays">
+              <div class="card-content">
+                <span class="card-icon">👨‍👩‍👧‍👦</span>
+                <span class="card-label">Family Holidays</span>
+              </div>
             </label>
-
-            <label class="option-card">
-              <input type="radio" name="journeyType" value="Adventure">
-              <span class="card-box">
-                <img src="assets/Tour Icons/Adventure Trek Icon.svg" alt="Adventure" class="option-svg-icon">
-                <span class="option-label">Adventure Trek</span>
-              </span>
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Exclusive Luxury Journeys">
+              <div class="card-content">
+                <span class="card-icon">💎</span>
+                <span class="card-label">Luxury Journeys</span>
+              </div>
             </label>
-
-            <label class="option-card">
-              <input type="radio" name="journeyType" value="Culture">
-              <span class="card-box">
-                <img src="assets/Tour Icons/Cultural heritage Icon.svg" alt="Culture" class="option-svg-icon">
-                <span class="option-label">Cultural Heritage</span>
-              </span>
-            </label>
-
-            <label class="option-card">
-              <input type="radio" name="journeyType" value="Family">
-              <span class="card-box">
-                <img src="assets/Tour Icons/Safari Adventure Icon.svg" alt="Family" class="option-svg-icon">
-                <span class="option-label">Family Safari</span>
-              </span>
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Cultural Discoveries">
+              <div class="card-content">
+                <span class="card-icon">🏛️</span>
+                <span class="card-label">Culture & Heritage</span>
+              </div>
             </label>
           </div>
         </div>
 
-        <!-- STEP 2: DESTINATION -->
+        <!-- STEP 2: DESTINATION SELECTION -->
         <div class="concierge-step" data-step="2">
-          <div class="option-grid select-dest-grid">
-            <label class="option-card">
-              <input type="checkbox" name="destination" value="Kenya" checked>
-              <span class="card-box">
-                <span class="option-label">Kenya</span>
-              </span>
-            </label>
-            <label class="option-card">
-              <input type="checkbox" name="destination" value="Tanzania">
-              <span class="card-box">
-                <span class="option-label">Tanzania</span>
-              </span>
-            </label>
-            <label class="option-card">
-              <input type="checkbox" name="destination" value="Uganda">
-              <span class="card-box">
-                <span class="option-label">Uganda</span>
-              </span>
-            </label>
-            <label class="option-card">
-              <input type="checkbox" name="destination" value="Zanzibar">
-              <span class="card-box">
-                <span class="option-label">Zanzibar</span>
-              </span>
-            </label>
-            <label class="option-card">
-              <input type="checkbox" name="destination" value="Rwanda">
-              <span class="card-box">
-                <span class="option-label">Rwanda</span>
-              </span>
-            </label>
-            <label class="option-card">
-              <input type="checkbox" name="destination" value="Ghana">
-              <span class="card-box">
-                <span class="option-label">Ghana</span>
-              </span>
-            </label>
-            <label class="option-card">
-              <input type="checkbox" name="destination" value="Mauritius">
-              <span class="card-box">
-                <span class="option-label">Mauritius</span>
-              </span>
-            </label>
-            <label class="option-card">
-              <input type="checkbox" name="destination" value="Egypt">
-              <span class="card-box">
-                <span class="option-label">Egypt</span>
-              </span>
-            </label>
+          <div class="checkbox-selection-grid">
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Kenya"> <span>Kenya</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Tanzania"> <span>Tanzania</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Uganda"> <span>Uganda</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Rwanda"> <span>Rwanda</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Zanzibar"> <span>Zanzibar</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Mauritius"> <span>Mauritius</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Egypt"> <span>Egypt</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Ghana"> <span>Ghana</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Malaysia"> <span>Malaysia</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Singapore"> <span>Singapore</span></label>
           </div>
         </div>
 
-        <!-- STEP 3: TRIP DETAILS -->
+        <!-- STEP 3: TRAVEL DETAILS -->
         <div class="concierge-step" data-step="3">
           <div class="form-fields-grid">
             <div class="form-group">
@@ -1032,45 +772,27 @@
         <div class="concierge-step step-confirmation" id="confirmationStep" style="display: none;">
           <div class="confirmation-box text-center">
             <span class="confirmation-icon">✨</span>
-            <h3 class="confirmation-headline">Your Trip Beyond The Horizon Awaits</h3>
-            <p class="confirmation-text">
-              Thank you. Your request has been logged and our concierge team is preparing your bespoke proposal.
-            </p>
-            <div class="summary-recap" id="summaryRecap"></div>
-            <div class="confirmation-cta-group" style="display: flex; gap: 16px; justify-content: center; margin-top: 24px; flex-wrap: wrap;">
-              <button type="button" class="btn btn-whatsapp" id="whatsappCtaBtn">Continue on WhatsApp 💬</button>
-              <button type="button" class="btn btn-outline" id="closeConfirmationBtn">Close Window</button>
+            <h4 class="confirmation-title">Your Private Concierge Request is Confirmed</h4>
+            <p class="confirmation-text">Our principal travel designer Viv will personally review your preferences and craft your custom itinerary proposal within 24 hours.</p>
+            
+            <div class="summary-recap-box" id="summaryRecap"></div>
+
+            <div class="dual-cta-wrap margin-top-md">
+              <button type="button" class="btn btn-whatsapp" id="whatsappCtaBtn">
+                <span>💬 Continue on WhatsApp</span>
+              </button>
+              <button type="button" class="btn btn-primary" id="closeConfirmationBtn">Return to Site</button>
             </div>
           </div>
         </div>
 
-        <!-- Modal Controls Footer -->
+        <!-- MODAL FOOTER NAV BUTTONS -->
         <div class="modal-footer-nav" id="modalFooterNav">
           <button type="button" class="btn btn-outline" id="prevStepBtn" style="display: none;">&larr; Back</button>
-          <button type="button" class="btn btn-primary" id="nextStepBtn">Next Step &rarr;</button>
+          <button type="button" class="btn btn-primary" id="nextStepBtn">Continue &rarr;</button>
           <button type="submit" class="btn btn-primary" id="submitConciergeBtn" style="display: none;">Submit Booking Request</button>
         </div>
       </form>
-    </div>
-  </dialog>
-
-  <!-- FULL ITINERARY MODAL -->
-  <dialog class="itinerary-modal" id="itineraryModal">
-    <div class="modal-content-wrapper itinerary-wrapper">
-      <button type="button" class="modal-close" id="closeItineraryBtn" aria-label="Close itinerary">&times;</button>
-      <div id="itineraryModalContent">
-        <!-- Dynamically injected by app.js -->
-      </div>
-    </div>
-  </dialog>
-
-  <!-- DESTINATION DETAIL MODAL -->
-  <dialog class="destination-modal" id="destinationModal">
-    <div class="modal-content-wrapper destination-wrapper">
-      <button type="button" class="modal-close" id="closeDestinationBtn" aria-label="Close destination details">&times;</button>
-      <div id="destinationModalContent">
-        <!-- Dynamically injected by app.js -->
-      </div>
     </div>
   </dialog>
 

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Iconic Destination | Ivory Horizons</title>
+  <meta name="description" content="Discover destination overviews, luxury lodge recommendations, best travel seasons, and signature itineraries with Ivory Horizons.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/audio/Hero 2 bg theme music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Navigation Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo" aria-label="Ivory Horizons Home">
+        <img src="assets/images/Ivory Dark No Bg.png" alt="Ivory Horizons Logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <span class="logo-mark-text" style="display: none;"><span class="logo-accent">Ivory</span> Horizons</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="index.html#destinations" class="nav-link active">Destinations</a></li>
+          <li><a href="index.html#experiences" class="nav-link">Experiences</a></li>
+          <li><a href="index.html#journeys" class="nav-link">Tours</a></li>
+          <li><a href="accommodation.html" class="nav-link">Accommodation</a></li>
+          <li><a href="blog.html" class="nav-link">Blog</a></li>
+          <li><a href="index.html#about" class="nav-link">About</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="btn btn-header-cta concierge-trigger">Plan My Trip</button>
+        <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container py-6">
+    <a href="index.html#destinations" class="btn btn-outline back-to-home-btn">&larr; Back to Destinations</a>
+    
+    <div id="destinationPageContent">
+      <!-- Rendered dynamically by app.js -->
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <div class="footer-outer-wrapper">
+    <footer class="site-footer footer-popout-card" id="contact">
+      <div class="footer-card-inner">
+        <div class="footer-card-top">
+          <div class="footer-tag-badge">✦ Contact Travel Planning</div>
+          <h2 class="footer-headline">Interested in creating a bespoke trip, exploring private safaris, or simply learning more?</h2>
+        </div>
+
+        <div class="footer-card-middle">
+          <div class="footer-contact-direct">
+            <span class="contact-label">Contact Ivory Horizons at:</span>
+            <a href="mailto:hello@ivoryhorizons.com" class="contact-email-link">hello@ivoryhorizons.com <span class="arrow-icon">↗</span></a>
+            <span class="contact-phone-item">Phone / WhatsApp: <a href="https://wa.me/254740199975" target="_blank" rel="noopener">+254 (0) 740 199 975</a></span>
+          </div>
+
+          <div class="footer-nav-menu">
+            <a href="index.html#destinations">Destinations</a>
+            <a href="index.html#experiences">Experiences</a>
+            <a href="index.html#journeys">Tours</a>
+            <a href="accommodation.html">Accommodation</a>
+            <a href="blog.html">Blog Journal</a>
+            <a href="index.html#about">About Us</a>
+            <a href="index.html#contact">Private Offices</a>
+          </div>
+        </div>
+
+        <div class="footer-giant-brand-wrap">
+          <span class="footer-giant-title">IVORY</span>
+        </div>
+
+        <div class="footer-card-bottom">
+          <div class="footer-copyright-text">
+            © 2026 Ivory Horizons Luxury Concierge. All Rights Reserved.
+          </div>
+          <div class="footer-social-links">
+            <a href="https://wa.me/254740199975" target="_blank" rel="noopener" class="footer-social-btn">WhatsApp Concierge</a>
+            <a href="mailto:hello@ivoryhorizons.com" class="footer-social-btn">Private Email</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- CONCIERGE MODAL -->
+  <dialog class="concierge-modal" id="conciergeModal">
+    <div class="concierge-modal-inner">
+      <div class="concierge-modal-header">
+        <div class="modal-brand-badge">
+          <span class="badge-icon">✦</span>
+          <span class="badge-text" id="stepBadge">Step 1 of 4</span>
+        </div>
+        <button type="button" class="close-modal-btn" id="closeConciergeBtn" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div class="concierge-progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
+      </div>
+
+      <div class="modal-headings">
+        <h3 class="modal-title" id="modalTitle">What type of trip are you imagining?</h3>
+        <p class="modal-subtitle" id="modalSubtitle">Select the experience that best captures your dream escape.</p>
+      </div>
+
+      <form id="conciergeForm" class="concierge-form">
+        <!-- STEP 1: EXPERIENCE TYPE -->
+        <div class="concierge-step step-active" data-step="1">
+          <div class="cards-selection-grid">
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Safari Adventures" checked>
+              <div class="card-content">
+                <span class="card-icon">🦁</span>
+                <span class="card-label">Safari Adventures</span>
+              </div>
+            </label>
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Beach Escapes">
+              <div class="card-content">
+                <span class="card-icon">🏖️</span>
+                <span class="card-label">Beach Escapes</span>
+              </div>
+            </label>
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Honeymoon Journeys">
+              <div class="card-content">
+                <span class="card-icon">💍</span>
+                <span class="card-label">Honeymoon Journeys</span>
+              </div>
+            </label>
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Family Holidays">
+              <div class="card-content">
+                <span class="card-icon">👨‍👩‍👧‍👦</span>
+                <span class="card-label">Family Holidays</span>
+              </div>
+            </label>
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Exclusive Luxury Journeys">
+              <div class="card-content">
+                <span class="card-icon">💎</span>
+                <span class="card-label">Luxury Journeys</span>
+              </div>
+            </label>
+            <label class="selection-card">
+              <input type="radio" name="journeyType" value="Cultural Discoveries">
+              <div class="card-content">
+                <span class="card-icon">🏛️</span>
+                <span class="card-label">Culture & Heritage</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- STEP 2: DESTINATION SELECTION -->
+        <div class="concierge-step" data-step="2">
+          <div class="checkbox-selection-grid">
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Kenya"> <span>Kenya</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Tanzania"> <span>Tanzania</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Uganda"> <span>Uganda</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Rwanda"> <span>Rwanda</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Zanzibar"> <span>Zanzibar</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Mauritius"> <span>Mauritius</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Egypt"> <span>Egypt</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Ghana"> <span>Ghana</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Malaysia"> <span>Malaysia</span></label>
+            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Singapore"> <span>Singapore</span></label>
+          </div>
+        </div>
+
+        <!-- STEP 3: TRAVEL DETAILS -->
+        <div class="concierge-step" data-step="3">
+          <div class="form-fields-grid">
+            <div class="form-group">
+              <label for="travelDates">Target Travel Dates / Season</label>
+              <input type="text" id="travelDates" placeholder="e.g. October 2026 / Flexible">
+            </div>
+
+            <div class="form-group">
+              <label for="travelersCount">Number of Guests</label>
+              <select id="travelersCount">
+                <option value="1 Guest">1 Guest</option>
+                <option value="2 Guests" selected>2 Guests</option>
+                <option value="3 Guests">3 Guests</option>
+                <option value="4 Guests">4 Guests</option>
+                <option value="5+ Guests">5+ Guests</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="roomsCount">Number of Rooms</label>
+              <select id="roomsCount">
+                <option value="1 Room" selected>1 Room</option>
+                <option value="2 Rooms">2 Rooms</option>
+                <option value="3 Rooms">3 Rooms</option>
+                <option value="4+ Rooms">4+ Rooms</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="roomType">Room Type</label>
+              <select id="roomType">
+                <option value="Single Room">Single Room</option>
+                <option value="Double Room" selected>Double Room</option>
+                <option value="Twin Room">Twin Room</option>
+                <option value="Family Room">Family Room</option>
+                <option value="Suite">Suite</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="budgetRange">Estimated Investment (per guest)</label>
+              <select id="budgetRange">
+                <option value="$5,000 - $10,000">$5,000 - $10,000 USD</option>
+                <option value="$10,000 - $25,000" selected>$10,000 - $25,000 USD</option>
+                <option value="$25,000+ Exclusive Ultra-Luxury">$25,000+ Exclusive Ultra-Luxury</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="specialPreferences">Special Preferences or Dreams</label>
+              <textarea id="specialPreferences" rows="3" placeholder="Tell us about celebratory occasions, dietary needs, private aviation preferences..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: CONTACT & SUBMIT -->
+        <div class="concierge-step" data-step="4">
+          <div class="form-fields-grid">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" required placeholder="First Name">
+            </div>
+
+            <div class="form-group">
+              <label for="middleName">Middle Name (Optional)</label>
+              <input type="text" id="middleName" placeholder="Middle Name">
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" required placeholder="Last Name">
+            </div>
+
+            <div class="form-group">
+              <label for="guestEmail">Email Address *</label>
+              <input type="email" id="guestEmail" required placeholder="your.email@domain.com">
+            </div>
+
+            <div class="form-group">
+              <label for="guestPhone">Phone / WhatsApp *</label>
+              <input type="tel" id="guestPhone" required placeholder="+254 740 199975">
+            </div>
+
+            <div class="form-group">
+              <label for="contactPreference">Preferred Contact Method</label>
+              <select id="contactPreference">
+                <option value="WhatsApp Concierge">WhatsApp Concierge</option>
+                <option value="Private Email">Private Email</option>
+                <option value="Scheduled Video Consultation">Scheduled Video Consultation</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONFIRMATION MESSAGE STATE -->
+        <div class="concierge-step step-confirmation" id="confirmationStep" style="display: none;">
+          <div class="confirmation-box text-center">
+            <span class="confirmation-icon">✨</span>
+            <h4 class="confirmation-title">Your Private Concierge Request is Confirmed</h4>
+            <p class="confirmation-text">Our principal travel designer Viv will personally review your preferences and craft your custom itinerary proposal within 24 hours.</p>
+            
+            <div class="summary-recap-box" id="summaryRecap"></div>
+
+            <div class="dual-cta-wrap margin-top-md">
+              <button type="button" class="btn btn-whatsapp" id="whatsappCtaBtn">
+                <span>💬 Continue on WhatsApp</span>
+              </button>
+              <button type="button" class="btn btn-primary" id="closeConfirmationBtn">Return to Site</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODAL FOOTER NAV BUTTONS -->
+        <div class="modal-footer-nav" id="modalFooterNav">
+          <button type="button" class="btn btn-outline" id="prevStepBtn" style="display: none;">&larr; Back</button>
+          <button type="button" class="btn btn-primary" id="nextStepBtn">Continue &rarr;</button>
+          <button type="submit" class="btn btn-primary" id="submitConciergeBtn" style="display: none;">Submit Booking Request</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
