@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Icon",
       roomTypes: "Historic Manor Suites",
       amenities: ["Giraffe Breakfast", "Private Gardens", "Fine Dining", "Spa Services"],
-      image: "assets/images/Curated Modalities/Safari Adventure.jpg",
+      image: "assets/images/Accommodation Imgs/Giraffe Manor.jpg",
       fallback: "assets/images/safari_adventure.jpg",
       description: "An iconic boutique hotel set in 12 acres of private land within 140 acres of indigenous forest, home to resident Rothschild's giraffes."
     },
@@ -491,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Sanctuary",
       roomTypes: "Forest Lodges & Treehouse Suites",
       amenities: ["Private Pool", "World-Class Spa", "Helipad", "Chef's Garden Dining"],
-      image: "assets/images/Accommodation Imgs/One&Only-Gorilla80%99s-Nest-.webp",
+      image: "assets/images/Accommodation Imgs/One&Only Gorillas' Nest.jpg",
       fallback: "assets/images/dest_rwanda.jpg",
       description: "Cradled by eucalyptus trees at the foothills of the Virunga Volcanoes, offering an intimate haven of mountain luxury."
     },
@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Historic Heritage",
       roomTypes: "Nile View Suites & Heritage Rooms",
       amenities: ["Nile Terrace Bar", "Infinity Pool", "Spa & Wellness", "Butler Service"],
-      image: "assets/images/dest_egypt.jpg",
+      image: "assets/images/Accommodation Imgs/Sofitel Legend Old Cataract.jfif",
       fallback: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80",
       description: "A Victorian palace built on a pink granite cliff along the banks of the Nile, where Agatha Christie penned Death on the Nile."
     },
@@ -962,7 +962,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <span class="accom-location">📍 ${a.location}</span>
                   <p class="accom-desc">${a.description}</p>
                   <div class="accom-cta-wrap">
-                    <button type="button" class="btn btn-outline concierge-trigger" data-hotel="${a.name}" data-dest="${a.destination}" data-skip-step1="true">Book Through Ivory Horizons</button>
+                    <button type="button" class="btn btn-outline concierge-trigger" data-hotel="${a.name}" data-dest="${a.destination}" data-skip-step1="true">Book Now</button>
                   </div>
                 </div>
               </article>
@@ -1007,7 +1007,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${item.amenities.map(am => `<span class="amenity-tag">${am}</span>`).join('')}
           </div>
           <div class="accom-cta-wrap">
-            <button type="button" class="btn btn-outline concierge-trigger" data-hotel="${item.name}" data-dest="${item.destination}" data-skip-step1="true">Book Through Ivory Horizons</button>
+            <button type="button" class="btn btn-outline concierge-trigger" data-hotel="${item.name}" data-dest="${item.destination}" data-skip-step1="true">Book Now</button>
           </div>
         </div>
       `;
