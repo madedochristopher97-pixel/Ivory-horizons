@@ -39,6 +39,7 @@
           <li><a href="#destinations" class="nav-link">Destinations</a></li>
           <li><a href="#experiences" class="nav-link">Experiences</a></li>
           <li><a href="#journeys" class="nav-link">Tours</a></li>
+          <li><a href="#accommodations" class="nav-link">Accommodations</a></li>
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
@@ -244,7 +245,7 @@
               <p class="dest-text">The birthplace of legendary safaris, where endless landscapes meet unforgettable wildlife encounters.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 5–10 Days</span>
-                <button type="button" class="btn-text concierge-trigger" data-dest="Kenya">Explore Kenya &rarr;</button>
+                <button type="button" class="btn-text explore-dest-trigger" data-dest="Kenya">Explore Kenya &rarr;</button>
               </div>
             </div>
           </article>
@@ -260,7 +261,7 @@
               <p class="dest-text">Vast wilderness plains, the Great Migration, and the majestic snow-capped peak of Mount Kilimanjaro.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 7–12 Days</span>
-                <button type="button" class="btn-text concierge-trigger" data-dest="Tanzania">Explore Tanzania &rarr;</button>
+                <button type="button" class="btn-text explore-dest-trigger" data-dest="Tanzania">Explore Tanzania &rarr;</button>
               </div>
             </div>
           </article>
@@ -276,7 +277,7 @@
               <p class="dest-text">The Pearl of Africa, home to lush misty rainforests and rare mountain gorilla encounters.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 4–8 Days</span>
-                <button type="button" class="btn-text concierge-trigger" data-dest="Uganda">Explore Uganda &rarr;</button>
+                <button type="button" class="btn-text explore-dest-trigger" data-dest="Uganda">Explore Uganda &rarr;</button>
               </div>
             </div>
           </article>
@@ -292,7 +293,7 @@
               <p class="dest-text">Spiced breeze, turquoise Indian Ocean waters, and ancient Swahili Stone Town heritage.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 4–7 Days</span>
-                <button type="button" class="btn-text concierge-trigger" data-dest="Zanzibar">Explore Zanzibar &rarr;</button>
+                <button type="button" class="btn-text explore-dest-trigger" data-dest="Zanzibar">Explore Zanzibar &rarr;</button>
               </div>
             </div>
           </article>
@@ -308,7 +309,7 @@
               <p class="dest-text">Land of a thousand hills, pioneering conservation, and sublime world-class luxury eco-lodges.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 4–6 Days</span>
-                <button type="button" class="btn-text concierge-trigger" data-dest="Rwanda">Explore Rwanda &rarr;</button>
+                <button type="button" class="btn-text explore-dest-trigger" data-dest="Rwanda">Explore Rwanda &rarr;</button>
               </div>
             </div>
           </article>
@@ -324,7 +325,7 @@
               <p class="dest-text">Vibrant coastal heritage, rich West African history, warm community spirit, and soulful cultural rhythms.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 6–10 Days</span>
-                <button type="button" class="btn-text concierge-trigger" data-dest="Ghana">Explore Ghana &rarr;</button>
+                <button type="button" class="btn-text explore-dest-trigger" data-dest="Ghana">Explore Ghana &rarr;</button>
               </div>
             </div>
           </article>
@@ -340,7 +341,7 @@
               <p class="dest-text">Dramatic volcanic peaks, vibrant coral reefs, and legendary luxury island hospitality.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 5–8 Days</span>
-                <button type="button" class="btn-text concierge-trigger" data-dest="Mauritius">Explore Mauritius &rarr;</button>
+                <button type="button" class="btn-text explore-dest-trigger" data-dest="Mauritius">Explore Mauritius &rarr;</button>
               </div>
             </div>
           </article>
@@ -356,7 +357,7 @@
               <p class="dest-text">Timeless wonders along the Nile, ancient pharaonic monuments, and private desert luxury cruises.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 7–12 Days</span>
-                <button type="button" class="btn-text concierge-trigger" data-dest="Egypt">Explore Egypt &rarr;</button>
+                <button type="button" class="btn-text explore-dest-trigger" data-dest="Egypt">Explore Egypt &rarr;</button>
               </div>
             </div>
           </article>
@@ -372,7 +373,7 @@
               <p class="dest-text">Lush ancient rainforests, exotic wildlife sanctuaries, and serene island archipelagos for global explorers.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 6–10 Days</span>
-                <button type="button" class="btn-text concierge-trigger" data-dest="Malaysia">Explore Malaysia &rarr;</button>
+                <button type="button" class="btn-text explore-dest-trigger" data-dest="Malaysia">Explore Malaysia &rarr;</button>
               </div>
             </div>
           </article>
@@ -388,7 +389,7 @@
               <p class="dest-text">A futuristic garden city gateway blending ultra-luxury hospitality with rich Asian cultural heritage.</p>
               <div class="dest-footer">
                 <span class="dest-duration">Recommended: 3–5 Days</span>
-                <button type="button" class="btn-text concierge-trigger" data-dest="Singapore">Explore Singapore &rarr;</button>
+                <button type="button" class="btn-text explore-dest-trigger" data-dest="Singapore">Explore Singapore &rarr;</button>
               </div>
             </div>
           </article>
@@ -407,9 +408,22 @@
           </p>
         </div>
 
+        <!-- Filter Tabs for Experience Categories -->
+        <div class="experience-filter-bar" id="experienceFilterBar">
+          <button type="button" class="filter-pill active" data-filter="all">All Experiences</button>
+          <button type="button" class="filter-pill" data-filter="Safari">Safari Adventures</button>
+          <button type="button" class="filter-pill" data-filter="Beach">Beach Escapes</button>
+          <button type="button" class="filter-pill" data-filter="Honeymoon">Honeymoon Journeys</button>
+          <button type="button" class="filter-pill" data-filter="Family">Family Holidays</button>
+          <button type="button" class="filter-pill" data-filter="Luxury">Luxury Journeys</button>
+          <button type="button" class="filter-pill" data-filter="Adventure">Adventure</button>
+          <button type="button" class="filter-pill" data-filter="Culture">Culture & Heritage</button>
+          <button type="button" class="filter-pill" data-filter="Wildlife">Wildlife</button>
+        </div>
+
         <div class="journey-showcase">
           <!-- Journey 1 -->
-          <article class="journey-featured-card">
+          <article class="journey-featured-card" data-category="Safari">
             <div class="journey-img-wrap">
               <img src="assets/images/journey_kenya.jpg" alt="Kenya Classic Safari" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80';">
               <div class="journey-tag-floating">3–5 Days</div>
@@ -428,13 +442,13 @@
                 <li>Guided evening bush walks with Maasai warriors</li>
               </ul>
               <div class="journey-cta">
-                <button type="button" class="btn btn-primary concierge-trigger" data-journey="Kenya Classic Safari">Request Full Itinerary</button>
+                <button type="button" class="btn btn-primary view-itinerary-trigger" data-journey-id="mara-classic">View Full Itinerary</button>
               </div>
             </div>
           </article>
 
           <!-- Journey 2 -->
-          <article class="journey-featured-card reverse">
+          <article class="journey-featured-card reverse" data-category="Safari">
             <div class="journey-img-wrap">
               <img src="assets/images/Signature tours Imgs/Great Migration Safari.jpg" alt="Great Migration Safari" loading="lazy" onerror="this.src='assets/images/journey_migration.jpg';">
               <div class="journey-tag-floating">July – October</div>
@@ -453,13 +467,13 @@
                 <li>Expert conservationist-led tracking sessions</li>
               </ul>
               <div class="journey-cta">
-                <button type="button" class="btn btn-primary concierge-trigger" data-journey="Great Migration Safari">Request Full Itinerary</button>
+                <button type="button" class="btn btn-primary view-itinerary-trigger" data-journey-id="great-migration">View Full Itinerary</button>
               </div>
             </div>
           </article>
 
           <!-- Journey 3 -->
-          <article class="journey-featured-card">
+          <article class="journey-featured-card" data-category="Wildlife">
             <div class="journey-img-wrap">
               <img src="assets/images/Signature tours Imgs/Gorilla Kingdom.jpg" alt="Gorilla Kingdom Expedition" loading="lazy" onerror="this.src='assets/images/journey_gorilla.jpg';">
               <div class="journey-tag-floating">Rare Encounter</div>
@@ -478,13 +492,13 @@
                 <li>Private helicopter transfer between Kigali and Bwindi</li>
               </ul>
               <div class="journey-cta">
-                <button type="button" class="btn btn-primary concierge-trigger" data-journey="Gorilla Kingdom Expedition">Request Full Itinerary</button>
+                <button type="button" class="btn btn-primary view-itinerary-trigger" data-journey-id="gorilla-kingdom">View Full Itinerary</button>
               </div>
             </div>
           </article>
 
           <!-- Journey 4 -->
-          <article class="journey-featured-card reverse">
+          <article class="journey-featured-card reverse" data-category="Beach">
             <div class="journey-img-wrap">
               <img src="assets/images/journey_bush_beach.jpg" alt="Bush & Beach Escape" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80';">
               <div class="journey-tag-floating">10–14 Days</div>
@@ -503,7 +517,7 @@
                 <li>Dedicated concierge managing every seamless transit</li>
               </ul>
               <div class="journey-cta">
-                <button type="button" class="btn btn-primary concierge-trigger" data-journey="Bush & Beach Escape">Request Full Itinerary</button>
+                <button type="button" class="btn btn-primary view-itinerary-trigger" data-journey-id="bush-beach">View Full Itinerary</button>
               </div>
             </div>
           </article>
@@ -511,7 +525,39 @@
       </div>
     </section>
 
-    <!-- Section 5: The Ivory Standard -->
+    <!-- Section 5: Partner Accommodations & Sanctuaries -->
+    <section class="section section-accommodations" id="accommodations">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-badge">Curated Sanctuaries</span>
+          <h2 class="section-title">Partner Accommodations</h2>
+          <p class="section-subtitle">
+            Explore recommended luxury lodges, private wilderness camps, and beachfront resorts across our iconic destinations.
+          </p>
+        </div>
+
+        <!-- Destination Filter Pills for Accommodations -->
+        <div class="destination-filter-bar" id="accommodationFilterBar">
+          <button type="button" class="filter-pill active" data-dest-filter="all">All Destinations</button>
+          <button type="button" class="filter-pill" data-dest-filter="Kenya">Kenya</button>
+          <button type="button" class="filter-pill" data-dest-filter="Tanzania">Tanzania</button>
+          <button type="button" class="filter-pill" data-dest-filter="Uganda">Uganda</button>
+          <button type="button" class="filter-pill" data-dest-filter="Rwanda">Rwanda</button>
+          <button type="button" class="filter-pill" data-dest-filter="Zanzibar">Zanzibar</button>
+          <button type="button" class="filter-pill" data-dest-filter="Mauritius">Mauritius</button>
+          <button type="button" class="filter-pill" data-dest-filter="Egypt">Egypt</button>
+          <button type="button" class="filter-pill" data-dest-filter="Ghana">Ghana</button>
+          <button type="button" class="filter-pill" data-dest-filter="Malaysia">Malaysia</button>
+          <button type="button" class="filter-pill" data-dest-filter="Singapore">Singapore</button>
+        </div>
+
+        <div class="accommodation-grid" id="accommodationGrid">
+          <!-- Dynamic rendering by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: The Ivory Standard -->
     <section class="section section-standard" id="standard">
       <div class="container">
         <div class="section-header text-center">
@@ -847,12 +893,34 @@
             </div>
 
             <div class="form-group">
-              <label for="travelersCount">Number of Travellers</label>
+              <label for="travelersCount">Number of Guests</label>
               <select id="travelersCount">
-                <option value="Solo Traveler">Solo Traveler</option>
-                <option value="Couple / 2 Guests" selected>Couple (2 Guests)</option>
-                <option value="Family (3-5 Guests)">Family (3-5 Guests)</option>
-                <option value="Private Group (6+ Guests)">Private Group (6+ Guests)</option>
+                <option value="1 Guest">1 Guest</option>
+                <option value="2 Guests" selected>2 Guests</option>
+                <option value="3 Guests">3 Guests</option>
+                <option value="4 Guests">4 Guests</option>
+                <option value="5+ Guests">5+ Guests</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="roomsCount">Number of Rooms</label>
+              <select id="roomsCount">
+                <option value="1 Room" selected>1 Room</option>
+                <option value="2 Rooms">2 Rooms</option>
+                <option value="3 Rooms">3 Rooms</option>
+                <option value="4+ Rooms">4+ Rooms</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="roomType">Room Type</label>
+              <select id="roomType">
+                <option value="Single Room">Single Room</option>
+                <option value="Double Room" selected>Double Room</option>
+                <option value="Twin Room">Twin Room</option>
+                <option value="Family Room">Family Room</option>
+                <option value="Suite">Suite</option>
               </select>
             </div>
 
@@ -907,10 +975,13 @@
             <span class="confirmation-icon">✨</span>
             <h3 class="confirmation-headline">Your Trip Beyond The Horizon Awaits</h3>
             <p class="confirmation-text">
-              Thank you. An Ivory Horizons travel specialist will contact you shortly.
+              Thank you. Your request has been logged and our concierge team is preparing your bespoke proposal.
             </p>
             <div class="summary-recap" id="summaryRecap"></div>
-            <button type="button" class="btn btn-outline" id="closeConfirmationBtn">Close Window</button>
+            <div class="confirmation-cta-group" style="display: flex; gap: 16px; justify-content: center; margin-top: 24px; flex-wrap: wrap;">
+              <button type="button" class="btn btn-whatsapp" id="whatsappCtaBtn">Continue on WhatsApp 💬</button>
+              <button type="button" class="btn btn-outline" id="closeConfirmationBtn">Close Window</button>
+            </div>
           </div>
         </div>
 
@@ -918,9 +989,29 @@
         <div class="modal-footer-nav" id="modalFooterNav">
           <button type="button" class="btn btn-outline" id="prevStepBtn" style="display: none;">&larr; Back</button>
           <button type="button" class="btn btn-primary" id="nextStepBtn">Next Step &rarr;</button>
-          <button type="submit" class="btn btn-primary" id="submitConciergeBtn" style="display: none;">Plan My Trip</button>
+          <button type="submit" class="btn btn-primary" id="submitConciergeBtn" style="display: none;">Submit Booking Request</button>
         </div>
       </form>
+    </div>
+  </dialog>
+
+  <!-- FULL ITINERARY MODAL -->
+  <dialog class="itinerary-modal" id="itineraryModal">
+    <div class="modal-content-wrapper itinerary-wrapper">
+      <button type="button" class="modal-close" id="closeItineraryBtn" aria-label="Close itinerary">&times;</button>
+      <div id="itineraryModalContent">
+        <!-- Dynamically injected by app.js -->
+      </div>
+    </div>
+  </dialog>
+
+  <!-- DESTINATION DETAIL MODAL -->
+  <dialog class="destination-modal" id="destinationModal">
+    <div class="modal-content-wrapper destination-wrapper">
+      <button type="button" class="modal-close" id="closeDestinationBtn" aria-label="Close destination details">&times;</button>
+      <div id="destinationModalContent">
+        <!-- Dynamically injected by app.js -->
+      </div>
     </div>
   </dialog>
 
