@@ -107,85 +107,123 @@
         <div class="modal-brand-badge">
           <span class="badge-icon">✦</span>
           <span class="badge-text" id="stepBadge">Step 1 of 4</span>
-        </div>
-        <button type="button" class="close-modal-btn" id="closeConciergeBtn" aria-label="Close dialog">&times;</button>
+  <!-- CONCIERGE MODAL / STEP-BY-STEP JOURNEY PLANNER -->
+  <dialog class="concierge-modal" id="conciergeModal">
+    <div class="modal-content-wrapper">
+      <button type="button" class="modal-close" id="closeConciergeBtn" aria-label="Close modal">&times;</button>
+      
+      <div class="modal-header">
+        <span class="modal-step-badge" id="stepBadge">Step 1 of 4</span>
+        <h3 class="modal-title" id="modalTitle">What type of trip are you imagining?</h3>
+        <p class="modal-subtitle" id="modalSubtitle">Select the experience that best captures your dream African escape.</p>
       </div>
 
-      <div class="concierge-progress-bar">
+      <!-- Step Progress Bar -->
+      <div class="modal-progress-bar">
         <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
       </div>
 
-      <div class="modal-headings">
-        <h3 class="modal-title" id="modalTitle">What type of trip are you imagining?</h3>
-        <p class="modal-subtitle" id="modalSubtitle">Select the experience that best captures your dream escape.</p>
-      </div>
-
-      <form id="conciergeForm" class="concierge-form">
-        <!-- STEP 1: EXPERIENCE TYPE -->
+      <form id="conciergeForm" onsubmit="return false;">
+        <!-- STEP 1: JOURNEY TYPE -->
         <div class="concierge-step step-active" data-step="1">
-          <div class="cards-selection-grid">
-            <label class="selection-card">
-              <input type="radio" name="journeyType" value="Safari Adventures" checked>
-              <div class="card-content">
-                <span class="card-icon">🦁</span>
-                <span class="card-label">Safari Adventures</span>
-              </div>
+          <div class="option-grid">
+            <label class="option-card">
+              <input type="radio" name="journeyType" value="Safari Adventure" checked>
+              <span class="card-box">
+                <img src="assets/Tour Icons/Safari Adventure Icon.svg" alt="Safari Adventure" class="option-svg-icon">
+                <span class="option-label">Safari Adventure</span>
+              </span>
             </label>
-            <label class="selection-card">
-              <input type="radio" name="journeyType" value="Beach Escapes">
-              <div class="card-content">
-                <span class="card-icon">🏖️</span>
-                <span class="card-label">Beach Escapes</span>
-              </div>
+
+            <label class="option-card">
+              <input type="radio" name="journeyType" value="Beach Escape">
+              <span class="card-box">
+                <img src="assets/Tour Icons/Beach Escape Icon.svg" alt="Beach Escape" class="option-svg-icon">
+                <span class="option-label">Beach Escape</span>
+              </span>
             </label>
-            <label class="selection-card">
-              <input type="radio" name="journeyType" value="Honeymoon Journeys">
-              <div class="card-content">
-                <span class="card-icon">💍</span>
-                <span class="card-label">Honeymoon Journeys</span>
-              </div>
+
+            <label class="option-card">
+              <input type="radio" name="journeyType" value="Honeymoon">
+              <span class="card-box">
+                <img src="assets/Tour Icons/Honeymoon Icon.svg" alt="Honeymoon" class="option-svg-icon">
+                <span class="option-label">Honeymoon</span>
+              </span>
             </label>
-            <label class="selection-card">
-              <input type="radio" name="journeyType" value="Family Holidays">
-              <div class="card-content">
-                <span class="card-icon">👨‍👩‍👧‍👦</span>
-                <span class="card-label">Family Holidays</span>
-              </div>
+
+            <label class="option-card">
+              <input type="radio" name="journeyType" value="Luxury Retreat">
+              <span class="card-box">
+                <img src="assets/Tour Icons/Lucury Retreat Icon.svg" alt="Luxury Retreat" class="option-svg-icon">
+                <span class="option-label">Luxury Retreat</span>
+              </span>
             </label>
-            <label class="selection-card">
-              <input type="radio" name="journeyType" value="Exclusive Luxury Journeys">
-              <div class="card-content">
-                <span class="card-icon">💎</span>
-                <span class="card-label">Luxury Journeys</span>
-              </div>
-            </label>
-            <label class="selection-card">
+
+            <label class="option-card">
               <input type="radio" name="journeyType" value="Cultural Discoveries">
-              <div class="card-content">
-                <span class="card-icon">🏛️</span>
-                <span class="card-label">Culture & Heritage</span>
-              </div>
+              <span class="card-box">
+                <img src="assets/Tour Icons/Cultural heritage Icon.svg" alt="Cultural Discoveries" class="option-svg-icon">
+                <span class="option-label">Cultural Heritage</span>
+              </span>
+            </label>
+
+            <label class="option-card">
+              <input type="radio" name="journeyType" value="Wildlife Expedition">
+              <span class="card-box">
+                <img src="assets/Tour Icons/Adventure Trek Icon.svg" alt="Wildlife Expedition" class="option-svg-icon">
+                <span class="option-label">Adventure Trek</span>
+              </span>
             </label>
           </div>
         </div>
 
-        <!-- STEP 2: DESTINATION SELECTION -->
+        <!-- STEP 2: DESTINATIONS -->
         <div class="concierge-step" data-step="2">
-          <div class="checkbox-selection-grid">
-            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Kenya"> <span>Kenya</span></label>
-            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Tanzania"> <span>Tanzania</span></label>
-            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Uganda"> <span>Uganda</span></label>
-            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Rwanda"> <span>Rwanda</span></label>
-            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Zanzibar"> <span>Zanzibar</span></label>
-            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Mauritius"> <span>Mauritius</span></label>
-            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Egypt"> <span>Egypt</span></label>
-            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Ghana"> <span>Ghana</span></label>
-            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Malaysia"> <span>Malaysia</span></label>
-            <label class="checkbox-pill"><input type="checkbox" name="destination" value="Singapore"> <span>Singapore</span></label>
+          <div class="option-grid">
+            <label class="option-card">
+              <input type="checkbox" name="destination" value="Kenya">
+              <span class="card-box"><span class="option-label">Kenya</span></span>
+            </label>
+            <label class="option-card">
+              <input type="checkbox" name="destination" value="Tanzania">
+              <span class="card-box"><span class="option-label">Tanzania</span></span>
+            </label>
+            <label class="option-card">
+              <input type="checkbox" name="destination" value="Uganda">
+              <span class="card-box"><span class="option-label">Uganda</span></span>
+            </label>
+            <label class="option-card">
+              <input type="checkbox" name="destination" value="Rwanda">
+              <span class="card-box"><span class="option-label">Rwanda</span></span>
+            </label>
+            <label class="option-card">
+              <input type="checkbox" name="destination" value="Zanzibar">
+              <span class="card-box"><span class="option-label">Zanzibar</span></span>
+            </label>
+            <label class="option-card">
+              <input type="checkbox" name="destination" value="Mauritius">
+              <span class="card-box"><span class="option-label">Mauritius</span></span>
+            </label>
+            <label class="option-card">
+              <input type="checkbox" name="destination" value="Egypt">
+              <span class="card-box"><span class="option-label">Egypt</span></span>
+            </label>
+            <label class="option-card">
+              <input type="checkbox" name="destination" value="Ghana">
+              <span class="card-box"><span class="option-label">Ghana</span></span>
+            </label>
+            <label class="option-card">
+              <input type="checkbox" name="destination" value="Malaysia">
+              <span class="card-box"><span class="option-label">Malaysia</span></span>
+            </label>
+            <label class="option-card">
+              <input type="checkbox" name="destination" value="Singapore">
+              <span class="card-box"><span class="option-label">Singapore</span></span>
+            </label>
           </div>
         </div>
 
-        <!-- STEP 3: TRAVEL DETAILS -->
+        <!-- STEP 3: TRIP DETAILS -->
         <div class="concierge-step" data-step="3">
           <div class="form-fields-grid">
             <div class="form-group">
@@ -284,24 +322,22 @@
         <div class="concierge-step step-confirmation" id="confirmationStep" style="display: none;">
           <div class="confirmation-box text-center">
             <span class="confirmation-icon">✨</span>
-            <h4 class="confirmation-title">Your Private Concierge Request is Confirmed</h4>
-            <p class="confirmation-text">Our principal travel designer Viv will personally review your preferences and craft your custom itinerary proposal within 24 hours.</p>
-            
-            <div class="summary-recap-box" id="summaryRecap"></div>
-
-            <div class="dual-cta-wrap margin-top-md">
-              <button type="button" class="btn btn-whatsapp" id="whatsappCtaBtn">
-                <span>💬 Continue on WhatsApp</span>
-              </button>
-              <button type="button" class="btn btn-primary" id="closeConfirmationBtn">Return to Site</button>
+            <h3 class="confirmation-headline">Your Trip Beyond The Horizon Awaits</h3>
+            <p class="confirmation-text">
+              Thank you. Your request has been logged and our concierge team is preparing your bespoke proposal within 24 hours.
+            </p>
+            <div class="summary-recap" id="summaryRecap"></div>
+            <div class="confirmation-cta-group" style="display: flex; gap: 16px; justify-content: center; margin-top: 24px; flex-wrap: wrap;">
+              <button type="button" class="btn btn-whatsapp" id="whatsappCtaBtn">Continue on WhatsApp 💬</button>
+              <button type="button" class="btn btn-outline" id="closeConfirmationBtn">Close Window</button>
             </div>
           </div>
         </div>
 
-        <!-- MODAL FOOTER NAV BUTTONS -->
+        <!-- Modal Controls Footer -->
         <div class="modal-footer-nav" id="modalFooterNav">
           <button type="button" class="btn btn-outline" id="prevStepBtn" style="display: none;">&larr; Back</button>
-          <button type="button" class="btn btn-primary" id="nextStepBtn">Continue &rarr;</button>
+          <button type="button" class="btn btn-primary" id="nextStepBtn">Next Step &rarr;</button>
           <button type="submit" class="btn btn-primary" id="submitConciergeBtn" style="display: none;">Submit Booking Request</button>
         </div>
       </form>
