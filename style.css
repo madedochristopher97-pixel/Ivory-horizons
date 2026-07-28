@@ -1878,3 +1878,212 @@ img {
   font-size: 1rem;
 }
 
+/* ==========================================================================
+   STICKY HEADER, FULL PAGE VIEWS & MOBILE STACKING
+   ========================================================================== */
+
+/* Sticky Header Accessibility (Requirement 2) */
+.site-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(253, 251, 247, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: var(--transition-fast);
+}
+
+/* Mobile Handpicked Lands Stacking (Requirement 6) */
+@media (max-width: 768px) {
+  .destination-card {
+    display: flex;
+    flex-direction: column !important;
+  }
+
+  .dest-image-box {
+    width: 100% !important;
+    height: 220px !important;
+  }
+
+  .dest-body {
+    width: 100% !important;
+    padding: var(--space-3) 0 0 0;
+  }
+}
+
+/* Full Dedicated Page Views */
+.page-view {
+  width: 100%;
+  min-height: 80vh;
+  animation: fadeInView 0.35s ease-out;
+}
+
+@keyframes fadeInView {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-hero-mini {
+  background-color: var(--bg-secondary);
+  padding: var(--space-8) 0 var(--space-6);
+  margin-bottom: var(--space-6);
+  border-bottom: 1px solid var(--brown-light);
+}
+
+.dest-hero-banner, .journey-hero-banner {
+  position: relative;
+  height: 320px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-6);
+}
+
+.dest-hero-banner img, .journey-hero-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dest-hero-overlay, .journey-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,15,10,0.85), rgba(26,15,10,0.2));
+}
+
+.dest-hero-text, .journey-hero-text {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  color: var(--white);
+  z-index: 2;
+}
+
+.dest-hero-title, .journey-hero-title {
+  font-size: 2.5rem;
+  color: var(--white);
+  margin-top: 8px;
+}
+
+.dest-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-6) 0;
+}
+
+.meta-box {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--brown-light);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.meta-icon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.dest-journey-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.dest-page-cta-box, .journey-page-cta-box {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--brown-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.py-6 {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+}
+
+.back-to-home-btn {
+  margin-bottom: var(--space-4);
+}
+
+/* Blog Page Styling (Requirement 12) */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.blog-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--brown-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+
+.blog-img-wrap {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.blog-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-cat-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: var(--brown-accent);
+  color: var(--white);
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.blog-body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.blog-meta {
+  font-size: 0.8rem;
+  color: var(--brown-secondary);
+  margin-bottom: 8px;
+}
+
+.blog-title {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.blog-excerpt {
+  font-size: 0.85rem;
+  color: #4A3E37;
+  margin-bottom: var(--space-3);
+}
+
+.read-article-btn {
+  margin-top: auto;
+}
+
+

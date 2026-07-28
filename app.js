@@ -40,24 +40,85 @@ document.addEventListener('DOMContentLoaded', () => {
   const playText = document.getElementById('playText');
   let isPlaying = false;
 
-  // New Modal Elements
-  const itineraryModal = document.getElementById('itineraryModal');
-  const closeItineraryBtn = document.getElementById('closeItineraryBtn');
-  const itineraryModalContent = document.getElementById('itineraryModalContent');
+  // Dedicated Page Views
+  const pageViews = {
+    home: document.getElementById('pageViewHome'),
+    destination: document.getElementById('pageViewDestination'),
+    journey: document.getElementById('pageViewJourney'),
+    accommodation: document.getElementById('pageViewAccommodation'),
+    blog: document.getElementById('pageViewBlog')
+  };
 
-  const destinationModal = document.getElementById('destinationModal');
-  const closeDestinationBtn = document.getElementById('closeDestinationBtn');
-  const destinationModalContent = document.getElementById('destinationModalContent');
-
+  const destinationPageContent = document.getElementById('destinationPageContent');
+  const journeyPageContent = document.getElementById('journeyPageContent');
   const accommodationGrid = document.getElementById('accommodationGrid');
   const accommodationFilterBar = document.getElementById('accommodationFilterBar');
   const experienceFilterBar = document.getElementById('experienceFilterBar');
+  const blogGrid = document.getElementById('blogGrid');
+  const blogFilterBar = document.getElementById('blogFilterBar');
+
+  // ----------------------------------------------------
+  // VIEW ROUTER & NAVIGATION
+  // ----------------------------------------------------
+
+  function showPage(pageId, targetHash = null) {
+    Object.keys(pageViews).forEach(key => {
+      if (pageViews[key]) {
+        pageViews[key].style.display = key === pageId ? 'block' : 'none';
+      }
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (pageId === 'home' && targetHash) {
+      setTimeout(() => {
+        const elem = document.querySelector(targetHash);
+        if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }
+
+  // Handle page link clicks
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('.nav-page-link');
+    if (link) {
+      e.preventDefault();
+      const pageId = link.dataset.page || 'home';
+      const href = link.getAttribute('href');
+      showPage(pageId, href.startsWith('#') ? href : null);
+      if (mainNav && mainNav.classList.contains('active')) {
+        mainNav.classList.remove('active');
+      }
+    }
+
+    const backBtn = e.target.closest('.back-to-home-btn');
+    if (backBtn) {
+      e.preventDefault();
+      showPage('home');
+    }
+  });
+
+  // Sticky Header Scroll Effect
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      siteHeader.classList.add('scrolled');
+    } else {
+      siteHeader.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile Navigation Toggle
+  if (mobileToggle && mainNav) {
+    mobileToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+    });
+  }
 
   // ----------------------------------------------------
   // DATASETS
   // ----------------------------------------------------
 
-  // Destination Metadata (Section 6 Requirements)
+  // Destination Metadata (Section 5 & 6 Requirements)
   const destinationData = {
     "Kenya": {
       name: "Kenya",
@@ -66,9 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
       overview: "Track mountain gorillas or witness millions of wildebeest across the Maasai Mara. Kenya offers the quintessential African safari alongside pristine Indian Ocean coastlines.",
       coreExperiences: ["Wildlife", "Beaches", "Culture", "Adventure"],
       idealDuration: "3–12 Days",
+      bestTimeToVisit: "July – October (Great Migration) & January – March",
       bestFor: "Families, Groups, Honeymooners",
-      journeys: ["Classic Maasai Mara Safari", "Amboseli, Lake Nakuru & Maasai Mara Safari", "Samburu Wildlife Adventure", "Laikipia Luxury Safari", "Great Migration Safari", "Tsavo East & West Safari", "Luxury Fly-in Safari", "Diani Beach Escape", "Lamu Getaway", "Kenya Bush & Beach"],
-      accommodations: ["Angama Mara", "Giraffe Manor Nairobi", "Hemingways Watamu", "Segera Retreat Laikipia"]
+      gallery: [
+        "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=80",
+        "assets/images/journey_kenya.jpg",
+        "assets/images/Curated Modalities/Safari Adventure.jpg"
+      ]
     },
     "Tanzania": {
       name: "Tanzania",
@@ -77,9 +142,13 @@ document.addEventListener('DOMContentLoaded', () => {
       overview: "Home to the boundless Serengeti, Ngorongoro Crater, and snow-capped Mount Kilimanjaro. A sanctuary of raw wilderness and fly-in luxury.",
       coreExperiences: ["Wildlife", "Luxury Safari", "Mountains"],
       idealDuration: "4–10 Days",
+      bestTimeToVisit: "June – October & December – March",
       bestFor: "Safari Enthusiasts, Luxury Travelers, Adventure",
-      journeys: ["Serengeti Migration Safari", "Ngorongoro Crater Experience", "Tarangire & Lake Manyara Safari", "Southern Tanzania Safari", "Tanzania Fly-in Luxury Safari"],
-      accommodations: ["Four Seasons Safari Lodge Serengeti", "Ngorongoro Crater Lodge", "Singita Grumeti Camps", "Tarangire Treetops"]
+      gallery: [
+        "assets/images/Handpicked Lands/Tanzania.jpg",
+        "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=80",
+        "assets/images/dest_tanzania.jpg"
+      ]
     },
     "Uganda": {
       name: "Uganda",
@@ -88,9 +157,13 @@ document.addEventListener('DOMContentLoaded', () => {
       overview: "The Pearl of Africa features lush misty emerald rainforests, rare mountain gorilla encounters, and thunderous waterfalls along the Nile.",
       coreExperiences: ["Primates", "Wildlife", "Adventure"],
       idealDuration: "4–9 Days",
+      bestTimeToVisit: "June – September & December – February",
       bestFor: "Adventure, Nature Lovers, Photographers",
-      journeys: ["Queen Elizabeth National Park Safari", "Murchison Falls Safari", "Uganda Primates & Wildlife Combination", "Gorilla Trekking Adventure", "Chimpanzee Tracking"],
-      accommodations: ["Sanctuary Gorilla Forest Camp", "Clouds Mountain Gorilla Lodge", "Paraa Safari Lodge", "Ndali Lodge Kibale"]
+      gallery: [
+        "assets/images/Handpicked Lands/Uganda.jpg",
+        "assets/images/Signature tours Imgs/Gorilla Kingdom.jpg",
+        "assets/images/Curated Modalities/Wildlife experiences.jpg"
+      ]
     },
     "Zanzibar": {
       name: "Zanzibar",
@@ -99,9 +172,13 @@ document.addEventListener('DOMContentLoaded', () => {
       overview: "Powder-white sand beaches, turquoise Indian Ocean waters, and ancient Swahili Stone Town heritage scented with spice.",
       coreExperiences: ["Beaches", "Romance", "Culture"],
       idealDuration: "3–7 Days",
+      bestTimeToVisit: "June – October & December – February",
       bestFor: "Couples, Families, Beach Lovers",
-      journeys: ["Beach Honeymoon Package", "Luxury Beach Holiday", "Luxury All-Inclusive Holiday"],
-      accommodations: ["The Residence Zanzibar", "Baraza Resort & Spa", "Zawadi Hotel Zanzibar", "Park Hyatt Zanzibar"]
+      gallery: [
+        "assets/images/dest_zanzibar.jpg",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+        "assets/images/Curated Modalities/Honeymoon Journeys.jpg"
+      ]
     },
     "Rwanda": {
       name: "Rwanda",
@@ -110,9 +187,13 @@ document.addEventListener('DOMContentLoaded', () => {
       overview: "Land of a thousand hills, pioneering conservation, and architectural eco-luxury lodges set against misty volcanic peaks.",
       coreExperiences: ["Gorillas", "Luxury", "Culture"],
       idealDuration: "3–7 Days",
+      bestTimeToVisit: "June – September & December – February",
       bestFor: "Luxury Travelers, Wildlife Lovers",
-      journeys: ["Gorilla Trekking Experience", "Rwanda & Uganda Gorilla Combo", "Luxury Rwanda Escape", "Rwanda Cultural Experience"],
-      accommodations: ["One&Only Gorillas' Nest", "Bisate Lodge Volcanoes", "Singita Kwitonda Lodge", "The Retreat by Heaven Kigali"]
+      gallery: [
+        "assets/images/Handpicked Lands/Rwanda.jpg",
+        "assets/images/Signature tours Imgs/Gorilla Kingdom.jpg",
+        "assets/images/dest_rwanda.jpg"
+      ]
     },
     "Ghana": {
       name: "Ghana",
@@ -121,9 +202,13 @@ document.addEventListener('DOMContentLoaded', () => {
       overview: "Vibrant coastal heritage, rich West African history, Ashanti kingdom traditions, and soulful cultural rhythms.",
       coreExperiences: ["Heritage", "Culture", "Beaches"],
       idealDuration: "4–8 Days",
+      bestTimeToVisit: "November – March",
       bestFor: "Diaspora Travel, Culture Seekers",
-      journeys: ["Beach & Heritage Holiday", "Luxury Ghana Experience", "Ashanti Kingdom Cultural Tour", "Afro-Future in Ghana"],
-      accommodations: ["Kempinski Hotel Gold Coast City Accra", "Villa Monticello Accra", "Lou Moon Eco Luxury Resort", "Zaina Lodge Mole"]
+      gallery: [
+        "assets/images/Handpicked Lands/Accra Ghana.jpg",
+        "assets/images/Curated Modalities/Cultural Discoveries.jpg",
+        "assets/images/dest_ghana.jpg"
+      ]
     },
     "Mauritius": {
       name: "Mauritius",
@@ -132,9 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
       overview: "Dramatic volcanic peaks, vibrant coral lagoons, and world-class luxury beachfront resorts offering refined Indian Ocean hospitality.",
       coreExperiences: ["Beaches", "Luxury", "Relaxation"],
       idealDuration: "4–8 Days",
+      bestTimeToVisit: "May – December",
       bestFor: "Honeymooners, Families, Luxury Travelers",
-      journeys: ["Luxury Beach Escape", "Family Resort Escape", "Honeymoon Getaway", "Adventure & Nature Tours"],
-      accommodations: ["Royal Palm Beachcomber Luxury", "LUX* Grand Baie", "Four Seasons Resort Mauritius", "One&Only Le Saint Géran"]
+      gallery: [
+        "assets/images/dest_mauritius.jpg",
+        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80"
+      ]
     },
     "Egypt": {
       name: "Egypt",
@@ -143,9 +231,12 @@ document.addEventListener('DOMContentLoaded', () => {
       overview: "Timeless wonders along the Nile River, ancient pharaonic monuments, private desert luxury, and vibrant historical markets.",
       coreExperiences: ["Ancient History", "Culture", "Pilgrimage"],
       idealDuration: "5–10 Days",
+      bestTimeToVisit: "October – April",
       bestFor: "History Lovers, Couples, Families",
-      journeys: ["Egypt Honeymoon Package", "Luxury Egypt Highlights", "Pilgrimage Trip"],
-      accommodations: ["Marriott Mena House Cairo", "Sofitel Legend Old Cataract Aswan", "Four Seasons Hotel Cairo at Nile Plaza", "The Oberoi Sahl Hasheesh"]
+      gallery: [
+        "assets/images/dest_egypt.jpg",
+        "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=600&q=80"
+      ]
     },
     "Malaysia": {
       name: "Malaysia",
@@ -154,9 +245,11 @@ document.addEventListener('DOMContentLoaded', () => {
       overview: "Lush ancient rainforests, exotic wildlife sanctuaries, and serene tropical island archipelagos for global explorers.",
       coreExperiences: ["Cities", "Islands", "Nature"],
       idealDuration: "5–8 Days",
+      bestTimeToVisit: "March – October",
       bestFor: "Families, Couples, First-time Asia Visitors",
-      journeys: ["Malaysia Family Holidays", "Kuala Lumpur City Tour"],
-      accommodations: ["The Datai Langkawi", "Four Seasons Resort Langkawi", "Mandarin Oriental Kuala Lumpur", "Pangkor Laut Resort"]
+      gallery: [
+        "assets/images/dest_malaysia.jpg"
+      ]
     },
     "Singapore": {
       name: "Singapore",
@@ -165,13 +258,15 @@ document.addEventListener('DOMContentLoaded', () => {
       overview: "A futuristic garden city gateway blending ultra-luxury skyline hospitality, Michelin dining, and family entertainment.",
       coreExperiences: ["City", "Entertainment", "Luxury"],
       idealDuration: "3–5 Days",
+      bestTimeToVisit: "Year-Round",
       bestFor: "Families, Couples, Luxury Travelers",
-      journeys: ["Singapore City Explorer"],
-      accommodations: ["Raffles Hotel Singapore", "Marina Bay Sands", "Capella Singapore Sentosa", "The Ritz-Carlton Millenia"]
+      gallery: [
+        "assets/images/dest_singapore.jpg"
+      ]
     }
   };
 
-  // Journeys Master Database (Sections 2 & 3 Requirements)
+  // Journeys Master Database (Section 7 & 8 Requirements)
   const journeysData = [
     {
       id: "mara-classic",
@@ -198,7 +293,11 @@ document.addEventListener('DOMContentLoaded', () => {
         { day: "Days 4–5", title: "Private Wildlife Encounters & Farewell Flight", details: "Final sunrise game drive to spot rare cheetah hunts. Private charter flight back to Nairobi for departure." }
       ],
       included: ["Private charter flights", "Luxury tented suite accommodation", "All gourmet meals & premium spirits", "Unlimited private 4x4 game drives", "Park & conservation fees", "24/7 dedicated concierge assistance"],
-      excluded: ["International airfare", "Visa fees", "Personal travel insurance"]
+      excluded: ["International airfare", "Visa fees", "Personal travel insurance"],
+      faqs: [
+        { q: "What is the best time for the Great Migration?", a: "The wildebeest herds are usually in the Maasai Mara between July and October." },
+        { q: "Are children welcome?", a: "Yes, our family safari itineraries include private vehicles and dedicated junior ranger programs." }
+      ]
     },
     {
       id: "great-migration",
@@ -224,7 +323,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { day: "Days 7–10", title: "Private Conservancy Sanctuary", details: "Retreat to a private conservancy for nighttime game drives, bush walks, and relaxation." }
       ],
       included: ["Inter-camp flight transfers", "Mobile luxury camp stays", "All meals & drinks", "Private guide and vehicle", "Conservation park permits"],
-      excluded: ["International flights", "Staff gratuities"]
+      excluded: ["International flights", "Staff gratuities"],
+      faqs: [
+        { q: "How close do we get to river crossings?", a: "Our private 4x4 vehicles are positioned at prime, safe vantage points with experienced conservation guides." }
+      ]
     },
     {
       id: "gorilla-kingdom",
@@ -251,7 +353,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { day: "Days 4–6", title: "Bwindi Impenetrable Forest Trek (Uganda)", details: "Cross into Bwindi, Uganda for a second gorilla trek in ancient primary forest. Relax at an eco-lodge overlooking the canopy." }
       ],
       included: ["Gorilla trekking permits", "Helicopter & private land transfers", "Luxury lodge accommodations", "Expert ranger guides", "All meals"],
-      excluded: ["International flights", "Personal items"]
+      excluded: ["International flights", "Personal items"],
+      faqs: [
+        { q: "How fit do I need to be for gorilla trekking?", a: "Treks range from 1 to 4 hours over forest terrain. Porters are available to assist guests on all climbs." }
+      ]
     },
     {
       id: "bush-beach",
@@ -276,137 +381,14 @@ document.addEventListener('DOMContentLoaded', () => {
         { day: "Days 6–10", title: "Zanzibar Coastal Sanctuary", details: "Direct fly-in to Zanzibar. Stay in a private oceanfront pool villa with spa treatments, dhow cruises, and spice garden tours." }
       ],
       included: ["Domestic and inter-country flights", "Luxury bush & beach accommodations", "All meals & drinks", "Private safari & ocean activities"],
-      excluded: ["International flights", "Personal purchases"]
-    },
-    {
-      id: "diani-escape",
-      name: "Diani Beach Escape",
-      destination: "Kenya",
-      location: "Kenya • Diani",
-      category: "Beach",
-      duration: "4–7 Days",
-      bestFor: "Beach Lovers • Families • Couples",
-      tags: ["Beach", "Relaxation", "Luxury"],
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-      fallback: "assets/images/beach_escape.jpg",
-      description: "Pristine white sand, crystal waters, and private beachfront luxury along Kenya's awarded south coast.",
-      bestSeason: "Year-Round",
-      highlights: ["Private ocean villa with chef", "Kite surfing and dhow excursions", "Seafood dining on sandbars"],
-      itinerary: [{ day: "Days 1–5", title: "Diani Beach Relaxation", details: "Unwind at a luxury beach resort with private butler service, snorkeling, and sunset cruises." }],
-      included: ["Resort stay", "All meals", "Airport transfers"],
-      excluded: ["Flights"]
-    },
-    {
-      id: "serengeti-migration",
-      name: "Serengeti Migration Safari",
-      destination: "Tanzania",
-      location: "Tanzania • Serengeti",
-      category: "Safari",
-      duration: "5–8 Days",
-      bestFor: "Safari Enthusiasts • Couples",
-      tags: ["Safari", "Wildlife", "Luxury"],
-      image: "assets/images/Handpicked Lands/Tanzania.jpg",
-      fallback: "assets/images/dest_tanzania.jpg",
-      description: "Explore the vast plains of the Serengeti, following the endless herds of wildebeest and predators.",
-      bestSeason: "December – March & July – October",
-      highlights: ["Luxury fly-in safari camp", "Private Serengeti game drives", "Sunrise balloon ride"],
-      itinerary: [{ day: "Days 1–6", title: "Serengeti Game Exploration", details: "Daily private safari tracking lion pride hunts, elephant herds, and migration crossings." }],
-      included: ["Fly-in transfers", "Camp stay", "Meals & spirits"],
-      excluded: ["International airfare"]
-    },
-    {
-      id: "zanzibar-honeymoon",
-      name: "Beach Honeymoon Package",
-      destination: "Zanzibar",
-      location: "Zanzibar • Stone Town & Coast",
-      category: "Honeymoon",
-      duration: "5–8 Days",
-      bestFor: "Honeymooners • Couples",
-      tags: ["Honeymoon", "Beach", "Romance"],
-      image: "assets/images/dest_zanzibar.jpg",
-      fallback: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1200&q=80",
-      description: "Romantic oceanfront villas, couples candlelit dinners on private sandbanks, and spice island tranquility.",
-      bestSeason: "Year-Round",
-      highlights: ["Couples massage by the sea", "Private dhow sunset voyage", "Candlelit beach dining"],
-      itinerary: [{ day: "Days 1–6", title: "Honeymoon Bliss", details: "Exclusive privacy, ocean villa, private butler, and personalized island tours." }],
-      included: ["Villa stay", "All inclusive dining", "Private transfers"],
-      excluded: ["Flights"]
-    },
-    {
-      id: "mauritius-luxury",
-      name: "Luxury Beach Escape",
-      destination: "Mauritius",
-      location: "Mauritius",
-      category: "Luxury",
-      duration: "5–8 Days",
-      bestFor: "Luxury Travelers • Couples • Families",
-      tags: ["Luxury", "Beach", "Resort"],
-      image: "assets/images/dest_mauritius.jpg",
-      fallback: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80",
-      description: "Indulge in 5-star beachfront resorts surrounded by turquoise lagoons, volcanic backdrops, and world-class culinary art.",
-      bestSeason: "May – December",
-      highlights: ["Private pool villa", "Catamaran reef sailing", "Helicopter island tour"],
-      itinerary: [{ day: "Days 1–7", title: "Mauritian Luxury Stay", details: "Relax in total privacy with world-class spa facilities and fine dining." }],
-      included: ["Luxury resort stay", "Half-board dining", "Private transfers"],
-      excluded: ["International flights"]
-    },
-    {
-      id: "egypt-highlights",
-      name: "Luxury Egypt Highlights",
-      destination: "Egypt",
-      location: "Egypt • Cairo & Nile",
-      category: "Culture",
-      duration: "7–10 Days",
-      bestFor: "History Seekers • Families • Culture Lovers",
-      tags: ["Culture", "History", "Luxury"],
-      image: "assets/images/dest_egypt.jpg",
-      fallback: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1200&q=80",
-      description: "Private Egyptologist-guided exploration of the Pyramids of Giza, Sphinx, Luxor temples, and a private dahabiya Nile river cruise.",
-      bestSeason: "October – April",
-      highlights: ["Private entry to Pyramids & King Tut museum", "Luxury Nile cruise", "Aswan & Abu Simbel flight"],
-      itinerary: [{ day: "Days 1–8", title: "Pharaonic Wonders Expedition", details: "Explore Cairo's ancient treasures, cruise the Nile in private luxury, and visit Valley of the Kings." }],
-      included: ["Private Egyptologist", "5-star hotel & Nile cruise", "Domestic flights", "All permits"],
-      excluded: ["International flights"]
-    },
-    {
-      id: "ghana-heritage",
-      name: "Beach & Heritage Holiday",
-      destination: "Ghana",
-      location: "Ghana • Accra & Cape Coast",
-      category: "Culture",
-      duration: "6–9 Days",
-      bestFor: "Diaspora Travel • Culture Seekers • Families",
-      tags: ["Culture", "Heritage", "Beach"],
-      image: "assets/images/Handpicked Lands/Accra Ghana.jpg",
-      fallback: "assets/images/dest_ghana.jpg",
-      description: "Reconnect with ancestral roots, explore historic coastal fortresses, Kumasi royal kingdoms, and vibrant Accra culinary culture.",
-      bestSeason: "November – March",
-      highlights: ["Cape Coast Castle ancestral tour", "Ashanti Kingdom royal palace visit", "Accra art & gastronomy tour"],
-      itinerary: [{ day: "Days 1–7", title: "Ghana Cultural Rhythms", details: "Accra city discovery, Cape Coast historical exploration, and coastal eco-resort relaxation." }],
-      included: ["Private guide & driver", "Boutique hotel stays", "Entry tickets & tours"],
-      excluded: ["International flights"]
-    },
-    {
-      id: "singapore-city",
-      name: "Singapore City Explorer",
-      destination: "Singapore",
-      location: "Singapore",
-      category: "Family",
-      duration: "3–5 Days",
-      bestFor: "Families • Couples • City Lovers",
-      tags: ["City", "Luxury", "Family"],
-      image: "assets/images/dest_singapore.jpg",
-      fallback: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80",
-      description: "Experience futuristic gardens, Michelin-starred street food, luxury shopping, and family entertainment in Singapore.",
-      bestSeason: "Year-Round",
-      highlights: ["Gardens by the Bay VIP pass", "Raffles Hotel high tea", "Sentosa Island private tour"],
-      itinerary: [{ day: "Days 1–4", title: "Garden City Discovery", details: "Explore iconic attractions, private yacht cruising, and luxury skyline dining." }],
-      included: ["5-star hotel stay", "Private transfers", "VIP access passes"],
-      excluded: ["Flights"]
+      excluded: ["International flights", "Personal purchases"],
+      faqs: [
+        { q: "Can this journey be customized for a honeymoon?", a: "Absolutely. We include special romantic touches, private beach dinners, and villa upgrades." }
+      ]
     }
   ];
 
-  // Accommodations Database (Section 5 Requirements)
+  // Accommodations Database (Section 10 Requirements)
   const accommodationsData = [
     {
       name: "Angama Mara",
@@ -542,8 +524,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
+  // Blog Articles Database (Section 12 Requirements)
+  const blogArticlesData = [
+    {
+      id: "fly-in-safari-art",
+      title: "The Art of the Private Fly-in Safari",
+      category: "Safari Tips",
+      readTime: "5 min read",
+      date: "October 2026",
+      image: "assets/images/journey_kenya.jpg",
+      excerpt: "Skip long road transfers and glide over Africa's iconic savannahs directly onto private airstrips near exclusive wilderness camps.",
+      content: "Private fly-in safaris transform African travel by turning transit into breathtaking aerial sight-seeing. Charter flights connect remote conservancies in Kenya and Tanzania effortlessly."
+    },
+    {
+      id: "best-time-migration",
+      title: "When is the Best Time to Witness the Great Migration?",
+      category: "Destination Guides",
+      readTime: "7 min read",
+      date: "September 2026",
+      image: "assets/images/Signature tours Imgs/Great Migration Safari.jpg",
+      excerpt: "From calving season in Southern Serengeti to dramatic river crossings in the Maasai Mara, discover the monthly rhythms of the migration.",
+      content: "The Great Migration is a continuous year-round circuit. Understanding seasonal movements helps travelers position themselves for river crossings or predator encounters."
+    },
+    {
+      id: "stone-town-heritage",
+      title: "Exploring Zanzibar's Stone Town: Spices, Culture & Heritage",
+      category: "Culture",
+      readTime: "6 min read",
+      date: "August 2026",
+      image: "assets/images/dest_zanzibar.jpg",
+      excerpt: "Wander through labyrinthine alleyways, carved Swahili doors, and aromatic spice bazaars in East Africa's historic coral stone city.",
+      content: "Stone Town's rich fusion of Arab, Persian, Indian, and Swahili architecture tells the story of centuries of Indian Ocean trade."
+    },
+    {
+      id: "gorilla-trekking-guide",
+      title: "Uganda & Rwanda Gorilla Trekking: Permits, Gear & Preparation",
+      category: "Travel Advice",
+      readTime: "8 min read",
+      date: "July 2026",
+      image: "assets/images/Handpicked Lands/Uganda.jpg",
+      excerpt: "Everything you need to know about permit bookings, required physical fitness, gaiters, and what happens during your hour with wild gorillas.",
+      content: "Trekking wild mountain gorillas in Bwindi or Volcanoes National Park is one of the world's most intimate wildlife experiences."
+    }
+  ];
+
   // ----------------------------------------------------
-  // CONCIERGE MODAL SYSTEM (REFINED)
+  // CONCIERGE MODAL & CONTEXT-AWARE WIZARD (SECTIONS 3, 4, 9)
   // ----------------------------------------------------
 
   let currentStep = 1;
@@ -568,24 +594,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Sticky Header Scroll Effect
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      siteHeader.classList.add('scrolled');
-    } else {
-      siteHeader.classList.remove('scrolled');
-    }
-  });
-
-  // Mobile Navigation Toggle
-  if (mobileToggle && mainNav) {
-    mobileToggle.addEventListener('click', () => {
-      mainNav.classList.toggle('active');
-    });
-  }
-
-  // Open & Pre-fill Concierge Modal
-  function openConcierge(preselectType = null, preselectDest = null, preselectJourney = null, preselectHotel = null) {
+  // Open & Pre-fill Concierge Modal with Context-Aware Entry Points
+  function openConcierge(preselectType = null, preselectDest = null, preselectJourney = null, preselectHotel = null, skipStep1 = false) {
     if (preselectType) {
       const radio = conciergeForm.querySelector(`input[name="journeyType"][value="${preselectType}"]`);
       if (radio) radio.checked = true;
@@ -610,7 +620,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    currentStep = 1;
+    // Context-Aware Entry: Skip Step 1 if journey/dest already known
+    currentStep = skipStep1 ? 3 : 1;
     updateStepView();
 
     if (conciergeModal.showModal) {
@@ -643,11 +654,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const dest = trigger.dataset.dest || null;
       const journey = trigger.dataset.journey || null;
       const hotel = trigger.dataset.hotel || null;
-      openConcierge(type, dest, journey, hotel);
+      const skip = trigger.dataset.skipStep1 === 'true';
+      openConcierge(type, dest, journey, hotel, skip);
     }
   });
 
-  // Step View Updates
+  // Step View Updates & Back Navigation (Requirement 3)
   function updateStepView() {
     document.querySelectorAll('.concierge-step').forEach(step => {
       step.classList.remove('step-active');
@@ -670,6 +682,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       progressFill.style.width = `${(currentStep / totalSteps) * 100}%`;
 
+      // Show Back button on step 2, 3, and 4
       prevStepBtn.style.display = currentStep > 1 ? 'inline-flex' : 'none';
       nextStepBtn.style.display = currentStep < totalSteps ? 'inline-flex' : 'none';
       submitConciergeBtn.style.display = currentStep === totalSteps ? 'inline-flex' : 'none';
@@ -694,10 +707,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Form Submission & WhatsApp Link Generation (Section 1 Requirements)
+  // Form Submission & WhatsApp Link Generator (Requirement 9)
   if (conciergeForm) {
     conciergeForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      
+      const firstName = document.getElementById('firstName')?.value || 'Valued';
+      const middleName = document.getElementById('middleName')?.value || '';
+      const lastName = document.getElementById('lastName')?.value || 'Guest';
+      const fullName = `${firstName} ${middleName ? middleName + ' ' : ''}${lastName}`.trim();
+      
+      const guestEmail = document.getElementById('guestEmail')?.value || '';
+      const guestPhone = document.getElementById('guestPhone')?.value || '';
+      const contactPref = document.getElementById('contactPreference')?.value || 'WhatsApp Concierge';
       
       const journeyType = conciergeForm.querySelector('input[name="journeyType"]:checked')?.value || 'Bespoke Experience';
       const destinations = Array.from(conciergeForm.querySelectorAll('input[name="destination"]:checked')).map(cb => cb.value);
@@ -707,30 +729,33 @@ document.addEventListener('DOMContentLoaded', () => {
       const roomType = document.getElementById('roomType')?.value || 'Double Room';
       const budget = document.getElementById('budgetRange')?.value || '$10,000 - $25,000 USD';
       const specialRequests = document.getElementById('specialPreferences')?.value || 'None specified';
-      const guestName = document.getElementById('guestName')?.value || 'Valued Guest';
 
       const selectedDestStr = destinations.length ? destinations.join(', ') : 'Curated Recommendation';
 
       // Render Summary Recap
       summaryRecap.innerHTML = `
-        <p><strong>Guest:</strong> ${guestName}</p>
+        <p><strong>Guest Name:</strong> ${fullName}</p>
+        <p><strong>Contact:</strong> ${guestEmail} • ${guestPhone} (${contactPref})</p>
         <p><strong>Journey Style:</strong> ${journeyType}</p>
         <p><strong>Destinations:</strong> ${selectedDestStr}</p>
-        <p><strong>Dates:</strong> ${travelDates} • <strong>Guests:</strong> ${guests}</p>
-        <p><strong>Rooms:</strong> ${rooms} (${roomType})</p>
+        <p><strong>Travel Dates:</strong> ${travelDates} • <strong>Guests:</strong> ${guests}</p>
+        <p><strong>Room Setup:</strong> ${rooms} (${roomType})</p>
         <p><strong>Investment:</strong> ${budget}</p>
-        <p><strong>Special Notes:</strong> ${specialRequests}</p>
+        <p><strong>Special Requests:</strong> ${specialRequests}</p>
       `;
 
-      // Build WhatsApp Pre-filled URL
+      // Build WhatsApp Pre-filled URL with complete details
       const waText = `Hello Viv, I would like to book a trip with Ivory Horizons:
+- Name: ${fullName}
+- Contact: ${guestPhone} (${guestEmail})
 - Destination: ${selectedDestStr}
-- Selected Journey: ${journeyType}
+- Journey Style: ${journeyType}
 - Travel Dates: ${travelDates}
 - Number of Guests: ${guests}
 - Number of Rooms: ${rooms}
 - Room Type: ${roomType}
 - Budget: ${budget}
+- Preferred Contact: ${contactPref}
 - Special Requests: ${specialRequests}`;
 
       const whatsappUrl = `https://wa.me/254740199975?text=${encodeURIComponent(waText)}`;
@@ -754,275 +779,210 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ----------------------------------------------------
-  // INTELLIGENT EXPERIENCE CATEGORIES & FILTERING (SECTION 2)
+  // DEDICATED DESTINATION FULL PAGE VIEW (SECTION 5)
   // ----------------------------------------------------
 
-  function filterExperiences(category) {
-    if (experienceFilterBar) {
-      experienceFilterBar.querySelectorAll('.filter-pill').forEach(pill => {
-        if (pill.dataset.filter.toLowerCase() === category.toLowerCase()) {
-          pill.classList.add('active');
-        } else {
-          pill.classList.remove('active');
-        }
-      });
-    }
-
-    const journeyCards = document.querySelectorAll('.journey-featured-card');
-    journeyCards.forEach(card => {
-      const cardCategory = card.dataset.category || '';
-      if (category.toLowerCase() === 'all' || cardCategory.toLowerCase().includes(category.toLowerCase())) {
-        card.style.display = 'flex';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-
-    const destCards = document.querySelectorAll('.destination-card');
-    destCards.forEach(card => {
-      const destName = card.querySelector('.dest-title')?.textContent.trim() || '';
-      const destObj = destinationData[destName];
-      if (category.toLowerCase() === 'all') {
-        card.style.display = 'flex';
-      } else if (destObj) {
-        const matchesCategory = destObj.coreExperiences.some(exp => exp.toLowerCase().includes(category.toLowerCase())) ||
-                                (category.toLowerCase() === 'safari' && (destName === 'Kenya' || destName === 'Tanzania' || destName === 'Uganda' || destName === 'Rwanda')) ||
-                                (category.toLowerCase() === 'beach' && (destName === 'Kenya' || destName === 'Zanzibar' || destName === 'Mauritius' || destName === 'Ghana')) ||
-                                (category.toLowerCase() === 'honeymoon' && (destName === 'Kenya' || destName === 'Zanzibar' || destName === 'Mauritius' || destName === 'Egypt')) ||
-                                (category.toLowerCase() === 'family' && (destName === 'Kenya' || destName === 'Mauritius' || destName === 'Malaysia' || destName === 'Singapore')) ||
-                                (category.toLowerCase() === 'luxury' && (destName === 'Kenya' || destName === 'Tanzania' || destName === 'Rwanda' || destName === 'Ghana' || destName === 'Egypt' || destName === 'Zanzibar' || destName === 'Mauritius')) ||
-                                (category.toLowerCase() === 'adventure' && (destName === 'Kenya' || destName === 'Uganda' || destName === 'Tanzania' || destName === 'Mauritius')) ||
-                                (category.toLowerCase() === 'culture' && (destName === 'Kenya' || destName === 'Rwanda' || destName === 'Ghana' || destName === 'Egypt' || destName === 'Malaysia' || destName === 'Singapore'));
-        card.style.display = matchesCategory ? 'flex' : 'none';
-      }
-    });
-
-    const journeysSection = document.getElementById('journeys');
-    if (journeysSection) {
-      journeysSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
-  if (experienceFilterBar) {
-    experienceFilterBar.addEventListener('click', (e) => {
-      const pill = e.target.closest('.filter-pill');
-      if (pill) {
-        const cat = pill.dataset.filter;
-        filterExperiences(cat);
-      }
-    });
-  }
-
-  document.querySelectorAll('.experience-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-      const btnLink = card.querySelector('.card-link');
-      const cat = btnLink ? btnLink.dataset.type : 'all';
-      filterExperiences(cat);
-    });
-  });
-
-  // ----------------------------------------------------
-  // FULL ITINERARY VIEW MODAL (SECTION 3 & 4)
-  // ----------------------------------------------------
-
-  function openItineraryModal(journeyId) {
-    const journey = journeysData.find(j => j.id === journeyId || j.name.toLowerCase() === journeyId.toLowerCase()) || journeysData[0];
-    
-    itineraryModalContent.innerHTML = `
-      <div class="itinerary-header">
-        <div class="itinerary-hero-img-wrap">
-          <img src="${journey.image}" alt="${journey.name}" onerror="this.src='${journey.fallback}';">
-          <div class="itinerary-overlay"></div>
-          <div class="itinerary-badge">${journey.duration}</div>
-        </div>
-        <div class="itinerary-title-box">
-          <span class="location-tag">${journey.location}</span>
-          <h2 class="modal-itinerary-title">${journey.name}</h2>
-          <p class="best-for-text"><strong>Best For:</strong> ${journey.bestFor}</p>
-        </div>
-      </div>
-
-      <div class="itinerary-body-grid">
-        <div class="itinerary-main-info">
-          <div class="info-block">
-            <h3>Overview</h3>
-            <p>${journey.description}</p>
-          </div>
-
-          <div class="info-block">
-            <h3>Best Travel Season</h3>
-            <p>🗓️ ${journey.bestSeason}</p>
-          </div>
-
-          <div class="info-block">
-            <h3>Day-by-Day Journey Itinerary</h3>
-            <div class="timeline">
-              ${journey.itinerary.map(item => `
-                <div class="timeline-item">
-                  <div class="timeline-day">${item.day}</div>
-                  <div class="timeline-content">
-                    <h4>${item.title}</h4>
-                    <p>${item.details}</p>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-
-          <div class="info-block services-dual-grid">
-            <div class="service-col">
-              <h4>✓ Included Services</h4>
-              <ul>${journey.included.map(inc => `<li>${inc}</li>`).join('')}</ul>
-            </div>
-            <div class="service-col">
-              <h4>✕ Excluded Services</h4>
-              <ul>${journey.excluded.map(exc => `<li>${exc}</li>`).join('')}</ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="itinerary-modal-footer">
-        <button type="button" class="btn btn-primary btn-large plan-this-journey-btn" data-journey="${journey.name}" data-dest="${journey.destination}">Plan This Journey</button>
-      </div>
-    `;
-
-    const planBtn = itineraryModalContent.querySelector('.plan-this-journey-btn');
-    if (planBtn) {
-      planBtn.addEventListener('click', () => {
-        closeItineraryModal();
-        openConcierge(null, journey.destination, journey.name);
-      });
-    }
-
-    if (itineraryModal.showModal) {
-      itineraryModal.showModal();
-    } else {
-      itineraryModal.setAttribute('open', 'true');
-    }
-  }
-
-  function closeItineraryModal() {
-    if (itineraryModal.close) {
-      itineraryModal.close();
-    } else {
-      itineraryModal.removeAttribute('open');
-    }
-  }
-
-  if (closeItineraryBtn) closeItineraryBtn.addEventListener('click', closeItineraryModal);
-
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.view-itinerary-trigger');
-    if (btn) {
-      e.preventDefault();
-      const journeyId = btn.dataset.journeyId || btn.dataset.journey || 'mara-classic';
-      openItineraryModal(journeyId);
-    }
-  });
-
-  // ----------------------------------------------------
-  // DESTINATION DETAILS MODAL (SECTION 6)
-  // ----------------------------------------------------
-
-  function openDestinationModal(destName) {
+  function renderDestinationPage(destName) {
     const dest = destinationData[destName] || destinationData["Kenya"];
     const matchingJourneys = journeysData.filter(j => j.destination.includes(destName));
     const matchingAccom = accommodationsData.filter(a => a.destination.toLowerCase() === destName.toLowerCase());
 
-    destinationModalContent.innerHTML = `
-      <div class="dest-modal-header">
-        <div class="dest-hero-wrap">
-          <img src="${dest.image}" alt="${dest.name}" onerror="this.src='${dest.fallback}';">
-          <div class="dest-overlay"></div>
-          <h2 class="dest-modal-title">Explore ${dest.name}</h2>
+    destinationPageContent.innerHTML = `
+      <div class="dest-hero-banner">
+        <img src="${dest.image}" alt="${dest.name}" onerror="this.src='${dest.fallback}';">
+        <div class="dest-hero-overlay"></div>
+        <div class="dest-hero-text">
+          <span class="section-badge badge-light">${dest.idealDuration}</span>
+          <h1 class="dest-hero-title">Explore ${dest.name}</h1>
         </div>
       </div>
 
-      <div class="dest-modal-body">
-        <p class="dest-overview-lead">${dest.overview}</p>
+      <div class="dest-page-body">
+        <div class="dest-overview-card">
+          <h2>Destination Overview</h2>
+          <p class="lead-p">${dest.overview}</p>
+        </div>
 
-        <div class="dest-meta-cards">
-          <div class="meta-card">
-            <span class="meta-label">Core Experiences</span>
-            <span class="meta-val">${dest.coreExperiences.join(' • ')}</span>
+        <div class="dest-meta-grid">
+          <div class="meta-box">
+            <span class="meta-icon">🧭</span>
+            <strong>Core Experiences</strong>
+            <p>${dest.coreExperiences.join(' • ')}</p>
           </div>
-          <div class="meta-card">
-            <span class="meta-label">Ideal Duration</span>
-            <span class="meta-val">${dest.idealDuration}</span>
+          <div class="meta-box">
+            <span class="meta-icon">🗓️</span>
+            <strong>Best Time to Visit</strong>
+            <p>${dest.bestTimeToVisit}</p>
           </div>
-          <div class="meta-card">
-            <span class="meta-label">Best For</span>
-            <span class="meta-val">${dest.bestFor}</span>
+          <div class="meta-box">
+            <span class="meta-icon">⌛</span>
+            <strong>Ideal Duration</strong>
+            <p>${dest.idealDuration}</p>
+          </div>
+          <div class="meta-box">
+            <span class="meta-icon">👥</span>
+            <strong>Ideal For</strong>
+            <p>${dest.bestFor}</p>
           </div>
         </div>
 
         <div class="dest-section-block">
-          <h3>Featured Signature Journeys in ${dest.name}</h3>
-          <div class="dest-journey-list">
+          <h2>Signature Journeys in ${dest.name}</h2>
+          <div class="dest-journey-cards-grid">
             ${matchingJourneys.length ? matchingJourneys.map(j => `
-              <div class="dest-journey-mini-card">
-                <h4>${j.name}</h4>
-                <p>${j.duration} • ${j.description}</p>
-                <button type="button" class="btn-text view-itinerary-trigger" data-journey-id="${j.id}">View Full Itinerary &rarr;</button>
+              <div class="journey-featured-card">
+                <div class="journey-img-wrap">
+                  <img src="${j.image}" alt="${j.name}" onerror="this.src='${j.fallback}';">
+                  <div class="journey-tag-floating">${j.duration}</div>
+                </div>
+                <div class="journey-info">
+                  <h3>${j.name}</h3>
+                  <p class="journey-excerpt">${j.description}</p>
+                  <button type="button" class="btn btn-primary view-itinerary-trigger" data-journey-id="${j.id}">View Full Itinerary</button>
+                </div>
               </div>
             `).join('') : `<p>Bespoke journeys curated upon request for ${dest.name}.</p>`}
           </div>
         </div>
 
         <div class="dest-section-block">
-          <h3>Recommended Lodges & Resorts in ${dest.name}</h3>
-          <div class="dest-accom-list">
+          <h2>Recommended Lodges & Sanctuaries in ${dest.name}</h2>
+          <div class="accommodation-grid">
             ${matchingAccom.length ? matchingAccom.map(a => `
-              <div class="dest-accom-mini-card">
-                <strong>${a.name}</strong> (${a.rating}) — ${a.description}
-              </div>
+              <article class="accommodation-card">
+                <div class="accom-img-wrap">
+                  <img src="${a.image}" alt="${a.name}" onerror="this.src='${a.fallback}';">
+                  <span class="accom-badge">${a.destination}</span>
+                </div>
+                <div class="accom-body">
+                  <span class="star-rating">⭐ ${a.rating}</span>
+                  <h3 class="accom-title">${a.name}</h3>
+                  <span class="accom-location">📍 ${a.location}</span>
+                  <p class="accom-desc">${a.description}</p>
+                  <div class="accom-cta-wrap">
+                    <button type="button" class="btn btn-outline concierge-trigger" data-hotel="${a.name}" data-dest="${a.destination}" data-skip-step1="true">Book Through Ivory Horizons</button>
+                  </div>
+                </div>
+              </article>
             `).join('') : `<p>Luxury partner sanctuaries curated upon request for ${dest.name}.</p>`}
           </div>
         </div>
-      </div>
 
-      <div class="dest-modal-footer">
-        <button type="button" class="btn btn-primary btn-large plan-dest-btn" data-dest="${dest.name}">Plan My ${dest.name} Journey</button>
+        <div class="dest-page-cta-box text-center">
+          <h2>Ready To Experience ${dest.name}?</h2>
+          <button type="button" class="btn btn-primary btn-large concierge-trigger" data-dest="${dest.name}" data-skip-step1="true">Plan My Journey</button>
+        </div>
       </div>
     `;
 
-    const planDestBtn = destinationModalContent.querySelector('.plan-dest-btn');
-    if (planDestBtn) {
-      planDestBtn.addEventListener('click', () => {
-        closeDestinationModal();
-        openConcierge(null, dest.name);
-      });
-    }
-
-    if (destinationModal.showModal) {
-      destinationModal.showModal();
-    } else {
-      destinationModal.setAttribute('open', 'true');
-    }
+    showPage('destination');
   }
 
-  function closeDestinationModal() {
-    if (destinationModal.close) {
-      destinationModal.close();
-    } else {
-      destinationModal.removeAttribute('open');
-    }
-  }
-
-  if (closeDestinationBtn) closeDestinationBtn.addEventListener('click', closeDestinationModal);
-
+  // Trigger Explore Destination Full Page
   document.addEventListener('click', (e) => {
     const trigger = e.target.closest('.explore-dest-trigger');
     if (trigger) {
       e.preventDefault();
       const destName = trigger.dataset.dest || 'Kenya';
-      openDestinationModal(destName);
+      renderDestinationPage(destName);
     }
   });
 
   // ----------------------------------------------------
-  // ACCOMMODATIONS LISTING SYSTEM (SECTION 5)
+  // DEDICATED JOURNEY DETAILS FULL PAGE VIEW (SECTIONS 8 & 9)
+  // ----------------------------------------------------
+
+  function renderJourneyPage(journeyId) {
+    const journey = journeysData.find(j => j.id === journeyId || j.name.toLowerCase() === journeyId.toLowerCase()) || journeysData[0];
+
+    journeyPageContent.innerHTML = `
+      <div class="journey-hero-banner">
+        <img src="${journey.image}" alt="${journey.name}" onerror="this.src='${journey.fallback}';">
+        <div class="journey-hero-overlay"></div>
+        <div class="journey-hero-text">
+          <span class="section-badge badge-light">${journey.duration}</span>
+          <h1 class="journey-hero-title">${journey.name}</h1>
+          <p class="best-for-text"><strong>Best For:</strong> ${journey.bestFor}</p>
+        </div>
+      </div>
+
+      <div class="journey-page-body">
+        <div class="journey-overview-card">
+          <h2>Journey Overview</h2>
+          <p class="lead-p">${journey.description}</p>
+          <p><strong>🗓️ Best Travel Season:</strong> ${journey.bestSeason}</p>
+        </div>
+
+        <div class="journey-section-block">
+          <h2>Day-by-Day Itinerary</h2>
+          <div class="timeline">
+            ${journey.itinerary.map(item => `
+              <div class="timeline-item">
+                <div class="timeline-day">${item.day}</div>
+                <div class="timeline-content">
+                  <h3>${item.title}</h3>
+                  <p>${item.details}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="services-dual-grid">
+          <div class="service-col">
+            <h3>✓ Included Services</h3>
+            <ul>${journey.included.map(inc => `<li>${inc}</li>`).join('')}</ul>
+          </div>
+          <div class="service-col">
+            <h3>✕ Excluded Services</h3>
+            <ul>${journey.excluded.map(exc => `<li>${exc}</li>`).join('')}</ul>
+          </div>
+        </div>
+
+        ${journey.faqs ? `
+          <div class="journey-section-block">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list">
+              ${journey.faqs.map(faq => `
+                <div class="faq-item">
+                  <strong>Q: ${faq.q}</strong>
+                  <p>A: ${faq.a}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+
+        <div class="journey-page-cta-box text-center">
+          <h2>Ready To Plan This Journey?</h2>
+          <button type="button" class="btn btn-primary btn-large plan-this-journey-btn" data-journey="${journey.name}" data-dest="${journey.destination}">Plan This Journey</button>
+        </div>
+      </div>
+    `;
+
+    // Bind Plan This Journey CTA
+    const planBtn = journeyPageContent.querySelector('.plan-this-journey-btn');
+    if (planBtn) {
+      planBtn.addEventListener('click', () => {
+        openConcierge(null, journey.destination, journey.name, null, true);
+      });
+    }
+
+    showPage('journey');
+  }
+
+  // Trigger View Full Itinerary Full Page
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('.view-itinerary-trigger');
+    if (trigger) {
+      e.preventDefault();
+      const journeyId = trigger.dataset.journeyId || 'mara-classic';
+      renderJourneyPage(journeyId);
+    }
+  });
+
+  // ----------------------------------------------------
+  // DEDICATED ACCOMMODATION FULL PAGE (SECTION 10)
   // ----------------------------------------------------
 
   function renderAccommodations(filterDest = 'all') {
@@ -1054,7 +1014,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${item.amenities.map(am => `<span class="amenity-tag">${am}</span>`).join('')}
           </div>
           <div class="accom-cta-wrap">
-            <button type="button" class="btn btn-outline concierge-trigger" data-hotel="${item.name}" data-dest="${item.destination}">Book Through Ivory Horizons</button>
+            <button type="button" class="btn btn-outline concierge-trigger" data-hotel="${item.name}" data-dest="${item.destination}" data-skip-step1="true">Book Through Ivory Horizons</button>
           </div>
         </div>
       `;
@@ -1075,6 +1035,51 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   renderAccommodations('all');
+
+  // ----------------------------------------------------
+  // DEDICATED BLOG FULL PAGE (SECTION 12)
+  // ----------------------------------------------------
+
+  function renderBlogArticles(filterCat = 'all') {
+    if (!blogGrid) return;
+    blogGrid.innerHTML = '';
+
+    const filtered = filterCat === 'all'
+      ? blogArticlesData
+      : blogArticlesData.filter(a => a.category.toLowerCase() === filterCat.toLowerCase());
+
+    filtered.forEach(article => {
+      const card = document.createElement('article');
+      card.className = 'blog-card';
+      card.innerHTML = `
+        <div class="blog-img-wrap">
+          <img src="${article.image}" alt="${article.title}">
+          <span class="blog-cat-badge">${article.category}</span>
+        </div>
+        <div class="blog-body">
+          <span class="blog-meta">${article.date} • ${article.readTime}</span>
+          <h3 class="blog-title">${article.title}</h3>
+          <p class="blog-excerpt">${article.excerpt}</p>
+          <button type="button" class="btn-text read-article-btn" data-article-id="${article.id}">Read Guide &rarr;</button>
+        </div>
+      `;
+      blogGrid.appendChild(card);
+    });
+  }
+
+  if (blogFilterBar) {
+    blogFilterBar.addEventListener('click', (e) => {
+      const pill = e.target.closest('.filter-pill');
+      if (pill) {
+        blogFilterBar.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const filter = pill.dataset.blogFilter;
+        renderBlogArticles(filter);
+      }
+    });
+  }
+
+  renderBlogArticles('all');
 
   // Audio Player Handlers
   if (playMusicBtn && bgMusic) {

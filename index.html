@@ -36,17 +36,17 @@
 
       <nav class="main-nav" aria-label="Main Navigation">
         <ul class="nav-list">
-          <li><a href="#destinations" class="nav-link">Destinations</a></li>
-          <li><a href="#experiences" class="nav-link">Experiences</a></li>
-          <li><a href="#journeys" class="nav-link">Tours</a></li>
-          <li><a href="#accommodations" class="nav-link">Accommodations</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li><a href="#home" class="nav-link nav-page-link" data-page="home">Home</a></li>
+          <li><a href="#destinations" class="nav-link nav-page-link" data-page="home">Destinations</a></li>
+          <li><a href="#experiences" class="nav-link nav-page-link" data-page="home">Experiences</a></li>
+          <li><a href="#accommodation" class="nav-link nav-page-link" data-page="accommodation">Accommodation</a></li>
+          <li><a href="#about" class="nav-link nav-page-link" data-page="home">About</a></li>
+          <li><a href="#blog" class="nav-link nav-page-link" data-page="blog">Blog</a></li>
+          <li><a href="#contact" class="nav-link nav-page-link" data-page="home">Contact</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
-        <button type="button" class="btn-login-link concierge-trigger">Travel Planning</button>
         <button type="button" class="btn btn-header-cta" id="openConciergeHeaderBtn">Plan My Trip</button>
         <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
           <span></span>
@@ -525,39 +525,7 @@
       </div>
     </section>
 
-    <!-- Section 5: Partner Accommodations & Sanctuaries -->
-    <section class="section section-accommodations" id="accommodations">
-      <div class="container">
-        <div class="section-header text-center">
-          <span class="section-badge">Curated Sanctuaries</span>
-          <h2 class="section-title">Partner Accommodations</h2>
-          <p class="section-subtitle">
-            Explore recommended luxury lodges, private wilderness camps, and beachfront resorts across our iconic destinations.
-          </p>
-        </div>
-
-        <!-- Destination Filter Pills for Accommodations -->
-        <div class="destination-filter-bar" id="accommodationFilterBar">
-          <button type="button" class="filter-pill active" data-dest-filter="all">All Destinations</button>
-          <button type="button" class="filter-pill" data-dest-filter="Kenya">Kenya</button>
-          <button type="button" class="filter-pill" data-dest-filter="Tanzania">Tanzania</button>
-          <button type="button" class="filter-pill" data-dest-filter="Uganda">Uganda</button>
-          <button type="button" class="filter-pill" data-dest-filter="Rwanda">Rwanda</button>
-          <button type="button" class="filter-pill" data-dest-filter="Zanzibar">Zanzibar</button>
-          <button type="button" class="filter-pill" data-dest-filter="Mauritius">Mauritius</button>
-          <button type="button" class="filter-pill" data-dest-filter="Egypt">Egypt</button>
-          <button type="button" class="filter-pill" data-dest-filter="Ghana">Ghana</button>
-          <button type="button" class="filter-pill" data-dest-filter="Malaysia">Malaysia</button>
-          <button type="button" class="filter-pill" data-dest-filter="Singapore">Singapore</button>
-        </div>
-
-        <div class="accommodation-grid" id="accommodationGrid">
-          <!-- Dynamic rendering by app.js -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 6: The Ivory Standard -->
+    <!-- Section 5: The Ivory Standard -->
     <section class="section section-standard" id="standard">
       <div class="container">
         <div class="section-header text-center">
@@ -702,8 +670,87 @@
           <button type="button" class="btn btn-primary btn-large" id="finalCtaBtn">Plan My Trip</button>
         </div>
       </div>
-    </section>
   </main>
+
+  <!-- PAGE VIEW: DEDICATED ACCOMMODATION PAGE -->
+  <div class="page-view" id="pageViewAccommodation" style="display: none;">
+    <section class="section section-hero-mini">
+      <div class="container text-center">
+        <span class="section-badge">Curated Sanctuaries</span>
+        <h1 class="section-title">Luxury Accommodations & Lodges</h1>
+        <p class="section-subtitle">Handpicked luxury lodges, private wilderness camps, and 5-star beachfront resorts across our iconic destinations.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="destination-filter-bar" id="accommodationFilterBar">
+          <button type="button" class="filter-pill active" data-dest-filter="all">All Destinations</button>
+          <button type="button" class="filter-pill" data-dest-filter="Kenya">Kenya</button>
+          <button type="button" class="filter-pill" data-dest-filter="Tanzania">Tanzania</button>
+          <button type="button" class="filter-pill" data-dest-filter="Uganda">Uganda</button>
+          <button type="button" class="filter-pill" data-dest-filter="Rwanda">Rwanda</button>
+          <button type="button" class="filter-pill" data-dest-filter="Zanzibar">Zanzibar</button>
+          <button type="button" class="filter-pill" data-dest-filter="Mauritius">Mauritius</button>
+          <button type="button" class="filter-pill" data-dest-filter="Egypt">Egypt</button>
+          <button type="button" class="filter-pill" data-dest-filter="Ghana">Ghana</button>
+          <button type="button" class="filter-pill" data-dest-filter="Malaysia">Malaysia</button>
+          <button type="button" class="filter-pill" data-dest-filter="Singapore">Singapore</button>
+        </div>
+
+        <div class="accommodation-grid" id="accommodationGrid">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE VIEW: DEDICATED DESTINATION PAGE -->
+  <div class="page-view" id="pageViewDestination" style="display: none;">
+    <div class="container py-6">
+      <button type="button" class="btn btn-outline back-to-home-btn">&larr; Back to Destinations</button>
+      <div id="destinationPageContent">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE VIEW: DEDICATED JOURNEY DETAILS PAGE -->
+  <div class="page-view" id="pageViewJourney" style="display: none;">
+    <div class="container py-6">
+      <button type="button" class="btn btn-outline back-to-home-btn">&larr; Back to Journeys</button>
+      <div id="journeyPageContent">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE VIEW: DEDICATED BLOG PAGE -->
+  <div class="page-view" id="pageViewBlog" style="display: none;">
+    <section class="section section-hero-mini">
+      <div class="container text-center">
+        <span class="section-badge">Travel Journal</span>
+        <h1 class="section-title">Insights, Stories & Safari Tips</h1>
+        <p class="section-subtitle">Destination guides, seasonal travel advice, and cultural inspirations curated by Ivory Horizons specialists.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="blog-filter-bar" id="blogFilterBar">
+          <button type="button" class="filter-pill active" data-blog-filter="all">All Articles</button>
+          <button type="button" class="filter-pill" data-blog-filter="Safari Tips">Safari Tips</button>
+          <button type="button" class="filter-pill" data-blog-filter="Destination Guides">Destination Guides</button>
+          <button type="button" class="filter-pill" data-blog-filter="Culture">Culture</button>
+          <button type="button" class="filter-pill" data-blog-filter="Travel Advice">Travel Advice</button>
+        </div>
+
+        <div class="blog-grid" id="blogGrid">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+    </section>
+  </div>
 
   <!-- Site Footer -->
   <div class="footer-outer-wrapper">
@@ -726,11 +773,13 @@
           </div>
 
           <div class="footer-nav-menu">
-            <a href="#destinations">Destinations</a>
-            <a href="#experiences">Experiences</a>
-            <a href="#journeys">Tours</a>
-            <a href="#about">About Us</a>
-            <a href="#contact">Private Offices</a>
+            <a href="#destinations" class="nav-page-link" data-page="home">Destinations</a>
+            <a href="#experiences" class="nav-page-link" data-page="home">Experiences</a>
+            <a href="#journeys" class="nav-page-link" data-page="home">Tours</a>
+            <a href="#accommodation" class="nav-page-link" data-page="accommodation">Accommodation</a>
+            <a href="#blog" class="nav-page-link" data-page="blog">Blog Journal</a>
+            <a href="#about" class="nav-page-link" data-page="home">About Us</a>
+            <a href="#contact" class="nav-page-link" data-page="home">Private Offices</a>
           </div>
         </div>
 
@@ -944,8 +993,18 @@
         <div class="concierge-step" data-step="4">
           <div class="form-fields-grid">
             <div class="form-group">
-              <label for="guestName">Full Name *</label>
-              <input type="text" id="guestName" required placeholder="Lord / Lady / Dr. / Mr. / Ms.">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" required placeholder="First Name">
+            </div>
+
+            <div class="form-group">
+              <label for="middleName">Middle Name (Optional)</label>
+              <input type="text" id="middleName" placeholder="Middle Name">
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" required placeholder="Last Name">
             </div>
 
             <div class="form-group">
