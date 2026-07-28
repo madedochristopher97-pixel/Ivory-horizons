@@ -62,6 +62,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Continuous 3 Hero GIF Transitions (Seamless Crossfade)
+  const heroGifBg = document.querySelector('.hero-gif-bg');
+  if (heroGifBg) {
+    const heroGifs = [
+      'assets/Hero/Hero 2.gif',
+      'assets/Hero/12221206_1920_1080_24fps-ezgif.com-optimize.gif',
+      'assets/Hero/14264374_1920_1080_50fps-ezgif.com-video-to-gif-converter.gif'
+    ];
+    let currentGifIndex = 0;
+
+    // Preload all GIF files
+    heroGifs.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    setInterval(() => {
+      currentGifIndex = (currentGifIndex + 1) % heroGifs.length;
+      heroGifBg.style.opacity = '0.3';
+      setTimeout(() => {
+        heroGifBg.src = heroGifs[currentGifIndex];
+        heroGifBg.style.opacity = '1';
+      }, 500);
+    }, 7000);
+  }
+
   // ----------------------------------------------------
   // DATASETS
   // ----------------------------------------------------
@@ -410,8 +436,8 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Ultra-Luxury",
       roomTypes: "Glass-fronted Tented Suites",
       amenities: ["Private Airfield", "Infinity Pool", "Personal Butler", "Game Drives"],
-      image: "assets/images/journey_kenya.jpg",
-      fallback: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+      image: "assets/images/Accommodation Imgs/Angama-Mara-.webp",
+      fallback: "assets/images/journey_kenya.jpg",
       description: "Perched high on the rim of the Great Rift Valley overlooking the Maasai Mara, offering breathtaking views and unmatched luxury."
     },
     {
@@ -432,7 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Luxury",
       roomTypes: "Savannah Rooms & Private Pool Villas",
       amenities: ["Waterhole View Pool", "Full-service Spa", "Kijana Kids Club", "Bush Dinners"],
-      image: "assets/images/Handpicked Lands/Tanzania.jpg",
+      image: "assets/images/Accommodation Imgs/Four Seasons Safari Lodge Serengeti.jpg",
       fallback: "assets/images/dest_tanzania.jpg",
       description: "Deep within the Serengeti National Park, featuring elevated walkways and a watering hole visited by wildlife throughout the day."
     },
@@ -443,8 +469,8 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Architectural Marvel",
       roomTypes: "Chateau-style Stilted Suites",
       amenities: ["Personal Butler", "Crater View Deck", "Fine Wine Cellar", "Private Guides"],
-      image: "assets/images/dest_tanzania.jpg",
-      fallback: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80",
+      image: "assets/images/Accommodation Imgs/ngorongoro-crater-lodge-2.jpg",
+      fallback: "assets/images/dest_tanzania.jpg",
       description: "Dramatic architecture combining Versailles opulence with African craft on the rim of the ancient Ngorongoro Crater."
     },
     {
@@ -454,7 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Eco-Luxury",
       roomTypes: "Luxury Tented Suites",
       amenities: ["Gorilla Visits in Camp", "Forest Spa", "Campfire Lounge", "Private Dining"],
-      image: "assets/images/Handpicked Lands/Uganda.jpg",
+      image: "assets/images/Accommodation Imgs/Sanctuary Gorilla Forest Camp.jfif",
       fallback: "assets/images/dest_uganda.jpg",
       description: "Nestled deep inside Bwindi Impenetrable Forest, where wild gorilla families occasionally wander right into camp."
     },
@@ -465,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Sanctuary",
       roomTypes: "Forest Lodges & Treehouse Suites",
       amenities: ["Private Pool", "World-Class Spa", "Helipad", "Chef's Garden Dining"],
-      image: "assets/images/Handpicked Lands/Rwanda.jpg",
+      image: "assets/images/Accommodation Imgs/One&Only-Gorilla80%99s-Nest-.webp",
       fallback: "assets/images/dest_rwanda.jpg",
       description: "Cradled by eucalyptus trees at the foothills of the Virunga Volcanoes, offering an intimate haven of mountain luxury."
     },
@@ -476,8 +502,8 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Oceanfront",
       roomTypes: "Luxury Ocean Pool Villas",
       amenities: ["Private Butler", "Infinity Pool", "Private Beach", "Spa & Wellness"],
-      image: "assets/images/dest_zanzibar.jpg",
-      fallback: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80",
+      image: "assets/images/Accommodation Imgs/The Residence Zanzibarjpg.jpg",
+      fallback: "assets/images/dest_zanzibar.jpg",
       description: "Set among 32 hectares of tropical gardens alongside a mile-long white sand beach with elegant private pool villas."
     },
     {
@@ -487,8 +513,8 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Palace",
       roomTypes: "Ocean Suites & Royal Villa",
       amenities: ["Helipad", "Yacht Transfers", "3 Gourmet Restaurants", "Spa by Clarins"],
-      image: "assets/images/dest_mauritius.jpg",
-      fallback: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+      image: "assets/images/Accommodation Imgs/Royal Palm Beachcomber Luxury.jpg",
+      fallback: "assets/images/dest_mauritius.jpg",
       description: "The peak of Mauritian luxury on a sheltered beach in Grand Baie, renowned for discreet service and fine gastronomy."
     },
     {
@@ -509,7 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star City Resort",
       roomTypes: "Executive Suites & Presidential Villa",
       amenities: ["Resort Pool", "Luxury Spa", "Fine Dining", "Concierge Service"],
-      image: "assets/images/Handpicked Lands/Accra Ghana.jpg",
+      image: "assets/images/Accommodation Imgs/Kempinski Hotel Gold Coast City4K.jpg",
       fallback: "assets/images/dest_ghana.jpg",
       description: "Accra's premier 5-star luxury hotel, combining contemporary luxury with Ghanaian warmth and culture."
     },
@@ -520,8 +546,8 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Rainforest Retreat",
       roomTypes: "Rainforest Villas & Beach Suites",
       amenities: ["Private Beach", "10-Million-Year Rainforest", "Nature Center", "Spa"],
-      image: "assets/images/dest_malaysia.jpg",
-      fallback: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80",
+      image: "assets/images/Accommodation Imgs/The Datai Langkawi.jpg",
+      fallback: "assets/images/dest_malaysia.jpg",
       description: "Embedded within an ancient rainforest opening onto a secluded crescent bay, offering serene natural luxury."
     },
     {
@@ -531,8 +557,8 @@ document.addEventListener('DOMContentLoaded', () => {
       rating: "5-Star Heritage Icon",
       roomTypes: "Grand Colonial Suites",
       amenities: ["Private Butler", "Long Bar", "Raffles Spa", "Michelin Dining"],
-      image: "assets/images/dest_singapore.jpg",
-      fallback: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80",
+      image: "assets/images/Accommodation Imgs/Raffles Hotel Singapore.jpg",
+      fallback: "assets/images/dest_singapore.jpg",
       description: "An iconic landmark offering legendary colonial luxury, unblemished hospitality, and timeless Singaporean charm."
     }
   ];
