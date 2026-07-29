@@ -934,21 +934,34 @@ I look forward to hearing from you.`;
     }
   }
 
-  const conciergeTriggers = document.querySelectorAll('.concierge-trigger');
-  conciergeTriggers.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const hotel = btn.dataset.hotel || null;
-      if (hotel) {
-        openAccomBooking(hotel);
+  // Global Event Delegation for all trigger buttons (including dynamically rendered accommodation cards)
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.concierge-trigger');
+    if (!btn) return;
+
+    e.preventDefault();
+    const hotel = btn.dataset.hotel || btn.getAttribute('data-hotel') || null;
+
+    if (hotel) {
+      openAccomBooking(hotel);
+      return;
+    }
+
+    const accomCard = btn.closest('.accommodation-card');
+    if (accomCard) {
+      const cardTitle = accomCard.querySelector('.accom-title')?.textContent?.trim();
+      if (cardTitle) {
+        openAccomBooking(cardTitle);
         return;
       }
-      const type = btn.dataset.type || null;
-      const dest = btn.dataset.dest || null;
-      const journey = btn.dataset.journey || null;
-      const skip = btn.dataset.skipStep1 === 'true';
-      openConcierge(type, dest, journey, hotel, skip);
-    });
+    }
+
+    const type = btn.dataset.type || null;
+    const dest = btn.dataset.dest || null;
+    const journey = btn.dataset.journey || null;
+    const skip = btn.dataset.skipStep1 === 'true';
+
+    openConcierge(type, dest, journey, hotel, skip);
   });
 
   const closeConciergeBtn = document.getElementById('closeConciergeBtn');
