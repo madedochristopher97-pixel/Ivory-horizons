@@ -1989,40 +1989,127 @@ img {
   margin-top: 8px;
 }
 
-.dest-meta-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--space-3);
-  margin: var(--space-6) 0;
+/* Section CTA Invitation Box (Clean Banner Above Footer Without Background Image) */
+.section-cta {
+  padding: 80px 0;
+  background-color: var(--bg-primary);
 }
 
-.meta-box {
+.final-cta-box {
   background-color: var(--bg-secondary);
   border: 1px solid var(--brown-light);
-  padding: var(--space-4);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
+  padding: 64px 36px;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  gap: 20px;
+  box-shadow: var(--shadow-soft);
 }
 
-.meta-icon {
-  font-size: 1.8rem;
-  display: block;
+.final-cta-headline {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-family: var(--font-heading);
+  color: var(--dark-primary);
   margin-bottom: 8px;
+}
+
+.final-cta-subtext {
+  font-size: 1.1rem;
+  color: #5C4D42;
+  max-width: 640px;
+  margin-bottom: 12px;
+}
+
+/* Explore Country / Destination Pages Spacing & Layout */
+.dest-page-body, .journey-page-body {
+  padding-bottom: 60px;
+}
+
+.dest-overview-card, .journey-overview-card {
+  margin-bottom: 48px;
+  padding: 40px 32px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--brown-light);
+  border-radius: var(--radius-lg);
+}
+
+.dest-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin: 48px 0;
+}
+
+.dest-section-block, .journey-section-block {
+  margin-top: 72px !important;
+  margin-bottom: 64px !important;
+}
+
+.dest-section-block h2, .journey-section-block h2 {
+  font-size: 2.2rem !important;
+  font-family: var(--font-heading) !important;
+  color: var(--dark-primary) !important;
+  margin-top: 0 !important;
+  margin-bottom: 32px !important; /* CLEAR BREATHING ROOM BETWEEN HEADING AND CARDS BELOW */
+  display: block !important;
 }
 
 .dest-journey-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-4);
-  margin-top: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 36px !important;
+  margin-top: 28px !important;
+  margin-bottom: 48px !important;
+}
+
+.accommodation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 36px !important;
+  margin-top: 28px !important;
+  margin-bottom: 56px !important;
+}
+
+.accom-body {
+  padding: 28px 24px 24px 24px !important;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 12px;
 }
 
 .dest-page-cta-box, .journey-page-cta-box {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--brown-light);
-  border-radius: var(--radius-lg);
-  padding: var(--space-8) var(--space-4);
-  margin-top: var(--space-8);
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--brown-light) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 56px 36px !important;
+  margin-top: 72px !important;
+  margin-bottom: 72px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 24px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.dest-page-cta-box h2, .journey-page-cta-box h2 {
+  font-size: 2.2rem !important;
+  margin-bottom: 8px !important;
+  color: var(--dark-primary) !important;
+  text-align: center !important;
+}
+
+.dest-page-cta-box .btn, .journey-page-cta-box .btn {
+  margin-top: 4px !important;
+  align-self: center !important;
 }
 
 .py-6 {
