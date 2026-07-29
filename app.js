@@ -435,6 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: "Maasai Mara, Kenya",
       rating: "5-Star Ultra-Luxury",
       roomTypes: "Glass-fronted Tented Suites",
+      price: "$1,850 USD / night",
       amenities: ["Private Airfield", "Infinity Pool", "Personal Butler", "Game Drives"],
       image: "assets/images/Accommodation Imgs/Angama-Mara-.webp",
       fallback: "assets/images/journey_kenya.jpg",
@@ -446,6 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: "Nairobi, Kenya",
       rating: "5-Star Icon",
       roomTypes: "Historic Manor Suites",
+      price: "$1,100 USD / night",
       amenities: ["Giraffe Breakfast", "Private Gardens", "Fine Dining", "Spa Services"],
       image: "assets/images/Accommodation Imgs/Giraffe Manor.jpg",
       fallback: "assets/images/safari_adventure.jpg",
@@ -457,6 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: "Serengeti National Park, Tanzania",
       rating: "5-Star Luxury",
       roomTypes: "Savannah Rooms & Private Pool Villas",
+      price: "$1,450 USD / night",
       amenities: ["Waterhole View Pool", "Full-service Spa", "Kijana Kids Club", "Bush Dinners"],
       image: "assets/images/Accommodation Imgs/Four Seasons Safari Lodge Serengeti.jpg",
       fallback: "assets/images/dest_tanzania.jpg",
@@ -468,6 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: "Ngorongoro Conservation Area, Tanzania",
       rating: "5-Star Architectural Marvel",
       roomTypes: "Chateau-style Stilted Suites",
+      price: "$1,650 USD / night",
       amenities: ["Personal Butler", "Crater View Deck", "Fine Wine Cellar", "Private Guides"],
       image: "assets/images/Accommodation Imgs/ngorongoro-crater-lodge-2.jpg",
       fallback: "assets/images/dest_tanzania.jpg",
@@ -479,6 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: "Bwindi Impenetrable Forest, Uganda",
       rating: "5-Star Eco-Luxury",
       roomTypes: "Luxury Tented Suites",
+      price: "$1,350 USD / night",
       amenities: ["Gorilla Visits in Camp", "Forest Spa", "Campfire Lounge", "Private Dining"],
       image: "assets/images/Accommodation Imgs/Sanctuary Gorilla Forest Camp.jfif",
       fallback: "assets/images/dest_uganda.jpg",
@@ -490,6 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: "Volcanoes National Park, Rwanda",
       rating: "5-Star Sanctuary",
       roomTypes: "Forest Lodges & Treehouse Suites",
+      price: "$2,100 USD / night",
       amenities: ["Private Pool", "World-Class Spa", "Helipad", "Chef's Garden Dining"],
       image: "assets/images/Accommodation Imgs/One&Only Gorillas' Nest.jpg",
       fallback: "assets/images/dest_rwanda.jpg",
@@ -501,6 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: "Mustaphi, Zanzibar",
       rating: "5-Star Oceanfront",
       roomTypes: "Luxury Ocean Pool Villas",
+      price: "$950 USD / night",
       amenities: ["Private Butler", "Infinity Pool", "Private Beach", "Spa & Wellness"],
       image: "assets/images/Accommodation Imgs/The Residence Zanzibarjpg.jpg",
       fallback: "assets/images/dest_zanzibar.jpg",
@@ -512,6 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: "Grand Baie, Mauritius",
       rating: "5-Star Palace",
       roomTypes: "Ocean Suites & Royal Villa",
+      price: "$1,050 USD / night",
       amenities: ["Helipad", "Yacht Transfers", "3 Gourmet Restaurants", "Spa by Clarins"],
       image: "assets/images/Accommodation Imgs/Royal Palm Beachcomber Luxury.jpg",
       fallback: "assets/images/dest_mauritius.jpg",
@@ -523,6 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: "Aswan, Egypt",
       rating: "5-Star Historic Heritage",
       roomTypes: "Nile View Suites & Heritage Rooms",
+      price: "$780 USD / night",
       amenities: ["Nile Terrace Bar", "Infinity Pool", "Spa & Wellness", "Butler Service"],
       image: "assets/images/Accommodation Imgs/Sofitel Legend Old Cataract.jfif",
       fallback: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80",
@@ -534,6 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: "Accra, Ghana",
       rating: "5-Star City Resort",
       roomTypes: "Executive Suites & Presidential Villa",
+      price: "$650 USD / night",
       amenities: ["Resort Pool", "Luxury Spa", "Fine Dining", "Concierge Service"],
       image: "assets/images/Accommodation Imgs/Kempinski Hotel Gold Coast City4K.jpg",
       fallback: "assets/images/dest_ghana.jpg",
@@ -608,6 +618,263 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   // ----------------------------------------------------
+  // MULTI-STEP ACCOMMODATION BOOKING WIZARD LOGIC (5 STEPS)
+  // ----------------------------------------------------
+  let currentAccomStep = 1;
+  let currentAccomHotelObj = null;
+
+  const accomModal = document.getElementById('accomBookingModal');
+  const closeAccomBtn = document.getElementById('closeAccomModalBtn');
+  const accomForm = document.getElementById('accomBookingForm');
+  const accomStepBadge = document.getElementById('accomStepBadge');
+  const accomModalTitle = document.getElementById('accomModalTitle');
+  const accomModalSubtitle = document.getElementById('accomModalSubtitle');
+  const accomProgressFill = document.getElementById('accomProgressFill');
+  const prevAccomStepBtn = document.getElementById('prevAccomStepBtn');
+  const nextAccomStepBtn = document.getElementById('nextAccomStepBtn');
+  const accomFooterNav = document.getElementById('accomModalFooterNav');
+  const submitAccomBtn = document.getElementById('submitAccomBtn');
+  const accomWhatsAppCtaBtn = document.getElementById('accomWhatsAppCtaBtn');
+
+  const accomStepMeta = {
+    1: { title: "Confirm Your Sanctuary", subtitle: "Review your selected accommodation before selecting stay parameters.", fill: "20%" },
+    2: { title: "Stay Details", subtitle: "Choose your check-in, check-out dates, guest count, and preferred room type.", fill: "40%" },
+    3: { title: "Guest Information", subtitle: "Provide your contact details so our concierge can secure your private hold.", fill: "60%" },
+    4: { title: "Tailor Your Stay", subtitle: "Tell us about the purpose of your trip and any special requests or celebration setups.", fill: "80%" },
+    5: { title: "Review & Submit", subtitle: "Confirm your stay details below and submit your request or connect via WhatsApp.", fill: "100%" }
+  };
+
+  function openAccomBooking(hotelName = 'Angama Mara') {
+    if (!accomModal) return;
+    
+    currentAccomHotelObj = accommodationsData.find(a => a.name.toLowerCase() === hotelName.toLowerCase()) || {
+      name: hotelName,
+      destination: "Africa",
+      location: hotelName,
+      description: "A handpicked luxury sanctuary curated by Ivory Horizons.",
+      price: "$1,200 USD / night",
+      image: "assets/images/Accommodation Imgs/Angama-Mara-.webp"
+    };
+
+    // Populate Step 1 Preview Card
+    const previewImg = document.getElementById('accomPreviewImg');
+    const previewBadge = document.getElementById('accomPreviewBadge');
+    const previewName = document.getElementById('accomPreviewName');
+    const previewLoc = document.getElementById('accomPreviewLocation');
+    const previewDesc = document.getElementById('accomPreviewDesc');
+    const priceVal = document.getElementById('accomPriceVal');
+
+    if (previewImg) previewImg.src = currentAccomHotelObj.image || "assets/images/Accommodation Imgs/Angama-Mara-.webp";
+    if (previewBadge) previewBadge.textContent = currentAccomHotelObj.destination || "Africa";
+    if (previewName) previewName.textContent = currentAccomHotelObj.name || hotelName;
+    if (previewLoc) previewLoc.textContent = `📍 ${currentAccomHotelObj.location || hotelName}`;
+    if (previewDesc) previewDesc.textContent = currentAccomHotelObj.description || "A handpicked luxury sanctuary curated by Ivory Horizons.";
+    if (priceVal) priceVal.textContent = currentAccomHotelObj.price || "$1,200 USD / night";
+
+    currentAccomStep = 1;
+    updateAccomStepView();
+    
+    if (typeof accomModal.showModal === 'function') {
+      accomModal.showModal();
+    } else {
+      accomModal.setAttribute('open', '');
+    }
+  }
+
+  function closeAccomModal() {
+    if (!accomModal) return;
+    if (typeof accomModal.close === 'function') {
+      accomModal.close();
+    } else {
+      accomModal.removeAttribute('open');
+    }
+  }
+
+  if (closeAccomBtn) {
+    closeAccomBtn.addEventListener('click', closeAccomModal);
+  }
+
+  function updateAccomStepView() {
+    const steps = accomModal ? accomModal.querySelectorAll('.accom-step') : [];
+    steps.forEach(step => {
+      const stepNum = parseInt(step.getAttribute('data-step'), 10);
+      if (stepNum === currentAccomStep) {
+        step.classList.add('step-active');
+        step.style.display = 'block';
+      } else {
+        step.classList.remove('step-active');
+        step.style.display = 'none';
+      }
+    });
+
+    const meta = accomStepMeta[currentAccomStep] || accomStepMeta[1];
+    if (accomStepBadge) accomStepBadge.textContent = `Step ${currentAccomStep} of 5`;
+    if (accomModalTitle) accomModalTitle.textContent = meta.title;
+    if (accomModalSubtitle) accomModalSubtitle.textContent = meta.subtitle;
+    if (accomProgressFill) accomProgressFill.style.width = meta.fill;
+
+    // Controls
+    if (currentAccomStep === 1) {
+      if (prevAccomStepBtn) prevAccomStepBtn.style.display = 'none';
+      if (nextAccomStepBtn) {
+        nextAccomStepBtn.style.display = 'inline-block';
+        nextAccomStepBtn.textContent = 'Continue →';
+      }
+      if (accomFooterNav) accomFooterNav.style.display = 'flex';
+    } else if (currentAccomStep >= 2 && currentAccomStep <= 4) {
+      if (prevAccomStepBtn) prevAccomStepBtn.style.display = 'inline-flex';
+      if (nextAccomStepBtn) {
+        nextAccomStepBtn.style.display = 'inline-block';
+        nextAccomStepBtn.textContent = currentAccomStep === 4 ? 'Review Booking →' : 'Next →';
+      }
+      if (accomFooterNav) accomFooterNav.style.display = 'flex';
+    } else if (currentAccomStep === 5) {
+      if (accomFooterNav) accomFooterNav.style.display = 'none';
+      buildAccomSummaryRecap();
+    }
+  }
+
+  function buildAccomSummaryRecap() {
+    const checkIn = document.getElementById('accomCheckIn')?.value || 'Not specified';
+    const checkOut = document.getElementById('accomCheckOut')?.value || 'Not specified';
+    const guests = accomForm ? (accomForm.querySelector('input[name="accomGuests"]:checked')?.value || '2 Guests') : '2 Guests';
+    const rooms = document.getElementById('accomRooms')?.value || '1 Room';
+    const roomType = accomForm ? (accomForm.querySelector('input[name="accomRoomType"]:checked')?.value || 'Double Room') : 'Double Room';
+    
+    const firstName = document.getElementById('accomFirstName')?.value || '';
+    const lastName = document.getElementById('accomLastName')?.value || '';
+    const fullName = `${firstName} ${lastName}`.trim() || 'Valued Guest';
+    const email = document.getElementById('accomEmail')?.value || '';
+    const phone = document.getElementById('accomPhone')?.value || '';
+    const whatsapp = document.getElementById('accomWhatsApp')?.value || phone;
+    const pref = accomForm ? (accomForm.querySelector('input[name="accomContactPref"]:checked')?.value || 'WhatsApp') : 'WhatsApp';
+    
+    const purpose = accomForm ? (accomForm.querySelector('input[name="accomPurpose"]:checked')?.value || 'Holiday') : 'Holiday';
+    const reqTags = accomForm ? Array.from(accomForm.querySelectorAll('input[name="accomReqTags"]:checked')).map(cb => cb.value) : [];
+    const specialText = document.getElementById('accomSpecialText')?.value || '';
+
+    const reqSummaryStr = [...reqTags, specialText].filter(Boolean).join(', ') || 'None specified';
+
+    const recapBox = document.getElementById('accomSummaryRecap');
+    if (recapBox && currentAccomHotelObj) {
+      recapBox.innerHTML = `
+        <p><strong>Sanctuary:</strong> ${currentAccomHotelObj.name} (${currentAccomHotelObj.location})</p>
+        <p><strong>Check-in:</strong> ${checkIn} • <strong>Check-out:</strong> ${checkOut}</p>
+        <p><strong>Guests:</strong> ${guests} • <strong>Rooms:</strong> ${rooms} (${roomType})</p>
+        <p><strong>Guest Name:</strong> ${fullName}</p>
+        <p><strong>Contact:</strong> ${email} • ${phone} (Preferred: ${pref})</p>
+        <p><strong>Purpose of Travel:</strong> ${purpose}</p>
+        <p><strong>Special Requests:</strong> ${reqSummaryStr}</p>
+      `;
+    }
+
+    // Pre-filled WhatsApp message matching exact user specification
+    const waMessage = `Hello Ivory Horizons! I'd like to book accommodation.
+
+Hotel: ${currentAccomHotelObj ? currentAccomHotelObj.name : 'Sanctuary'}
+Destination: ${currentAccomHotelObj ? currentAccomHotelObj.location : 'Africa'}
+Check-in: ${checkIn}
+Check-out: ${checkOut}
+Guests: ${guests}
+Rooms: ${rooms}
+Room Type: ${roomType}
+Purpose: ${purpose}
+Special Requests: ${reqSummaryStr}
+
+My contact details are:
+Name: ${fullName}
+Email: ${email}
+Phone: ${phone}
+
+I look forward to hearing from you.`;
+
+    const waUrl = `https://wa.me/254740199975?text=${encodeURIComponent(waMessage)}`;
+
+    if (accomWhatsAppCtaBtn) {
+      accomWhatsAppCtaBtn.onclick = () => {
+        window.open(waUrl, '_blank');
+      };
+    }
+  }
+
+  // Next Step Button Handler for Accom Modal
+  if (nextAccomStepBtn) {
+    nextAccomStepBtn.addEventListener('click', () => {
+      // Validate Step 2 (Check-in & Check-out)
+      if (currentAccomStep === 2) {
+        const checkIn = document.getElementById('accomCheckIn');
+        const checkOut = document.getElementById('accomCheckOut');
+        if (!checkIn || !checkIn.value) {
+          alert('Please select a Check-in Date before continuing.');
+          checkIn?.focus();
+          return;
+        }
+        if (!checkOut || !checkOut.value) {
+          alert('Please select a Check-out Date before continuing.');
+          checkOut?.focus();
+          return;
+        }
+        if (new Date(checkOut.value) <= new Date(checkIn.value)) {
+          alert('Check-out Date must be after Check-in Date.');
+          checkOut?.focus();
+          return;
+        }
+      }
+
+      // Validate Step 3 (Guest Information)
+      if (currentAccomStep === 3) {
+        const fName = document.getElementById('accomFirstName');
+        const lName = document.getElementById('accomLastName');
+        const email = document.getElementById('accomEmail');
+        const phone = document.getElementById('accomPhone');
+
+        if (!fName || !fName.value.trim()) {
+          alert('Please enter your First Name.');
+          fName?.focus();
+          return;
+        }
+        if (!lName || !lName.value.trim()) {
+          alert('Please enter your Last Name.');
+          lName?.focus();
+          return;
+        }
+        if (!email || !email.value.trim()) {
+          alert('Please enter a valid Email Address.');
+          email?.focus();
+          return;
+        }
+        if (!phone || !phone.value.trim()) {
+          alert('Please enter your Phone Number.');
+          phone?.focus();
+          return;
+        }
+      }
+
+      if (currentAccomStep < 5) {
+        currentAccomStep++;
+        updateAccomStepView();
+      }
+    });
+  }
+
+  if (prevAccomStepBtn) {
+    prevAccomStepBtn.addEventListener('click', () => {
+      if (currentAccomStep > 1) {
+        currentAccomStep--;
+        updateAccomStepView();
+      }
+    });
+  }
+
+  if (accomForm) {
+    accomForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you! Your sanctuary reservation request has been submitted to Ivory Horizons. Our travel curator will contact you shortly.');
+      closeAccomModal();
+    });
+  }
+
+  // ----------------------------------------------------
   // CONCIERGE WIZARD LOGIC
   // ----------------------------------------------------
 
@@ -671,10 +938,14 @@ document.addEventListener('DOMContentLoaded', () => {
   conciergeTriggers.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+      const hotel = btn.dataset.hotel || null;
+      if (hotel) {
+        openAccomBooking(hotel);
+        return;
+      }
       const type = btn.dataset.type || null;
       const dest = btn.dataset.dest || null;
       const journey = btn.dataset.journey || null;
-      const hotel = btn.dataset.hotel || null;
       const skip = btn.dataset.skipStep1 === 'true';
       openConcierge(type, dest, journey, hotel, skip);
     });

@@ -2323,5 +2323,127 @@ img {
   box-shadow: 0 4px 14px rgba(215, 122, 56, 0.35);
 }
 
+/* Multi-Step Accommodation Booking Modal Specific Styles */
+.accom-step {
+  display: none;
+}
+
+.accom-step.step-active {
+  display: block;
+  animation: fadeInStep 0.25s ease-out;
+}
+
+#prevAccomStepBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: 1.5px solid var(--dark-primary) !important;
+  color: var(--dark-primary) !important;
+  background-color: transparent !important;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#prevAccomStepBtn:hover {
+  background-color: var(--dark-primary) !important;
+  color: var(--white) !important;
+}
+
+.accom-preview-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--brown-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 640px) {
+  .accom-preview-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+.accom-preview-img-wrap {
+  position: relative;
+  height: 160px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.accom-preview-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: var(--dark-primary);
+  color: var(--white);
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.accom-preview-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.preview-hotel-name {
+  font-size: 1.4rem;
+  font-family: var(--font-heading);
+  color: var(--dark-primary);
+  margin: 0;
+}
+
+.preview-location {
+  font-size: 0.85rem;
+  color: var(--brown-accent);
+  font-weight: 500;
+}
+
+.preview-desc {
+  font-size: 0.85rem;
+  color: #5C4D42;
+  line-height: 1.4;
+}
+
+.preview-price-box {
+  margin-top: 6px;
+  padding: 6px 12px;
+  background-color: var(--white);
+  border: 1px solid var(--brown-light);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+}
+
+.price-label {
+  font-size: 0.78rem;
+  color: var(--brown-secondary);
+}
+
+.price-val {
+  font-size: 0.92rem;
+  color: var(--dark-primary);
+  font-weight: 600;
+}
+
 
 

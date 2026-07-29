@@ -412,6 +412,280 @@
     </div>
   </dialog>
 
+  <!-- DEDICATED MULTI-STEP ACCOMMODATION BOOKING FLOW MODAL -->
+  <dialog class="concierge-modal" id="accomBookingModal">
+    <div class="modal-content-wrapper">
+      <button type="button" class="modal-close" id="closeAccomModalBtn" aria-label="Close modal">&times;</button>
+      
+      <div class="modal-header">
+        <span class="modal-step-badge" id="accomStepBadge">Step 1 of 5</span>
+        <h3 class="modal-title" id="accomModalTitle">Confirm Your Sanctuary</h3>
+        <p class="modal-subtitle" id="accomModalSubtitle">Review your selected accommodation before selecting stay parameters.</p>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="modal-progress-bar">
+        <div class="progress-fill" id="accomProgressFill" style="width: 20%;"></div>
+      </div>
+
+      <form id="accomBookingForm" onsubmit="return false;">
+        
+        <!-- STEP 1: CONFIRM ACCOMMODATION -->
+        <div class="accom-step step-active" data-step="1">
+          <div class="accom-preview-card">
+            <div class="accom-preview-img-wrap">
+              <img id="accomPreviewImg" src="assets/images/Accommodation Imgs/Angama-Mara-.webp" alt="Selected Hotel">
+              <span class="badge-tag" id="accomPreviewBadge">Kenya</span>
+            </div>
+            <div class="accom-preview-info">
+              <h4 class="preview-hotel-name" id="accomPreviewName">Angama Mara</h4>
+              <span class="preview-location" id="accomPreviewLocation">📍 Maasai Mara, Kenya</span>
+              <p class="preview-desc" id="accomPreviewDesc">Perched high on the rim of the Great Rift Valley overlooking the Maasai Mara...</p>
+              <div class="preview-price-box" id="accomPreviewPrice">
+                <span class="price-label">Starting Rate:</span>
+                <strong class="price-val" id="accomPriceVal">$1,850 USD / night</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: STAY DETAILS -->
+        <div class="accom-step" data-step="2">
+          <div class="form-fields-grid">
+            <div class="form-group">
+              <label for="accomCheckIn">Check-in Date *</label>
+              <input type="date" id="accomCheckIn" required>
+            </div>
+
+            <div class="form-group">
+              <label for="accomCheckOut">Check-out Date *</label>
+              <input type="date" id="accomCheckOut" required>
+            </div>
+
+            <!-- Guests Selection -->
+            <div class="form-group full-width">
+              <label>Number of Guests</label>
+              <div class="pill-group">
+                <label class="pill-option">
+                  <input type="radio" name="accomGuests" value="1 Guest">
+                  <span class="pill-box">1 Guest</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomGuests" value="2 Guests" checked>
+                  <span class="pill-box">2 Guests</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomGuests" value="3 Guests">
+                  <span class="pill-box">3 Guests</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomGuests" value="4 Guests">
+                  <span class="pill-box">4 Guests</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomGuests" value="5+ Guests">
+                  <span class="pill-box">5+ Guests</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Number of Rooms -->
+            <div class="form-group">
+              <label for="accomRooms">Number of Rooms</label>
+              <select id="accomRooms">
+                <option value="1 Room" selected>1 Room</option>
+                <option value="2 Rooms">2 Rooms</option>
+                <option value="3 Rooms">3 Rooms</option>
+                <option value="4+ Rooms">4+ Rooms</option>
+              </select>
+            </div>
+
+            <!-- Room Type -->
+            <div class="form-group full-width">
+              <label>Room Type</label>
+              <div class="pill-group">
+                <label class="pill-option">
+                  <input type="radio" name="accomRoomType" value="Single Room">
+                  <span class="pill-box">Single Room</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomRoomType" value="Double Room" checked>
+                  <span class="pill-box">Double Room</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomRoomType" value="Twin Room">
+                  <span class="pill-box">Twin Room</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomRoomType" value="Family Room">
+                  <span class="pill-box">Family Room</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomRoomType" value="Suite">
+                  <span class="pill-box">Suite</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: GUEST INFORMATION -->
+        <div class="accom-step" data-step="3">
+          <div class="form-fields-grid">
+            <div class="form-group">
+              <label for="accomFirstName">First Name *</label>
+              <input type="text" id="accomFirstName" required placeholder="First Name">
+            </div>
+
+            <div class="form-group">
+              <label for="accomLastName">Last Name *</label>
+              <input type="text" id="accomLastName" required placeholder="Last Name">
+            </div>
+
+            <div class="form-group">
+              <label for="accomEmail">Email Address *</label>
+              <input type="email" id="accomEmail" required placeholder="your.email@domain.com">
+            </div>
+
+            <div class="form-group">
+              <label for="accomPhone">Phone Number *</label>
+              <input type="tel" id="accomPhone" required placeholder="+1 (555) 000-0000">
+            </div>
+
+            <div class="form-group full-width">
+              <label for="accomWhatsApp">WhatsApp Number (Optional)</label>
+              <input type="tel" id="accomWhatsApp" placeholder="Same as phone or enter WhatsApp number">
+            </div>
+
+            <div class="form-group full-width">
+              <label>Preferred Contact Method</label>
+              <div class="pill-group">
+                <label class="pill-option">
+                  <input type="radio" name="accomContactPref" value="WhatsApp" checked>
+                  <span class="pill-box">WhatsApp</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomContactPref" value="Phone Call">
+                  <span class="pill-box">Phone Call</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomContactPref" value="Email">
+                  <span class="pill-box">Email</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: YOUR STAY (PREFERENCES & SPECIAL REQUESTS) -->
+        <div class="accom-step" data-step="4">
+          <div class="form-fields-grid">
+            <!-- Purpose of Travel -->
+            <div class="form-group full-width">
+              <label>Purpose of Travel</label>
+              <div class="pill-group">
+                <label class="pill-option">
+                  <input type="radio" name="accomPurpose" value="Holiday" checked>
+                  <span class="pill-box">Holiday</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomPurpose" value="Honeymoon">
+                  <span class="pill-box">Honeymoon</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomPurpose" value="Anniversary">
+                  <span class="pill-box">Anniversary</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomPurpose" value="Family Trip">
+                  <span class="pill-box">Family Trip</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomPurpose" value="Business">
+                  <span class="pill-box">Business</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomPurpose" value="Adventure">
+                  <span class="pill-box">Adventure</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="accomPurpose" value="Other">
+                  <span class="pill-box">Other</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Special Requests Tags -->
+            <div class="form-group full-width">
+              <label>Special Services & Amenities (Select all that apply)</label>
+              <div class="pill-group">
+                <label class="pill-option">
+                  <input type="checkbox" name="accomReqTags" value="Airport transfer">
+                  <span class="pill-box">✈️ Airport transfer</span>
+                </label>
+                <label class="pill-option">
+                  <input type="checkbox" name="accomReqTags" value="Early check-in">
+                  <span class="pill-box">🌅 Early check-in</span>
+                </label>
+                <label class="pill-option">
+                  <input type="checkbox" name="accomReqTags" value="Late check-out">
+                  <span class="pill-box">🌙 Late check-out</span>
+                </label>
+                <label class="pill-option">
+                  <input type="checkbox" name="accomReqTags" value="Baby cot">
+                  <span class="pill-box">👶 Baby cot</span>
+                </label>
+                <label class="pill-option">
+                  <input type="checkbox" name="accomReqTags" value="Wheelchair accessibility">
+                  <span class="pill-box">♿ Wheelchair accessibility</span>
+                </label>
+                <label class="pill-option">
+                  <input type="checkbox" name="accomReqTags" value="Vegetarian meals">
+                  <span class="pill-box">🥗 Vegetarian meals</span>
+                </label>
+                <label class="pill-option">
+                  <input type="checkbox" name="accomReqTags" value="Connecting rooms">
+                  <span class="pill-box">🚪 Connecting rooms</span>
+                </label>
+                <label class="pill-option">
+                  <input type="checkbox" name="accomReqTags" value="Celebration setup">
+                  <span class="pill-box">🎉 Celebration setup</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="accomSpecialText">Special Requests & Personal Vision</label>
+              <textarea id="accomSpecialText" rows="3" placeholder="Tell us anything that will make your stay more comfortable."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: REVIEW & SUBMIT -->
+        <div class="accom-step" data-step="5">
+          <div class="confirmation-box text-center">
+            <h4 class="confirmation-headline" style="font-size: 1.8rem; margin-bottom: 8px;">Review Your Sanctuary Reservation</h4>
+            <p class="confirmation-text" style="margin-bottom: 16px;">Please confirm your stay details before submitting your concierge request.</p>
+            
+            <div class="summary-recap" id="accomSummaryRecap"></div>
+
+            <div class="confirmation-cta-group" style="display: flex; gap: 16px; justify-content: center; margin-top: 24px; flex-wrap: wrap;">
+              <button type="submit" class="btn btn-primary" id="submitAccomBtn">Submit Booking Request</button>
+              <button type="button" class="btn btn-whatsapp" id="accomWhatsAppCtaBtn">Continue on WhatsApp 💬</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODAL FOOTER NAV BUTTONS -->
+        <div class="modal-footer-nav" id="accomModalFooterNav">
+          <button type="button" class="btn btn-outline" id="prevAccomStepBtn" style="display: none;">&larr; Back</button>
+          <button type="button" class="btn btn-primary" id="nextAccomStepBtn">Continue &rarr;</button>
+        </div>
+
+      </form>
+    </div>
+  </dialog>
+
   <script src="app.js"></script>
 </body>
 </html>
