@@ -234,58 +234,107 @@
           </div>
         </div>
 
-        <!-- STEP 3: TRIP DETAILS -->
+        <!-- STEP 3: TRIP DETAILS (ENHANCED WITH IMAGE 5 PILL SELECTIONS) -->
         <div class="concierge-step" data-step="3">
           <div class="form-fields-grid">
+            <!-- Travel Companions -->
+            <div class="form-group full-width">
+              <label>Who will you be travelling with?</label>
+              <div class="pill-group">
+                <label class="pill-option">
+                  <input type="radio" name="travelCompanions" value="I travel solo">
+                  <span class="pill-box">I travel solo</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="travelCompanions" value="My partner" checked>
+                  <span class="pill-box">My partner</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="travelCompanions" value="My family">
+                  <span class="pill-box">My family</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="travelCompanions" value="My friends">
+                  <span class="pill-box">My friends</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Budget Selection -->
+            <div class="form-group full-width">
+              <label>What is your budget per person?</label>
+              <div class="pill-group">
+                <label class="pill-option">
+                  <input type="radio" name="budgetPill" value="1000-3000 USD">
+                  <span class="pill-box">1000-3000 USD</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="budgetPill" value="3000-5000 USD" checked>
+                  <span class="pill-box">3000-5000 USD</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="budgetPill" value="5000+ USD">
+                  <span class="pill-box">5000+ USD</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="budgetPill" value="Not Sure">
+                  <span class="pill-box">Not Sure</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Flight Status & Travel Timing -->
             <div class="form-group">
-              <label for="travelDates">Target Travel Dates / Season</label>
-              <input type="text" id="travelDates" placeholder="e.g. October 2026 / Flexible">
+              <label>Have you booked your flights?</label>
+              <div class="pill-group">
+                <label class="pill-option">
+                  <input type="radio" name="flightStatus" value="Yes">
+                  <span class="pill-box">Yes</span>
+                </label>
+                <label class="pill-option">
+                  <input type="radio" name="flightStatus" value="No" checked>
+                  <span class="pill-box">No</span>
+                </label>
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="travelersCount">Number of Guests</label>
-              <select id="travelersCount">
-                <option value="1 Guest">1 Guest</option>
-                <option value="2 Guests" selected>2 Guests</option>
-                <option value="3 Guests">3 Guests</option>
-                <option value="4 Guests">4 Guests</option>
-                <option value="5+ Guests">5+ Guests</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="roomsCount">Number of Rooms</label>
-              <select id="roomsCount">
-                <option value="1 Room" selected>1 Room</option>
-                <option value="2 Rooms">2 Rooms</option>
-                <option value="3 Rooms">3 Rooms</option>
-                <option value="4+ Rooms">4+ Rooms</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="roomType">Room Type</label>
-              <select id="roomType">
-                <option value="Single Room">Single Room</option>
-                <option value="Double Room" selected>Double Room</option>
-                <option value="Twin Room">Twin Room</option>
-                <option value="Family Room">Family Room</option>
-                <option value="Suite">Suite</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="budgetRange">Estimated Investment (per guest)</label>
-              <select id="budgetRange">
-                <option value="$5,000 - $10,000">$5,000 - $10,000 USD</option>
-                <option value="$10,000 - $25,000" selected>$10,000 - $25,000 USD</option>
-                <option value="$25,000+ Exclusive Ultra-Luxury">$25,000+ Exclusive Ultra-Luxury</option>
-              </select>
+              <label>When do you want to travel?</label>
+              <div class="travel-timing-inputs">
+                <select id="travelYear" class="timing-select">
+                  <option value="" disabled selected>Year</option>
+                  <option value="2026">2026</option>
+                  <option value="2027">2027</option>
+                  <option value="2028">2028</option>
+                </select>
+                <select id="travelMonth" class="timing-select">
+                  <option value="" disabled selected>Month</option>
+                  <option value="January">January</option>
+                  <option value="February">February</option>
+                  <option value="March">March</option>
+                  <option value="April">April</option>
+                  <option value="May">May</option>
+                  <option value="June">June</option>
+                  <option value="July">July</option>
+                  <option value="August">August</option>
+                  <option value="September">September</option>
+                  <option value="October">October</option>
+                  <option value="November">November</option>
+                  <option value="December">December</option>
+                </select>
+                <select id="travelDuration" class="timing-select">
+                  <option value="" disabled selected>For How long</option>
+                  <option value="3-5 Days">3-5 Days</option>
+                  <option value="7-10 Days">7-10 Days</option>
+                  <option value="10-14 Days">10-14 Days</option>
+                  <option value="2+ Weeks">2+ Weeks</option>
+                </select>
+              </div>
             </div>
 
             <div class="form-group full-width">
-              <label for="specialPreferences">Special Preferences or Dreams</label>
-              <textarea id="specialPreferences" rows="3" placeholder="Tell us about celebratory occasions, dietary needs, private aviation preferences..."></textarea>
+              <label for="specialPreferences">Please tell us a bit more about your travel plans</label>
+              <textarea id="specialPreferences" rows="3" placeholder="Tell us about your preferred style, celebratory occasions, dietary needs, or specific desires..."></textarea>
             </div>
           </div>
         </div>
@@ -299,11 +348,6 @@
             </div>
 
             <div class="form-group">
-              <label for="middleName">Middle Name (Optional)</label>
-              <input type="text" id="middleName" placeholder="Middle Name">
-            </div>
-
-            <div class="form-group">
               <label for="lastName">Last Name *</label>
               <input type="text" id="lastName" required placeholder="Last Name">
             </div>
@@ -314,17 +358,24 @@
             </div>
 
             <div class="form-group">
-              <label for="guestPhone">Phone / WhatsApp *</label>
-              <input type="tel" id="guestPhone" required placeholder="+254 740 199975">
+              <label for="guestPhone">Telephone Number *</label>
+              <input type="tel" id="guestPhone" required placeholder="+1 (555) 000-0000">
             </div>
 
-            <div class="form-group">
+            <div class="form-group full-width">
               <label for="contactPreference">Preferred Contact Method</label>
               <select id="contactPreference">
                 <option value="WhatsApp Concierge">WhatsApp Concierge</option>
                 <option value="Private Email">Private Email</option>
                 <option value="Scheduled Video Consultation">Scheduled Video Consultation</option>
               </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label class="checkbox-label" style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: normal; font-size: 0.85rem;">
+                <input type="checkbox" id="newsletterOptIn" checked style="width: 16px; height: 16px; accent-color: var(--brown-accent);">
+                <span>Yes, I'd like to receive a monthly newsletter featuring travel tips, exclusive offers, reviews and news.</span>
+              </label>
             </div>
           </div>
         </div>

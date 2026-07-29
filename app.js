@@ -734,9 +734,8 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       
       const firstName = document.getElementById('firstName')?.value || 'Valued';
-      const middleName = document.getElementById('middleName')?.value || '';
       const lastName = document.getElementById('lastName')?.value || 'Guest';
-      const fullName = `${firstName} ${middleName ? middleName + ' ' : ''}${lastName}`.trim();
+      const fullName = `${firstName} ${lastName}`.trim();
       
       const guestEmail = document.getElementById('guestEmail')?.value || '';
       const guestPhone = document.getElementById('guestPhone')?.value || '';
@@ -744,13 +743,17 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const journeyType = conciergeForm.querySelector('input[name="journeyType"]:checked')?.value || 'Bespoke Experience';
       const destinations = Array.from(conciergeForm.querySelectorAll('input[name="destination"]:checked')).map(cb => cb.value);
-      const travelDates = document.getElementById('travelDates')?.value || 'Flexible';
-      const guests = document.getElementById('travelersCount')?.value || '2 Guests';
-      const rooms = document.getElementById('roomsCount')?.value || '1 Room';
-      const roomType = document.getElementById('roomType')?.value || 'Double Room';
-      const budget = document.getElementById('budgetRange')?.value || '$10,000 - $25,000 USD';
+      
+      const travelCompanions = conciergeForm.querySelector('input[name="travelCompanions"]:checked')?.value || 'Not specified';
+      const budget = conciergeForm.querySelector('input[name="budgetPill"]:checked')?.value || '3000-5000 USD';
+      const flightStatus = conciergeForm.querySelector('input[name="flightStatus"]:checked')?.value || 'No';
+      
+      const travelYear = document.getElementById('travelYear')?.value || '';
+      const travelMonth = document.getElementById('travelMonth')?.value || '';
+      const travelDuration = document.getElementById('travelDuration')?.value || '';
+      const whenToTravel = [travelMonth, travelYear, travelDuration].filter(Boolean).join(' ') || 'Flexible';
+      
       const specialRequests = document.getElementById('specialPreferences')?.value || 'None specified';
-
       const selectedDestStr = destinations.length ? destinations.join(', ') : 'Curated Recommendation';
 
       if (summaryRecap) {
@@ -759,9 +762,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <p><strong>Contact:</strong> ${guestEmail} • ${guestPhone} (${contactPref})</p>
           <p><strong>Journey Style:</strong> ${journeyType}</p>
           <p><strong>Destinations:</strong> ${selectedDestStr}</p>
-          <p><strong>Travel Dates:</strong> ${travelDates} • <strong>Guests:</strong> ${guests}</p>
-          <p><strong>Room Setup:</strong> ${rooms} (${roomType})</p>
-          <p><strong>Investment:</strong> ${budget}</p>
+          <p><strong>Travelling With:</strong> ${travelCompanions}</p>
+          <p><strong>Target Travel Date:</strong> ${whenToTravel}</p>
+          <p><strong>Flights Booked:</strong> ${flightStatus}</p>
+          <p><strong>Budget per Person:</strong> ${budget}</p>
           <p><strong>Special Requests:</strong> ${specialRequests}</p>
         `;
       }
@@ -771,10 +775,9 @@ document.addEventListener('DOMContentLoaded', () => {
 - Contact: ${guestPhone} (${guestEmail})
 - Destination: ${selectedDestStr}
 - Journey Style: ${journeyType}
-- Travel Dates: ${travelDates}
-- Number of Guests: ${guests}
-- Number of Rooms: ${rooms}
-- Room Type: ${roomType}
+- Travelling With: ${travelCompanions}
+- Target Travel Date: ${whenToTravel}
+- Flights Booked: ${flightStatus}
 - Budget: ${budget}
 - Preferred Contact: ${contactPref}
 - Special Requests: ${specialRequests}`;

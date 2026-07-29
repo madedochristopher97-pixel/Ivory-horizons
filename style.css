@@ -2108,4 +2108,133 @@ img {
   margin-top: auto;
 }
 
+/* ==========================================================================
+   ENHANCED BOOKING FLOW & MODAL STYLES (IMAGE 5 PILL SELECTIONS & BACK BTN)
+   ========================================================================== */
+#prevStepBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: 1.5px solid var(--dark-primary) !important;
+  color: var(--dark-primary) !important;
+  background-color: transparent !important;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#prevStepBtn:hover {
+  background-color: var(--dark-primary) !important;
+  color: var(--white) !important;
+}
+
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.pill-option {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pill-option input[type="radio"],
+.pill-option input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.pill-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border: 1px solid #D1B89D;
+  border-radius: var(--radius-sm);
+  background-color: var(--white);
+  color: #5C4D42;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.pill-option input:checked + .pill-box {
+  background-color: #BE9B6D;
+  color: #FFFFFF;
+  border-color: #BE9B6D;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(190, 155, 109, 0.3);
+}
+
+.pill-option:hover .pill-box {
+  border-color: var(--brown-accent);
+}
+
+.travel-timing-inputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .travel-timing-inputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+.timing-select {
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  background-color: var(--white);
+  border: 1px solid var(--brown-light);
+  border-radius: var(--radius-sm);
+  outline: none;
+  color: var(--dark-primary);
+}
+
+/* Accommodation Lodges Book Now Button Visibility Fix (High Opacity & Dark Primary Contrast) */
+.accom-cta-wrap {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.accom-cta-wrap .btn,
+.accommodation-card .concierge-trigger {
+  width: 100%;
+  display: block;
+  text-align: center;
+  background-color: var(--dark-primary) !important;
+  color: var(--white) !important;
+  border: 1px solid var(--dark-primary) !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(37, 23, 15, 0.18);
+}
+
+.accom-cta-wrap .btn:hover,
+.accommodation-card .concierge-trigger:hover {
+  background-color: var(--brown-accent) !important;
+  border-color: var(--brown-accent) !important;
+  color: var(--white) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(215, 122, 56, 0.35);
+}
+
+
 
