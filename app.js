@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     "Rwanda": {
       name: "Rwanda",
-      image: "assets/images/Handpicked Lands/Rwanda.jpg",
+      image: "assets/images/Handpicked Lands/Rwanda.jfif",
       fallback: "assets/images/dest_rwanda.jpg",
       overview: "Land of a thousand hills, pioneering conservation, and architectural eco-luxury lodges set against misty volcanic peaks.",
       coreExperiences: ["Volcanoes Gorilla Trekking", "Golden Monkey Tracking", "Kigali Cultural Tours", "Eco-Lodge Luxury"],
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
       bestTimeToVisit: "June – September & December – February",
       bestFor: "Luxury Travelers, Conservation Enthusiasts",
       gallery: [
-        "assets/images/Handpicked Lands/Rwanda.jpg",
+        "assets/images/Handpicked Lands/Rwanda.jfif",
         "assets/images/Signature tours Imgs/Gorilla Kingdom.jpg",
         "assets/images/dest_rwanda.jpg"
       ]
@@ -360,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
           day: "Day 1", 
           title: "Kigali Arrival & Scenic Helicopter Transfer", 
           details: "Meet-and-greet at Kigali Airport. Scenic helicopter flight over mist-shrouded peaks to Volcanoes National Park.",
-          img: "assets/images/Handpicked Lands/Rwanda.jpg"
+          img: "assets/images/Handpicked Lands/Rwanda.jfif"
         },
         { 
           day: "Day 2", 
