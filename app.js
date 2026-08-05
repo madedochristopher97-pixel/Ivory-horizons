@@ -237,6 +237,32 @@ document.addEventListener('DOMContentLoaded', () => {
       gallery: [
         "assets/images/dest_singapore.jpg"
       ]
+    },
+    "Turkey": {
+      name: "Turkey",
+      image: "assets/images/Handpicked Lands/Turkey.jpg",
+      fallback: "assets/images/Handpicked Lands/Turkey (1).jpg",
+      overview: "Where East meets West in timeless splendor, featuring fairy-tale Cappadocian landscapes, subterranean antiquities, and Ottoman luxury along the Bosphorus.",
+      coreExperiences: ["Cappadocia Hot Air Ballooning", "Bosphorus Private Yacht Cruises", "Istanbul Grand Bazaar & Palaces", "Pamukkale Thermal Terraces"],
+      idealDuration: "6–10 Days",
+      bestTimeToVisit: "April – June & September – November",
+      bestFor: "Couples, History Enthusiasts, Culture & Luxury Seekers",
+      gallery: [
+        "assets/images/Handpicked Lands/Turkey.jpg"
+      ]
+    },
+    "Bali": {
+      name: "Bali",
+      image: "assets/images/Handpicked Lands/Bali.jpg",
+      fallback: "assets/images/Handpicked Lands/Bali.jpg",
+      overview: "Island of the Gods, offering pristine jungle cliffside sanctuaries, sacred spiritual heritage, emerald rice terraces, and tranquil luxury ocean retreats.",
+      coreExperiences: ["Ubud Sacred Sanctuary Resorts", "Uluwatu Sunset Ocean Villas", "Tegallalang Rice Terrace Walks", "Private Spa & Wellness Immersion"],
+      idealDuration: "5–9 Days",
+      bestTimeToVisit: "April – October",
+      bestFor: "Honeymooners, Wellness Seekers, Families & Nature Lovers",
+      gallery: [
+        "assets/images/Handpicked Lands/Bali.jpg"
+      ]
     }
   };
 
