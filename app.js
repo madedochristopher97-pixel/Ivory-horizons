@@ -602,6 +602,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Blog Articles Database
   const blogArticlesData = [
     {
+      id: "kenya-mandatory-travel-insurance",
+      url: "kenya-travel-insurance-update.html",
+      title: "Travelling to Kenya? New Mandatory Travel Insurance Requirement",
+      category: "Travel Advice",
+      readTime: "3 min read",
+      date: "October 2026",
+      image: "assets/images/journey_migration.jpg",
+      excerpt: "Kenya now requires mandatory government travel insurance for international travellers. Here is what changes for your eTA, what it costs, and why you still need your own cover.",
+      content: "From 6 October 2026, international travellers entering Kenya need mandatory government travel insurance. It does not replace comprehensive travel insurance."
+    },
+    {
       id: "fly-in-safari-art",
       title: "The Art of the Private Fly-in Safari",
       category: "Safari Tips",
@@ -1362,7 +1373,9 @@ I look forward to hearing from you.`;
           <span class="blog-meta">${article.date} • ${article.readTime}</span>
           <h3 class="blog-title">${article.title}</h3>
           <p class="blog-excerpt">${article.excerpt}</p>
-          <button type="button" class="btn-text read-article-btn" data-article-id="${article.id}">Read Guide &rarr;</button>
+          ${article.url
+            ? `<a href="${article.url}" class="btn-text read-article-btn">Read Guide &rarr;</a>`
+            : `<button type="button" class="btn-text read-article-btn" data-article-id="${article.id}">Read Guide &rarr;</button>`}
         </div>
       `;
       blogGrid.appendChild(card);
