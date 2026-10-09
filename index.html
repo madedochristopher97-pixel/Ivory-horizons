@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <audio id="bgMusic" loop preload="none">
     <source src="assets/background-music/masai-mara-v2-mastered-by-john-elleson-hartley.mp3" type="audio/mpeg">
   </audio>
@@ -29,11 +30,11 @@
   <header class="site-header" id="siteHeader">
     <div class="header-container">
       <a href="index.html" class="brand-logo" aria-label="Ivory Horizons Home">
-        <img width="645" height="298" src="assets/images/ivory-dark-no-bg.png" alt="Ivory Horizons Luxury Concierge Logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <img width="645" height="298" src="assets/images/ivory-dark-no-bg.png" alt="Ivory Horizons Tours logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <span class="logo-mark-text" style="display: none;"><span class="logo-accent">Ivory</span> Horizons</span>
       </a>
 
-      <nav class="main-nav" aria-label="Main Navigation">
+      <nav class="main-nav" id="mainNav" aria-label="Main Navigation">
         <ul class="nav-list">
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="#destinations" class="nav-link">Destinations</a></li>
@@ -48,7 +49,7 @@
 
       <div class="header-actions">
         <button type="button" class="btn btn-header-cta concierge-trigger">Plan My Trip</button>
-        <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mainNav">
           <span></span>
           <span></span>
         </button>
@@ -56,7 +57,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <!-- Section 1: Hero Section (looping muted video playlist, poster shown until playback / for reduced motion) -->
     <section class="hero-inspo-layout" id="home">
       <div class="hero-bg-wrapper">
@@ -100,7 +101,7 @@
           <!-- Modality 1: Safari Adventure -->
           <article class="experience-card">
             <div class="card-image-wrap">
-              <img width="1024" height="683" decoding="async" src="assets/images/curated-modalities/safari-adventure.webp" srcset="assets/images/curated-modalities/safari-adventure-640.webp 640w, assets/images/curated-modalities/safari-adventure.webp 1024w, assets/images/curated-modalities/safari-adventure-1920.webp 1920w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 400px" alt="Safari Adventure in East Africa" loading="lazy" onerror="this.src='assets/images/safari-adventure.webp';">
+              <img width="1024" height="683" decoding="async" src="assets/images/curated-modalities/safari-adventure.webp" srcset="assets/images/curated-modalities/safari-adventure-640.webp 640w, assets/images/curated-modalities/safari-adventure.webp 1024w, assets/images/curated-modalities/safari-adventure-1920.webp 1920w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 400px" alt="Safari Adventure in East Africa" loading="lazy" onerror="this.src='assets/images/journey-migration.webp';">
               <div class="card-overlay"></div>
             </div>
             <div class="card-content">
@@ -201,7 +202,7 @@
           <!-- Destination 1: Kenya -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img width="800" height="535" decoding="async" src="assets/images/dest-kenya.webp" srcset="assets/images/dest-kenya-640.webp 640w, assets/images/dest-kenya.webp 800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Kenya Maasai Mara wildlife" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80';">
+              <img decoding="async" width="1024" height="770" src="assets/images/journey-migration.webp" srcset="assets/images/journey-migration-640.webp 640w, assets/images/journey-migration.webp 1024w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Kenya Maasai Mara wildlife" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80';">
               <span class="dest-badge">East Africa</span>
             </div>
             <div class="dest-body">
@@ -408,7 +409,7 @@
           <!-- Journey 1: Kenya Classic Safari -->
           <article class="journey-featured-card" data-category="Safari">
             <div class="journey-img-wrap">
-              <img width="1024" height="684" decoding="async" src="assets/images/journey-kenya.webp" srcset="assets/images/journey-kenya-640.webp 640w, assets/images/journey-kenya.webp 1024w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Kenya Classic Safari" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80';">
+              <img decoding="async" width="1024" height="683" src="assets/images/curated-modalities/safari-adventure.webp" srcset="assets/images/curated-modalities/safari-adventure-640.webp 640w, assets/images/curated-modalities/safari-adventure.webp 1024w, assets/images/curated-modalities/safari-adventure-1920.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Kenya Classic Safari" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80';">
               <div class="journey-tag-floating">3–5 Days</div>
             </div>
             <div class="journey-info">
@@ -601,7 +602,7 @@
     <section class="section section-cta">
       <div class="container">
         <div class="final-cta-box text-center">
-          <span class="section-badge badge-dark" style="color: var(--brown-accent);">Your Invitation</span>
+          <span class="section-badge badge-dark" style="color: var(--brown-accent-deep);">Your Invitation</span>
           <h2 class="final-cta-headline">Ready To Discover What Lies Beyond The Horizon?</h2>
           <p class="final-cta-subtext">
             Let our travel specialists design an extraordinary trip tailored exclusively to your vision.
@@ -625,7 +626,7 @@
           <div class="footer-contact-direct">
             <span class="contact-label">Contact Ivory Horizons at:</span>
             <a href="mailto:hello@ivoryhorizons.com" class="contact-email-link">hello@ivoryhorizons.com <span class="arrow-icon">↗</span></a>
-            <span class="contact-phone-item">Phone / WhatsApp: <a href="https://wa.me/254740199975" target="_blank" rel="noopener">+254 (0) 740 199 975</a></span>
+            <span class="contact-phone-item">Phone / WhatsApp: <a href="https://wa.me/254740199975" target="_blank" rel="noopener">+254 740 199 975</a></span>
           </div>
 
           <div class="footer-nav-menu">
@@ -635,7 +636,7 @@
             <a href="accommodation.html">Accommodation</a>
             <a href="blog.html">Blog Journal</a>
             <a href="#about">About Us</a>
-            <a href="#contact">Private Offices</a>
+            <a href="#contact">Contact</a>
           </div>
         </div>
 
@@ -645,7 +646,7 @@
 
         <div class="footer-card-bottom">
           <div class="footer-copyright-text">
-            © 2026 Ivory Horizons Luxury Concierge. All Rights Reserved.
+            © 2026 Ivory Horizons Tours. All Rights Reserved.
           </div>
           <div class="footer-social-links">
             <a href="https://wa.me/254740199975" target="_blank" rel="noopener" class="footer-social-btn">WhatsApp Concierge</a>
@@ -657,7 +658,7 @@
   </div>
 
   <!-- CONCIERGE MODAL / STEP-BY-STEP JOURNEY PLANNER (RESTORED ORIGINAL UI & SVG TOUR ICONS) -->
-  <dialog class="concierge-modal" data-lenis-prevent id="conciergeModal">
+  <dialog class="concierge-modal" data-lenis-prevent id="conciergeModal" aria-labelledby="modalTitle">
     <div class="modal-content-wrapper">
       <button type="button" class="modal-close" id="closeConciergeBtn" aria-label="Close modal">&times;</button>
       
@@ -847,13 +848,13 @@
             <div class="form-group">
               <label>When do you want to travel?</label>
               <div class="travel-timing-inputs">
-                <select id="travelYear" class="timing-select">
+                <select id="travelYear" class="timing-select" aria-label="Travel year">
                   <option value="" disabled selected>Year</option>
                   <option value="2026">2026</option>
                   <option value="2027">2027</option>
                   <option value="2028">2028</option>
                 </select>
-                <select id="travelMonth" class="timing-select">
+                <select id="travelMonth" class="timing-select" aria-label="Travel month">
                   <option value="" disabled selected>Month</option>
                   <option value="January">January</option>
                   <option value="February">February</option>
@@ -868,7 +869,7 @@
                   <option value="November">November</option>
                   <option value="December">December</option>
                 </select>
-                <select id="travelDuration" class="timing-select">
+                <select id="travelDuration" class="timing-select" aria-label="Trip duration">
                   <option value="" disabled selected>For How long</option>
                   <option value="3-5 Days">3-5 Days</option>
                   <option value="7-10 Days">7-10 Days</option>
@@ -953,7 +954,7 @@
   </dialog>
 
   <!-- DEDICATED MULTI-STEP ACCOMMODATION BOOKING FLOW MODAL -->
-  <dialog class="concierge-modal" data-lenis-prevent id="accomBookingModal">
+  <dialog class="concierge-modal" data-lenis-prevent id="accomBookingModal" aria-labelledby="accomModalTitle">
     <div class="modal-content-wrapper">
       <button type="button" class="modal-close" id="closeAccomModalBtn" aria-label="Close modal">&times;</button>
       

@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <audio id="bgMusic" loop preload="none">
     <source src="assets/background-music/masai-mara-v2-mastered-by-john-elleson-hartley.mp3" type="audio/mpeg">
   </audio>
@@ -32,7 +33,7 @@
         <span class="logo-mark-text" style="display: none;"><span class="logo-accent">Ivory</span> Horizons</span>
       </a>
 
-      <nav class="main-nav" aria-label="Main Navigation">
+      <nav class="main-nav" id="mainNav" aria-label="Main Navigation">
         <ul class="nav-list">
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="index.html#destinations" class="nav-link">Destinations</a></li>
@@ -47,7 +48,7 @@
 
       <div class="header-actions">
         <button type="button" class="btn btn-header-cta concierge-trigger">Plan My Trip</button>
-        <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mainNav">
           <span></span>
           <span></span>
         </button>
@@ -55,7 +56,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class="section section-hero-mini">
       <div class="container text-center">
         <span class="section-badge">Travel Journal</span>
@@ -94,7 +95,7 @@
           <div class="footer-contact-direct">
             <span class="contact-label">Contact Ivory Horizons at:</span>
             <a href="mailto:hello@ivoryhorizons.com" class="contact-email-link">hello@ivoryhorizons.com <span class="arrow-icon">↗</span></a>
-            <span class="contact-phone-item">Phone / WhatsApp: <a href="https://wa.me/254740199975" target="_blank" rel="noopener">+254 (0) 740 199 975</a></span>
+            <span class="contact-phone-item">Phone / WhatsApp: <a href="https://wa.me/254740199975" target="_blank" rel="noopener">+254 740 199 975</a></span>
           </div>
 
           <div class="footer-nav-menu">
@@ -104,7 +105,7 @@
             <a href="accommodation.html">Accommodation</a>
             <a href="blog.html">Blog Journal</a>
             <a href="index.html#about">About Us</a>
-            <a href="index.html#contact">Private Offices</a>
+            <a href="index.html#contact">Contact</a>
           </div>
         </div>
 
@@ -114,7 +115,7 @@
 
         <div class="footer-card-bottom">
           <div class="footer-copyright-text">
-            © 2026 Ivory Horizons Luxury Concierge. All Rights Reserved.
+            © 2026 Ivory Horizons Tours. All Rights Reserved.
           </div>
           <div class="footer-social-links">
             <a href="https://wa.me/254740199975" target="_blank" rel="noopener" class="footer-social-btn">WhatsApp Concierge</a>
@@ -126,7 +127,7 @@
   </div>
 
   <!-- CONCIERGE MODAL / STEP-BY-STEP JOURNEY PLANNER -->
-  <dialog class="concierge-modal" data-lenis-prevent id="conciergeModal">
+  <dialog class="concierge-modal" data-lenis-prevent id="conciergeModal" aria-labelledby="modalTitle">
     <div class="modal-content-wrapper">
       <button type="button" class="modal-close" id="closeConciergeBtn" aria-label="Close modal">&times;</button>
       
@@ -316,13 +317,13 @@
             <div class="form-group">
               <label>When do you want to travel?</label>
               <div class="travel-timing-inputs">
-                <select id="travelYear" class="timing-select">
+                <select id="travelYear" class="timing-select" aria-label="Travel year">
                   <option value="" disabled selected>Year</option>
                   <option value="2026">2026</option>
                   <option value="2027">2027</option>
                   <option value="2028">2028</option>
                 </select>
-                <select id="travelMonth" class="timing-select">
+                <select id="travelMonth" class="timing-select" aria-label="Travel month">
                   <option value="" disabled selected>Month</option>
                   <option value="January">January</option>
                   <option value="February">February</option>
@@ -337,7 +338,7 @@
                   <option value="November">November</option>
                   <option value="December">December</option>
                 </select>
-                <select id="travelDuration" class="timing-select">
+                <select id="travelDuration" class="timing-select" aria-label="Trip duration">
                   <option value="" disabled selected>For How long</option>
                   <option value="3-5 Days">3-5 Days</option>
                   <option value="7-10 Days">7-10 Days</option>
@@ -422,7 +423,7 @@
   </dialog>
 
   <!-- DEDICATED MULTI-STEP ACCOMMODATION BOOKING FLOW MODAL -->
-  <dialog class="concierge-modal" data-lenis-prevent id="accomBookingModal">
+  <dialog class="concierge-modal" data-lenis-prevent id="accomBookingModal" aria-labelledby="accomModalTitle">
     <div class="modal-content-wrapper">
       <button type="button" class="modal-close" id="closeAccomModalBtn" aria-label="Close modal">&times;</button>
       

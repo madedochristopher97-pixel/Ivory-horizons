@@ -100,13 +100,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Same-page anchors (#section and index.html#section when already on the home page)
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a[href*="#"]');
-    if (!link || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    if (!link || link.classList.contains('skip-link') || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
     const url = new URL(link.getAttribute('href'), window.location.href);
     if (!url.hash || url.hash === '#' || url.pathname.replace(/\/$/, '/index.html') !== window.location.pathname.replace(/\/$/, '/index.html')) return;
     const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
     if (!target) return;
     e.preventDefault();
     if (mainNav) mainNav.classList.remove('active');
+    if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
     scrollToAnchor(target);
     history.pushState(null, '', url.hash);
   });
@@ -139,7 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Mobile Navigation Toggle
   if (mobileToggle && mainNav) {
     mobileToggle.addEventListener('click', () => {
-      mainNav.classList.toggle('active');
+      const isOpen = mainNav.classList.toggle('active');
+      mobileToggle.setAttribute('aria-expanded', String(isOpen));
     });
   }
 
@@ -179,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Optimised photos follow name.webp (canonical width), name-640.webp and name-1920.webp.
   // Entries are [width, height, ...extra variant widths] for the canonical file.
   // ----------------------------------------------------
-  const IMG_MANIFEST = {"assets/images/accommodation-imgs/angama-mara.webp":[1024,682,640],"assets/images/accommodation-imgs/four-seasons-safari-lodge-serengeti.webp":[1024,718,640],"assets/images/accommodation-imgs/giraffe-manor.webp":[1024,1536,640,1920],"assets/images/accommodation-imgs/kempinski-hotel-gold-coast-city4k.webp":[1024,682,640,1920],"assets/images/accommodation-imgs/ngorongoro-crater-lodge-2.webp":[1024,646,640],"assets/images/accommodation-imgs/one-and-only-gorillas-nest.webp":[1024,683,640,1920],"assets/images/accommodation-imgs/raffles-hotel-singapore.webp":[1024,1365,640,1920],"assets/images/accommodation-imgs/royal-palm-beachcomber-luxury.webp":[1024,767,640],"assets/images/accommodation-imgs/sanctuary-gorilla-forest-camp.webp":[678,452],"assets/images/accommodation-imgs/sofitel-legend-old-cataract.webp":[387,516],"assets/images/accommodation-imgs/the-datai-langkawi.webp":[1024,683,640],"assets/images/accommodation-imgs/the-residence-zanzibar.webp":[900,500,640],"assets/images/adventure-experience.webp":[1024,1536,640],"assets/images/beach-escape.webp":[1024,681,640],"assets/images/curated-modalities/anniversaries.webp":[1024,683,640,1920],"assets/images/curated-modalities/city-escapes.webp":[1024,683,640,1920],"assets/images/curated-modalities/cultural-discoveries.webp":[1024,683,640,1920],"assets/images/curated-modalities/family-adventures.webp":[1024,682,640,1920],"assets/images/curated-modalities/honeymoon-journeys.webp":[1024,683,640,1920],"assets/images/curated-modalities/safari-adventure.webp":[1024,683,640,1920],"assets/images/curated-modalities/wildlife-experiences.webp":[1024,685,640,1920],"assets/images/dest-egypt.webp":[800,533,640],"assets/images/dest-ghana.webp":[800,533,640],"assets/images/dest-kenya.webp":[800,535,640],"assets/images/dest-malaysia.webp":[800,538,640],"assets/images/dest-mauritius.webp":[800,533,640],"assets/images/dest-rwanda.webp":[800,1200,640],"assets/images/dest-singapore.webp":[800,617,640],"assets/images/dest-tanzania.webp":[800,601,640],"assets/images/dest-zanzibar.webp":[800,1199,640],"assets/images/family-adventure.webp":[1024,683,640],"assets/images/founder-story.webp":[1024,809,640],"assets/images/handpicked-lands/accra-ghana.webp":[1024,683,640,1920],"assets/images/handpicked-lands/bali.webp":[1024,683,640,1920],"assets/images/handpicked-lands/rwanda.webp":[640,480],"assets/images/handpicked-lands/tanzania.webp":[1024,683,640,1920],"assets/images/handpicked-lands/turkey.webp":[1024,683,640,1920],"assets/images/handpicked-lands/uganda.webp":[1024,1536,640,1920],"assets/images/hero-inspo-silhouette.webp":[1024,1024,640],"assets/images/hero-sunset.webp":[1024,685,640,1920],"assets/images/honeymoon-journey.webp":[1024,683,640],"assets/images/ivory-dark-no-bg.png":[645,298],"assets/images/ivory-light-no-bg.png":[645,298],"assets/images/journey-gorilla.webp":[1024,1536,640],"assets/images/journey-kenya.webp":[1024,684,640],"assets/images/journey-migration.webp":[1024,770,640],"assets/images/luxury-retreat.webp":[1024,683,640],"assets/images/safari-adventure.webp":[1024,684,640],"assets/images/signature-tours-imgs/gorilla-kingdom.webp":[1024,683,640,1920],"assets/images/signature-tours-imgs/great-migration-safari.webp":[1024,683,640,1920],"assets/images/where-passion-meets-horizon.webp":[1024,595,640,1920],"assets/images/wildlife-experience.webp":[1024,692,640]};
+  const IMG_MANIFEST = {"assets/images/accommodation-imgs/angama-mara.webp":[1024,682,640],"assets/images/accommodation-imgs/four-seasons-safari-lodge-serengeti.webp":[1024,718,640],"assets/images/accommodation-imgs/giraffe-manor.webp":[1024,1536,640,1920],"assets/images/accommodation-imgs/kempinski-hotel-gold-coast-city4k.webp":[1024,682,640,1920],"assets/images/accommodation-imgs/ngorongoro-crater-lodge-2.webp":[1024,646,640],"assets/images/accommodation-imgs/one-and-only-gorillas-nest.webp":[1024,683,640,1920],"assets/images/accommodation-imgs/raffles-hotel-singapore.webp":[1024,1365,640,1920],"assets/images/accommodation-imgs/royal-palm-beachcomber-luxury.webp":[1024,767,640],"assets/images/accommodation-imgs/sanctuary-gorilla-forest-camp.webp":[678,452],"assets/images/accommodation-imgs/sofitel-legend-old-cataract.webp":[387,516],"assets/images/accommodation-imgs/the-datai-langkawi.webp":[1024,683,640],"assets/images/accommodation-imgs/the-residence-zanzibar.webp":[900,500,640],"assets/images/adventure-experience.webp":[1024,1536,640],"assets/images/beach-escape.webp":[1024,681,640],"assets/images/curated-modalities/anniversaries.webp":[1024,683,640,1920],"assets/images/curated-modalities/city-escapes.webp":[1024,683,640,1920],"assets/images/curated-modalities/cultural-discoveries.webp":[1024,683,640,1920],"assets/images/curated-modalities/family-adventures.webp":[1024,682,640,1920],"assets/images/curated-modalities/honeymoon-journeys.webp":[1024,683,640,1920],"assets/images/curated-modalities/safari-adventure.webp":[1024,683,640,1920],"assets/images/curated-modalities/wildlife-experiences.webp":[1024,685,640,1920],"assets/images/dest-egypt.webp":[800,533,640],"assets/images/dest-ghana.webp":[800,533,640],"assets/images/dest-malaysia.webp":[800,538,640],"assets/images/dest-mauritius.webp":[800,533,640],"assets/images/dest-rwanda.webp":[800,1200,640],"assets/images/dest-singapore.webp":[800,617,640],"assets/images/dest-tanzania.webp":[800,601,640],"assets/images/dest-zanzibar.webp":[800,1199,640],"assets/images/family-adventure.webp":[1024,683,640],"assets/images/founder-story.webp":[1024,809,640],"assets/images/handpicked-lands/accra-ghana.webp":[1024,683,640,1920],"assets/images/handpicked-lands/bali.webp":[1024,683,640,1920],"assets/images/handpicked-lands/rwanda.webp":[640,480],"assets/images/handpicked-lands/tanzania.webp":[1024,683,640,1920],"assets/images/handpicked-lands/turkey.webp":[1024,683,640,1920],"assets/images/handpicked-lands/uganda.webp":[1024,1536,640,1920],"assets/images/hero-inspo-silhouette.webp":[1024,1024,640],"assets/images/honeymoon-journey.webp":[1024,683,640],"assets/images/ivory-dark-no-bg.png":[645,298],"assets/images/ivory-light-no-bg.png":[645,298],"assets/images/journey-gorilla.webp":[1024,1536,640],"assets/images/journey-migration.webp":[1024,770,640],"assets/images/luxury-retreat.webp":[1024,683,640],"assets/images/signature-tours-imgs/gorilla-kingdom.webp":[1024,683,640,1920],"assets/images/signature-tours-imgs/great-migration-safari.webp":[1024,683,640,1920],"assets/images/where-passion-meets-horizon.webp":[1024,595,640,1920],"assets/images/wildlife-experience.webp":[1024,692,640]};
 
   function imgAttrs(src, sizes) {
     const e = IMG_MANIFEST[src];
@@ -204,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const destinationData = {
     "Kenya": {
       name: "Kenya",
-      image: "assets/images/dest-kenya.webp",
+      image: "assets/images/journey-migration.webp",
       fallback: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80",
       overview: "Track mountain gorillas or witness millions of wildebeest across the Maasai Mara. Kenya offers the quintessential African safari alongside pristine Indian Ocean coastlines.",
       coreExperiences: ["Wildlife Safaris", "Primate Encounters", "Indian Ocean Beaches", "Maasai Culture"],
@@ -213,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
       bestFor: "Families, Groups, Honeymooners",
       gallery: [
         "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=600&q=80",
-        "assets/images/journey-kenya.webp",
+        "assets/images/journey-migration.webp",
         "assets/images/curated-modalities/safari-adventure.webp"
       ]
     },
@@ -385,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
       duration: "3–5 Days",
       bestFor: "Families • Couples • First-Time Safari Travelers",
       tags: ["Safari", "Wildlife", "Luxury"],
-      image: "assets/images/journey-kenya.webp",
+      image: "assets/images/curated-modalities/safari-adventure.webp",
       fallback: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80",
       description: "An intimate immersion into the legendary Maasai Mara. Rise with dawn game drives, sip sundowners under acacia canopies, and sleep under luxury canvas.",
       bestSeason: "July – October (Great Migration) or Year-Round Wildlife",
@@ -411,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
           day: "Day 3", 
           title: "Maasai Cultural Immersion & Bush Dinner", 
           details: "Visit an authentic Maasai Manyatta village. Learn ancient tracking techniques and warrior customs. Dine under African stars surrounded by traditional fireside singing.",
-          img: "assets/images/journey-kenya.webp"
+          img: "assets/images/journey-migration.webp"
         },
         { 
           day: "Days 4–5", 
@@ -544,7 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
           day: "Days 1–5", 
           title: "Maasai Mara Wilderness Safari", 
           details: "5 days of private game drives, sundowners, and luxury tented stay in the Mara.",
-          img: "assets/images/journey-kenya.webp"
+          img: "assets/images/curated-modalities/safari-adventure.webp"
         },
         { 
           day: "Days 6–10", 
@@ -572,7 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
       price: "$1,850 USD / night",
       amenities: ["Private Airfield", "Infinity Pool", "Personal Butler", "Game Drives"],
       image: "assets/images/accommodation-imgs/angama-mara.webp",
-      fallback: "assets/images/journey-kenya.webp",
+      fallback: "assets/images/journey-migration.webp",
       description: "Perched high on the rim of the Great Rift Valley overlooking the Maasai Mara, offering breathtaking views and unmatched luxury."
     },
     {
@@ -584,7 +586,7 @@ document.addEventListener('DOMContentLoaded', () => {
       price: "$1,100 USD / night",
       amenities: ["Giraffe Breakfast", "Private Gardens", "Fine Dining", "Spa Services"],
       image: "assets/images/accommodation-imgs/giraffe-manor.webp",
-      fallback: "assets/images/safari-adventure.webp",
+      fallback: "assets/images/accommodation-imgs/angama-mara.webp",
       description: "An iconic boutique hotel set in 12 acres of private land within 140 acres of indigenous forest, home to resident Rothschild's giraffes."
     },
     {
@@ -726,7 +728,7 @@ document.addEventListener('DOMContentLoaded', () => {
       category: "Safari Tips",
       readTime: "5 min read",
       date: "October 2026",
-      image: "assets/images/journey-kenya.webp",
+      image: "assets/images/handpicked-lands/tanzania.webp",
       excerpt: "Skip long road transfers and glide over Africa's iconic savannahs directly onto private airstrips near exclusive wilderness camps.",
       content: "Private fly-in safaris transform African travel by turning transit into breathtaking aerial sight-seeing. Charter flights connect remote conservancies in Kenya and Tanzania effortlessly."
     },
@@ -1430,7 +1432,7 @@ I look forward to hearing from you.`;
         <div class="accom-body">
           <div class="accom-header">
             <span class="star-rating">⭐ ${item.rating}</span>
-            <h3 class="accom-title">${item.name}</h3>
+            <h2 class="accom-title">${item.name}</h2>
             <span class="accom-location">📍 ${item.location}</span>
           </div>
           <p class="accom-desc">${item.description}</p>
@@ -1479,7 +1481,7 @@ I look forward to hearing from you.`;
         </div>
         <div class="blog-body">
           <span class="blog-meta">${article.date} • ${article.readTime}</span>
-          <h3 class="blog-title">${article.title}</h3>
+          <h2 class="blog-title">${article.title}</h2>
           <p class="blog-excerpt">${article.excerpt}</p>
           ${article.url
             ? `<a href="${article.url}" class="btn-text read-article-btn">Read Guide &rarr;</a>`
