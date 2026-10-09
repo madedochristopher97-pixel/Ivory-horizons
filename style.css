@@ -2207,6 +2207,13 @@ img {
   margin-top: auto;
 }
 
+.read-article-btn.is-coming-soon {
+  cursor: default;
+  opacity: 0.6;
+  font-style: italic;
+  pointer-events: none;
+}
+
 /* ==========================================================================
    ENHANCED BOOKING FLOW & MODAL STYLES (IMAGE 5 PILL SELECTIONS & BACK BTN)
    ========================================================================== */

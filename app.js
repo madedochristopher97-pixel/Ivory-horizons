@@ -1375,7 +1375,7 @@ I look forward to hearing from you.`;
           <p class="blog-excerpt">${article.excerpt}</p>
           ${article.url
             ? `<a href="${article.url}" class="btn-text read-article-btn">Read Guide &rarr;</a>`
-            : `<button type="button" class="btn-text read-article-btn" data-article-id="${article.id}">Read Guide &rarr;</button>`}
+            : `<span class="read-article-btn is-coming-soon" aria-disabled="true">Guide coming soon</span>`}
         </div>
       `;
       blogGrid.appendChild(card);
