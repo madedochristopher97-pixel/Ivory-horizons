@@ -44,8 +44,8 @@
   --shadow-deep: 0 24px 60px rgba(26, 15, 10, 0.35);
 
   /* Transitions */
-  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-fast: all 0.2s ease-out;
+  --transition-smooth: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: color 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
 
 /* Reset & Base Setup */
@@ -325,14 +325,13 @@ img {
   width: 100%;
   z-index: 1000;
   padding: var(--space-4) 0;
-  transition: var(--transition-smooth);
+  transition: var(--transition-smooth), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   background: transparent;
 }
 
 .site-header.scrolled {
   position: fixed;
   background-color: rgba(253, 251, 247, 0.95);
-  backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px rgba(37, 23, 15, 0.06);
   padding: var(--space-2) 0;
   border-bottom: 1px solid var(--brown-light);
@@ -434,7 +433,8 @@ img {
   object-position: center right;
 }
 
-.hero-gif-bg {
+.hero-video-bg {
+  transition: opacity 0.5s ease;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1657,6 +1657,7 @@ img {
 
 /* Accommodation Section & Cards */
 .accommodation-grid {
+  min-height: 100vh; /* reserve space until JS renders cards */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--space-4);
@@ -2135,6 +2136,7 @@ img {
 
 /* Blog Page Styling (Requirement 12) */
 .blog-grid {
+  min-height: 100vh; /* reserve space until JS renders cards (prevents footer layout shift) */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--space-6);
@@ -2230,7 +2232,7 @@ img {
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition-fast);
 }
 
 #prevStepBtn:hover {
@@ -2270,7 +2272,7 @@ img {
   color: #5C4D42;
   font-size: 0.88rem;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: var(--transition-fast);
 }
 
 .pill-option input:checked + .pill-box {
@@ -2329,7 +2331,7 @@ img {
   border-radius: var(--radius-sm);
   opacity: 1 !important;
   visibility: visible !important;
-  transition: all 0.2s ease;
+  transition: var(--transition-fast);
   box-shadow: 0 2px 8px rgba(37, 23, 15, 0.18);
 }
 
@@ -2365,7 +2367,7 @@ img {
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition-fast);
 }
 
 #prevAccomStepBtn:hover {
