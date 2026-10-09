@@ -5,32 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ivory Horizons | Luxury Travel Concierge & Bespoke African Safaris</title>
   <meta name="description" content="Ivory Horizons is an ultra-luxury travel concierge specializing in bespoke African safaris, private wilderness expeditions, and high-end retreats tailored to discerning global travelers.">
-  <link rel="icon" type="image/svg+xml" href="assets/Tour Icons/Favicon Set/Ivory 32px.svg">
-  <link rel="icon" type="image/svg+xml" href="assets/Tour Icons/Favicon Set/Ivory 512px.svg" sizes="any">
-  <link rel="apple-touch-icon" href="assets/Tour Icons/Favicon Set/Ivory 180px.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/tour-icons/favicon-set/ivory-32px.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/tour-icons/favicon-set/ivory-512px.svg" sizes="any">
+  <link rel="apple-touch-icon" href="assets/tour-icons/favicon-set/ivory-180px.svg">
   <meta name="apple-mobile-web-app-title" content="Ivory Horizons">
   <link rel="manifest" href="site.webmanifest">
   
+  <link rel="preload" as="image" href="assets/hero/hero-1-poster.webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300&display=swap"></noscript>
   
+  <link rel="stylesheet" href="assets/vendor/lenis/lenis.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="assets/vendor/lenis/lenis.css"></noscript>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <audio id="bgMusic" loop preload="auto">
-    <source src="assets/Background Music/Masai-Mara-v2-mastered-by-John-Elleson-Hartley.mp3" type="audio/mpeg">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <audio id="bgMusic" loop preload="none">
+    <source src="assets/background-music/masai-mara-v2-mastered-by-john-elleson-hartley.mp3" type="audio/mpeg">
   </audio>
 
   <!-- Navigation Header -->
   <header class="site-header" id="siteHeader">
     <div class="header-container">
       <a href="index.html" class="brand-logo" aria-label="Ivory Horizons Home">
-        <img src="assets/images/Ivory Dark No Bg.png" alt="Ivory Horizons Luxury Concierge Logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <img width="645" height="298" src="assets/images/ivory-dark-no-bg.png" alt="Ivory Horizons Tours logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <span class="logo-mark-text" style="display: none;"><span class="logo-accent">Ivory</span> Horizons</span>
       </a>
 
-      <nav class="main-nav" aria-label="Main Navigation">
+      <nav class="main-nav" id="mainNav" aria-label="Main Navigation">
         <ul class="nav-list">
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="#destinations" class="nav-link">Destinations</a></li>
@@ -45,7 +50,7 @@
 
       <div class="header-actions">
         <button type="button" class="btn btn-header-cta concierge-trigger">Plan My Trip</button>
-        <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mainNav">
           <span></span>
           <span></span>
         </button>
@@ -53,11 +58,13 @@
     </div>
   </header>
 
-  <main>
-    <!-- Section 1: Hero Section (Reverted GIF to assets/Hero/Hero section.gif) -->
+  <main id="main-content" tabindex="-1">
+    <!-- Section 1: Hero Section (looping muted video playlist, poster shown until playback / for reduced motion) -->
     <section class="hero-inspo-layout" id="home">
       <div class="hero-bg-wrapper">
-        <img src="assets/Hero/Hero section.gif" alt="African wilderness safari landscape" class="hero-gif-bg" onerror="this.src='assets/images/Hero 2.gif';">
+        <video class="hero-video-bg" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="assets/hero/hero-1-poster.webp" width="800" height="450" aria-hidden="true" tabindex="-1">
+          <source src="assets/hero/hero-1.mp4" type="video/mp4">
+        </video>
         <div class="hero-overlay"></div>
       </div>
 
@@ -95,7 +102,7 @@
           <!-- Modality 1: Safari Adventure -->
           <article class="experience-card">
             <div class="card-image-wrap">
-              <img src="assets/images/Curated Modalities/Safari Adventure.jpg" alt="Safari Adventure in East Africa" loading="lazy" onerror="this.src='assets/images/safari_adventure.jpg';">
+              <img width="1024" height="683" decoding="async" src="assets/images/curated-modalities/safari-adventure.webp" srcset="assets/images/curated-modalities/safari-adventure-640.webp 640w, assets/images/curated-modalities/safari-adventure.webp 1024w, assets/images/curated-modalities/safari-adventure-1920.webp 1920w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 400px" alt="Safari Adventure in East Africa" loading="lazy" onerror="this.src='assets/images/journey-migration.webp';">
               <div class="card-overlay"></div>
             </div>
             <div class="card-content">
@@ -109,7 +116,7 @@
           <!-- Modality 2: Honeymoon Journeys -->
           <article class="experience-card">
             <div class="card-image-wrap">
-              <img src="assets/images/Curated Modalities/Honeymoon Journeys.jpg" alt="Honeymoon Journeys in Zanzibar and Mauritius" loading="lazy" onerror="this.src='assets/images/honeymoon_journeys.jpg';">
+              <img width="1024" height="683" decoding="async" src="assets/images/curated-modalities/honeymoon-journeys.webp" srcset="assets/images/curated-modalities/honeymoon-journeys-640.webp 640w, assets/images/curated-modalities/honeymoon-journeys.webp 1024w, assets/images/curated-modalities/honeymoon-journeys-1920.webp 1920w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 400px" alt="Honeymoon Journeys in Zanzibar and Mauritius" loading="lazy" onerror="this.src='assets/images/honeymoon-journey.webp';">
               <div class="card-overlay"></div>
             </div>
             <div class="card-content">
@@ -123,7 +130,7 @@
           <!-- Modality 3: Cultural Discoveries -->
           <article class="experience-card">
             <div class="card-image-wrap">
-              <img src="assets/images/Curated Modalities/Cultural Discoveries.jpg" alt="Cultural Discoveries in Ghana and Egypt" loading="lazy" onerror="this.src='assets/images/cultural_discoveries.jpg';">
+              <img width="1024" height="683" decoding="async" src="assets/images/curated-modalities/cultural-discoveries.webp" srcset="assets/images/curated-modalities/cultural-discoveries-640.webp 640w, assets/images/curated-modalities/cultural-discoveries.webp 1024w, assets/images/curated-modalities/cultural-discoveries-1920.webp 1920w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 400px" alt="Cultural Discoveries in Ghana and Egypt" loading="lazy" onerror="this.src='assets/images/founder-story.webp';">
               <div class="card-overlay"></div>
             </div>
             <div class="card-content">
@@ -137,7 +144,7 @@
           <!-- Modality 4: Wildlife Encounters -->
           <article class="experience-card">
             <div class="card-image-wrap">
-              <img src="assets/images/Curated Modalities/Wildlife experiences.jpg" alt="Wildlife experiences mountain gorilla trekking" loading="lazy" onerror="this.src='assets/images/wildlife_experience.jpg';">
+              <img width="1024" height="685" decoding="async" src="assets/images/curated-modalities/wildlife-experiences.webp" srcset="assets/images/curated-modalities/wildlife-experiences-640.webp 640w, assets/images/curated-modalities/wildlife-experiences.webp 1024w, assets/images/curated-modalities/wildlife-experiences-1920.webp 1920w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 400px" alt="Wildlife experiences mountain gorilla trekking" loading="lazy" onerror="this.src='assets/images/wildlife-experience.webp';">
               <div class="card-overlay"></div>
             </div>
             <div class="card-content">
@@ -151,7 +158,7 @@
           <!-- Modality 5: City Escapes -->
           <article class="experience-card">
             <div class="card-image-wrap">
-              <img src="assets/images/Curated Modalities/City Escapes.jpg" alt="City Escapes urban luxury travel" loading="lazy" onerror="this.src='assets/images/beach_escape.jpg';">
+              <img width="1024" height="683" decoding="async" src="assets/images/curated-modalities/city-escapes.webp" srcset="assets/images/curated-modalities/city-escapes-640.webp 640w, assets/images/curated-modalities/city-escapes.webp 1024w, assets/images/curated-modalities/city-escapes-1920.webp 1920w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 400px" alt="City Escapes urban luxury travel" loading="lazy" onerror="this.src='assets/images/beach-escape.webp';">
               <div class="card-overlay"></div>
             </div>
             <div class="card-content">
@@ -165,7 +172,7 @@
           <!-- Modality 6: Anniversaries -->
           <article class="experience-card">
             <div class="card-image-wrap">
-              <img src="assets/images/Curated Modalities/Anniversaries.jpg" alt="Anniversaries and milestone celebrations" loading="lazy" onerror="this.src='assets/images/luxury_retreat.jpg';">
+              <img width="1024" height="683" decoding="async" src="assets/images/curated-modalities/anniversaries.webp" srcset="assets/images/curated-modalities/anniversaries-640.webp 640w, assets/images/curated-modalities/anniversaries.webp 1024w, assets/images/curated-modalities/anniversaries-1920.webp 1920w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 400px" alt="Anniversaries and milestone celebrations" loading="lazy" onerror="this.src='assets/images/luxury-retreat.webp';">
               <div class="card-overlay"></div>
             </div>
             <div class="card-content">
@@ -196,7 +203,7 @@
           <!-- Destination 1: Kenya -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/dest_kenya.jpg" alt="Kenya Maasai Mara wildlife" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80';">
+              <img decoding="async" width="1024" height="770" src="assets/images/journey-migration.webp" srcset="assets/images/journey-migration-640.webp 640w, assets/images/journey-migration.webp 1024w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Kenya Maasai Mara wildlife" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80';">
               <span class="dest-badge">East Africa</span>
             </div>
             <div class="dest-body">
@@ -212,7 +219,7 @@
           <!-- Destination 2: Tanzania -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/Handpicked Lands/Tanzania.jpg" alt="Tanzania Serengeti savannah" loading="lazy" onerror="this.src='assets/images/dest_tanzania.jpg';">
+              <img width="1024" height="683" decoding="async" src="assets/images/handpicked-lands/tanzania.webp" srcset="assets/images/handpicked-lands/tanzania-640.webp 640w, assets/images/handpicked-lands/tanzania.webp 1024w, assets/images/handpicked-lands/tanzania-1920.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Tanzania Serengeti savannah" loading="lazy" onerror="this.src='assets/images/dest-tanzania.webp';">
               <span class="dest-badge">East Africa</span>
             </div>
             <div class="dest-body">
@@ -228,7 +235,7 @@
           <!-- Destination 3: Uganda -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/Handpicked Lands/Uganda.jpg" alt="Uganda Bwindi mountain gorilla sanctuary" loading="lazy" onerror="this.src='assets/images/dest_uganda.jpg';">
+              <img width="1024" height="1536" decoding="async" src="assets/images/handpicked-lands/uganda.webp" srcset="assets/images/handpicked-lands/uganda-640.webp 640w, assets/images/handpicked-lands/uganda.webp 1024w, assets/images/handpicked-lands/uganda-1920.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Uganda Bwindi mountain gorilla sanctuary" loading="lazy" onerror="this.src='assets/images/dest-rwanda.webp';">
               <span class="dest-badge">Central/East Africa</span>
             </div>
             <div class="dest-body">
@@ -244,7 +251,7 @@
           <!-- Destination 4: Zanzibar -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/dest_zanzibar.jpg" alt="Zanzibar turquoise ocean and dhow" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80';">
+              <img width="800" height="1199" decoding="async" src="assets/images/dest-zanzibar.webp" srcset="assets/images/dest-zanzibar-640.webp 640w, assets/images/dest-zanzibar.webp 800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Zanzibar turquoise ocean and dhow" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80';">
               <span class="dest-badge">Indian Ocean</span>
             </div>
             <div class="dest-body">
@@ -260,7 +267,7 @@
           <!-- Destination 5: Rwanda -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/Handpicked Lands/Rwanda.jfif" alt="Rwanda Volcanoes luxury eco-lodge" loading="lazy" onerror="this.src='assets/images/dest_rwanda.jpg';">
+              <img width="640" height="480" decoding="async" src="assets/images/handpicked-lands/rwanda.webp" alt="Rwanda Volcanoes luxury eco-lodge" loading="lazy" onerror="this.src='assets/images/dest-rwanda.webp';">
               <span class="dest-badge">East Africa</span>
             </div>
             <div class="dest-body">
@@ -276,7 +283,7 @@
           <!-- Destination 6: Ghana -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/Handpicked Lands/Accra Ghana.jpg" alt="Ghana coastal cultural heritage" loading="lazy" onerror="this.src='assets/images/dest_ghana.jpg';">
+              <img width="1024" height="683" decoding="async" src="assets/images/handpicked-lands/accra-ghana.webp" srcset="assets/images/handpicked-lands/accra-ghana-640.webp 640w, assets/images/handpicked-lands/accra-ghana.webp 1024w, assets/images/handpicked-lands/accra-ghana-1920.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Ghana coastal cultural heritage" loading="lazy" onerror="this.src='assets/images/dest-ghana.webp';">
               <span class="dest-badge">West Africa</span>
             </div>
             <div class="dest-body">
@@ -292,7 +299,7 @@
           <!-- Destination 7: Mauritius -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/dest_mauritius.jpg" alt="Mauritius luxury island resort" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80';">
+              <img width="800" height="533" decoding="async" src="assets/images/dest-mauritius.webp" srcset="assets/images/dest-mauritius-640.webp 640w, assets/images/dest-mauritius.webp 800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Mauritius luxury island resort" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80';">
               <span class="dest-badge">Indian Ocean</span>
             </div>
             <div class="dest-body">
@@ -308,7 +315,7 @@
           <!-- Destination 8: Egypt -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/dest_egypt.jpg" alt="Egypt Nile River and pharaonic heritage" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80';">
+              <img width="800" height="533" decoding="async" src="assets/images/dest-egypt.webp" srcset="assets/images/dest-egypt-640.webp 640w, assets/images/dest-egypt.webp 800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Egypt Nile River and pharaonic heritage" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80';">
               <span class="dest-badge">North Africa</span>
             </div>
             <div class="dest-body">
@@ -324,7 +331,7 @@
           <!-- Destination 9: Malaysia -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/dest_malaysia.jpg" alt="Malaysia tropical rainforest and islands" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80';">
+              <img width="800" height="538" decoding="async" src="assets/images/dest-malaysia.webp" srcset="assets/images/dest-malaysia-640.webp 640w, assets/images/dest-malaysia.webp 800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Malaysia tropical rainforest and islands" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80';">
               <span class="dest-badge">Exotic Horizons</span>
             </div>
             <div class="dest-body">
@@ -340,7 +347,7 @@
           <!-- Destination 10: Singapore -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/dest_singapore.jpg" alt="Singapore garden city architecture" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80';">
+              <img width="800" height="617" decoding="async" src="assets/images/dest-singapore.webp" srcset="assets/images/dest-singapore-640.webp 640w, assets/images/dest-singapore.webp 800w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Singapore garden city architecture" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80';">
               <span class="dest-badge">Exotic Horizons</span>
             </div>
             <div class="dest-body">
@@ -356,7 +363,7 @@
           <!-- Destination 11: Turkey -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/Handpicked Lands/Turkey.jpg" alt="Turkey Cappadocia fairy chimneys and Bosphorus" loading="lazy" onerror="this.src='assets/images/Handpicked Lands/Turkey (1).jpg';">
+              <img width="1024" height="683" decoding="async" src="assets/images/handpicked-lands/turkey.webp" srcset="assets/images/handpicked-lands/turkey-640.webp 640w, assets/images/handpicked-lands/turkey.webp 1024w, assets/images/handpicked-lands/turkey-1920.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Turkey Cappadocia fairy chimneys and Bosphorus" loading="lazy" onerror="this.src='assets/images/handpicked-lands/turkey.webp';">
               <span class="dest-badge">Exotic Horizons</span>
             </div>
             <div class="dest-body">
@@ -372,7 +379,7 @@
           <!-- Destination 12: Bali -->
           <article class="destination-card">
             <div class="dest-image-box">
-              <img src="assets/images/Handpicked Lands/Bali.jpg" alt="Bali lush rice terraces and coastal temples" loading="lazy" onerror="this.src='assets/images/dest_singapore.jpg';">
+              <img width="1024" height="683" decoding="async" src="assets/images/handpicked-lands/bali.webp" srcset="assets/images/handpicked-lands/bali-640.webp 640w, assets/images/handpicked-lands/bali.webp 1024w, assets/images/handpicked-lands/bali-1920.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Bali lush rice terraces and coastal temples" loading="lazy" onerror="this.src='assets/images/dest-singapore.webp';">
               <span class="dest-badge">Exotic Horizons</span>
             </div>
             <div class="dest-body">
@@ -403,7 +410,7 @@
           <!-- Journey 1: Kenya Classic Safari -->
           <article class="journey-featured-card" data-category="Safari">
             <div class="journey-img-wrap">
-              <img src="assets/images/journey_kenya.jpg" alt="Kenya Classic Safari" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80';">
+              <img decoding="async" width="1024" height="683" src="assets/images/curated-modalities/safari-adventure.webp" srcset="assets/images/curated-modalities/safari-adventure-640.webp 640w, assets/images/curated-modalities/safari-adventure.webp 1024w, assets/images/curated-modalities/safari-adventure-1920.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Kenya Classic Safari" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80';">
               <div class="journey-tag-floating">3–5 Days</div>
             </div>
             <div class="journey-info">
@@ -428,7 +435,7 @@
           <!-- Journey 2: Great Migration Safari -->
           <article class="journey-featured-card reverse" data-category="Safari">
             <div class="journey-img-wrap">
-              <img src="assets/images/Signature tours Imgs/Great Migration Safari.jpg" alt="Great Migration Safari" loading="lazy" onerror="this.src='assets/images/journey_migration.jpg';">
+              <img width="1024" height="683" decoding="async" src="assets/images/signature-tours-imgs/great-migration-safari.webp" srcset="assets/images/signature-tours-imgs/great-migration-safari-640.webp 640w, assets/images/signature-tours-imgs/great-migration-safari.webp 1024w, assets/images/signature-tours-imgs/great-migration-safari-1920.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Great Migration Safari" loading="lazy" onerror="this.src='assets/images/journey-migration.webp';">
               <div class="journey-tag-floating">July – October</div>
             </div>
             <div class="journey-info">
@@ -453,7 +460,7 @@
           <!-- Journey 3: Gorilla Kingdom Expedition -->
           <article class="journey-featured-card" data-category="Wildlife">
             <div class="journey-img-wrap">
-              <img src="assets/images/Signature tours Imgs/Gorilla Kingdom.jpg" alt="Gorilla Kingdom Expedition" loading="lazy" onerror="this.src='assets/images/journey_gorilla.jpg';">
+              <img width="1024" height="683" decoding="async" src="assets/images/signature-tours-imgs/gorilla-kingdom.webp" srcset="assets/images/signature-tours-imgs/gorilla-kingdom-640.webp 640w, assets/images/signature-tours-imgs/gorilla-kingdom.webp 1024w, assets/images/signature-tours-imgs/gorilla-kingdom-1920.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Gorilla Kingdom Expedition" loading="lazy" onerror="this.src='assets/images/journey-gorilla.webp';">
               <div class="journey-tag-floating">Rare Encounter</div>
             </div>
             <div class="journey-info">
@@ -478,7 +485,7 @@
           <!-- Journey 4: Bush & Beach Escape -->
           <article class="journey-featured-card reverse" data-category="Beach">
             <div class="journey-img-wrap">
-              <img src="assets/images/journey_bush_beach.jpg" alt="Bush & Beach Escape" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80';">
+              <img width="1024" height="681" decoding="async" src="assets/images/beach-escape.webp" srcset="assets/images/beach-escape-640.webp 640w, assets/images/beach-escape.webp 1024w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Bush & Beach Escape" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80';">
               <div class="journey-tag-floating">10–14 Days</div>
             </div>
             <div class="journey-info">
@@ -517,7 +524,7 @@
         <div class="standard-grid">
           <div class="standard-card">
             <div class="standard-icon-wrap">
-              <img src="assets/Tour Icons/Homepage Crafted Around you Icon.svg" alt="24/7 Dedicated Concierge" class="standard-svg-icon">
+              <img src="assets/tour-icons/homepage-crafted-around-you-icon.svg" alt="24/7 Dedicated Concierge" class="standard-svg-icon">
             </div>
             <h3 class="standard-card-title">24/7 Dedicated Concierge</h3>
             <p class="standard-card-text">
@@ -527,7 +534,7 @@
 
           <div class="standard-card">
             <div class="standard-icon-wrap">
-              <img src="assets/Tour Icons/Home page Every Detail Considered Icon.svg" alt="Private Aviation & Transfers" class="standard-svg-icon">
+              <img src="assets/tour-icons/home-page-every-detail-considered-icon.svg" alt="Private Aviation & Transfers" class="standard-svg-icon">
             </div>
             <h3 class="standard-card-title">Private Aviation & Transfers</h3>
             <p class="standard-card-text">
@@ -537,7 +544,7 @@
 
           <div class="standard-card">
             <div class="standard-icon-wrap">
-              <img src="assets/Tour Icons/Home Global excellence Icon.svg" alt="Conservation Impact" class="standard-svg-icon">
+              <img src="assets/tour-icons/home-global-excellence-icon.svg" alt="Conservation Impact" class="standard-svg-icon">
             </div>
             <h3 class="standard-card-title">Conservation Impact</h3>
             <p class="standard-card-text">
@@ -547,7 +554,7 @@
 
           <div class="standard-card">
             <div class="standard-icon-wrap">
-              <img src="assets/Tour Icons/Accessible Travelling.svg" alt="Accessible Travelling" class="standard-svg-icon">
+              <img src="assets/tour-icons/accessible-travelling.svg" alt="Accessible Travelling" class="standard-svg-icon">
             </div>
             <h3 class="standard-card-title">Accessible Travelling</h3>
             <p class="standard-card-text">
@@ -563,7 +570,7 @@
       <div class="container">
         <div class="story-layout">
           <div class="story-image-wrap">
-            <img src="assets/images/Where Passion meets Horizon .jpg" alt="Ivory Horizons African sunset wilderness horizon" loading="lazy" onerror="this.src='assets/images/dest_tanzania.jpg';">
+            <img width="1024" height="595" decoding="async" src="assets/images/where-passion-meets-horizon.webp" srcset="assets/images/where-passion-meets-horizon-640.webp 640w, assets/images/where-passion-meets-horizon.webp 1024w, assets/images/where-passion-meets-horizon-1920.webp 1920w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Ivory Horizons African sunset wilderness horizon" loading="lazy" onerror="this.src='assets/images/dest-tanzania.webp';">
           </div>
 
           <div class="story-content">
@@ -596,7 +603,7 @@
     <section class="section section-cta">
       <div class="container">
         <div class="final-cta-box text-center">
-          <span class="section-badge badge-dark" style="color: var(--brown-accent);">Your Invitation</span>
+          <span class="section-badge badge-dark" style="color: var(--brown-accent-deep);">Your Invitation</span>
           <h2 class="final-cta-headline">Ready To Discover What Lies Beyond The Horizon?</h2>
           <p class="final-cta-subtext">
             Let our travel specialists design an extraordinary trip tailored exclusively to your vision.
@@ -620,7 +627,7 @@
           <div class="footer-contact-direct">
             <span class="contact-label">Contact Ivory Horizons at:</span>
             <a href="mailto:hello@ivoryhorizons.com" class="contact-email-link">hello@ivoryhorizons.com <span class="arrow-icon">↗</span></a>
-            <span class="contact-phone-item">Phone / WhatsApp: <a href="https://wa.me/254740199975" target="_blank" rel="noopener">+254 (0) 740 199 975</a></span>
+            <span class="contact-phone-item">Phone / WhatsApp: <a href="https://wa.me/254740199975" target="_blank" rel="noopener">+254 740 199 975</a></span>
           </div>
 
           <div class="footer-nav-menu">
@@ -630,7 +637,7 @@
             <a href="accommodation.html">Accommodation</a>
             <a href="blog.html">Blog Journal</a>
             <a href="#about">About Us</a>
-            <a href="#contact">Private Offices</a>
+            <a href="#contact">Contact</a>
           </div>
         </div>
 
@@ -640,7 +647,7 @@
 
         <div class="footer-card-bottom">
           <div class="footer-copyright-text">
-            © 2026 Ivory Horizons Luxury Concierge. All Rights Reserved.
+            © 2026 Ivory Horizons Tours. All Rights Reserved.
           </div>
           <div class="footer-social-links">
             <a href="https://wa.me/254740199975" target="_blank" rel="noopener" class="footer-social-btn">WhatsApp Concierge</a>
@@ -652,7 +659,7 @@
   </div>
 
   <!-- CONCIERGE MODAL / STEP-BY-STEP JOURNEY PLANNER (RESTORED ORIGINAL UI & SVG TOUR ICONS) -->
-  <dialog class="concierge-modal" id="conciergeModal">
+  <dialog class="concierge-modal" data-lenis-prevent id="conciergeModal" aria-labelledby="modalTitle">
     <div class="modal-content-wrapper">
       <button type="button" class="modal-close" id="closeConciergeBtn" aria-label="Close modal">&times;</button>
       
@@ -674,7 +681,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Safari Adventure" checked>
               <span class="card-box">
-                <img src="assets/Tour Icons/Safari Adventure Icon.svg" alt="Safari Adventure" class="option-svg-icon">
+                <img src="assets/tour-icons/safari-adventure-icon.svg" alt="Safari Adventure" class="option-svg-icon">
                 <span class="option-label">Safari Adventure</span>
               </span>
             </label>
@@ -682,7 +689,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Beach Escape">
               <span class="card-box">
-                <img src="assets/Tour Icons/Beach Escape Icon.svg" alt="Beach Escape" class="option-svg-icon">
+                <img src="assets/tour-icons/beach-escape-icon.svg" alt="Beach Escape" class="option-svg-icon">
                 <span class="option-label">Beach Escape</span>
               </span>
             </label>
@@ -690,7 +697,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Honeymoon">
               <span class="card-box">
-                <img src="assets/Tour Icons/Honeymoon Icon.svg" alt="Honeymoon" class="option-svg-icon">
+                <img src="assets/tour-icons/honeymoon-icon.svg" alt="Honeymoon" class="option-svg-icon">
                 <span class="option-label">Honeymoon</span>
               </span>
             </label>
@@ -698,7 +705,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Luxury Retreat">
               <span class="card-box">
-                <img src="assets/Tour Icons/Lucury Retreat Icon.svg" alt="Luxury Retreat" class="option-svg-icon">
+                <img src="assets/tour-icons/luxury-retreat-icon.svg" alt="Luxury Retreat" class="option-svg-icon">
                 <span class="option-label">Luxury Retreat</span>
               </span>
             </label>
@@ -706,7 +713,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Cultural Discoveries">
               <span class="card-box">
-                <img src="assets/Tour Icons/Cultural heritage Icon.svg" alt="Cultural Discoveries" class="option-svg-icon">
+                <img src="assets/tour-icons/cultural-heritage-icon.svg" alt="Cultural Discoveries" class="option-svg-icon">
                 <span class="option-label">Cultural Heritage</span>
               </span>
             </label>
@@ -714,7 +721,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Wildlife Expedition">
               <span class="card-box">
-                <img src="assets/Tour Icons/Adventure Trek Icon.svg" alt="Wildlife Expedition" class="option-svg-icon">
+                <img src="assets/tour-icons/adventure-trek-icon.svg" alt="Wildlife Expedition" class="option-svg-icon">
                 <span class="option-label">Adventure Trek</span>
               </span>
             </label>
@@ -842,13 +849,13 @@
             <div class="form-group">
               <label>When do you want to travel?</label>
               <div class="travel-timing-inputs">
-                <select id="travelYear" class="timing-select">
+                <select id="travelYear" class="timing-select" aria-label="Travel year">
                   <option value="" disabled selected>Year</option>
                   <option value="2026">2026</option>
                   <option value="2027">2027</option>
                   <option value="2028">2028</option>
                 </select>
-                <select id="travelMonth" class="timing-select">
+                <select id="travelMonth" class="timing-select" aria-label="Travel month">
                   <option value="" disabled selected>Month</option>
                   <option value="January">January</option>
                   <option value="February">February</option>
@@ -863,7 +870,7 @@
                   <option value="November">November</option>
                   <option value="December">December</option>
                 </select>
-                <select id="travelDuration" class="timing-select">
+                <select id="travelDuration" class="timing-select" aria-label="Trip duration">
                   <option value="" disabled selected>For How long</option>
                   <option value="3-5 Days">3-5 Days</option>
                   <option value="7-10 Days">7-10 Days</option>
@@ -948,7 +955,7 @@
   </dialog>
 
   <!-- DEDICATED MULTI-STEP ACCOMMODATION BOOKING FLOW MODAL -->
-  <dialog class="concierge-modal" id="accomBookingModal">
+  <dialog class="concierge-modal" data-lenis-prevent id="accomBookingModal" aria-labelledby="accomModalTitle">
     <div class="modal-content-wrapper">
       <button type="button" class="modal-close" id="closeAccomModalBtn" aria-label="Close modal">&times;</button>
       
@@ -969,7 +976,7 @@
         <div class="accom-step step-active" data-step="1">
           <div class="accom-preview-card">
             <div class="accom-preview-img-wrap">
-              <img id="accomPreviewImg" src="assets/images/Accommodation Imgs/Angama-Mara-.webp" alt="Selected Hotel">
+              <img id="accomPreviewImg" width="1024" height="682" loading="lazy" decoding="async" src="assets/images/accommodation-imgs/angama-mara.webp" srcset="assets/images/accommodation-imgs/angama-mara-640.webp 640w, assets/images/accommodation-imgs/angama-mara.webp 1024w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Selected Hotel">
               <span class="badge-tag" id="accomPreviewBadge">Kenya</span>
             </div>
             <div class="accom-preview-info">
@@ -1221,6 +1228,7 @@
     </div>
   </dialog>
 
-  <script src="app.js"></script>
+  <script src="assets/vendor/lenis/lenis.min.js" defer></script>
+  <script src="app.js" defer></script>
 </body>
 </html>

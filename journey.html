@@ -5,32 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signature Itinerary Details | Ivory Horizons</title>
   <meta name="description" content="View full day-by-day itinerary, luxury accommodation recommendations, included services, and FAQs for Ivory Horizons signature journeys.">
-  <link rel="icon" type="image/svg+xml" href="assets/Tour Icons/Favicon Set/Ivory 32px.svg">
-  <link rel="icon" type="image/svg+xml" href="assets/Tour Icons/Favicon Set/Ivory 512px.svg" sizes="any">
-  <link rel="apple-touch-icon" href="assets/Tour Icons/Favicon Set/Ivory 180px.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/tour-icons/favicon-set/ivory-32px.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/tour-icons/favicon-set/ivory-512px.svg" sizes="any">
+  <link rel="apple-touch-icon" href="assets/tour-icons/favicon-set/ivory-180px.svg">
   <meta name="apple-mobile-web-app-title" content="Ivory Horizons">
   <link rel="manifest" href="site.webmanifest">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300&display=swap"></noscript>
   
+  <link rel="stylesheet" href="assets/vendor/lenis/lenis.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="assets/vendor/lenis/lenis.css"></noscript>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <audio id="bgMusic" loop preload="auto">
-    <source src="assets/Background Music/Masai-Mara-v2-mastered-by-John-Elleson-Hartley.mp3" type="audio/mpeg">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <audio id="bgMusic" loop preload="none">
+    <source src="assets/background-music/masai-mara-v2-mastered-by-john-elleson-hartley.mp3" type="audio/mpeg">
   </audio>
 
   <!-- Navigation Header -->
   <header class="site-header" id="siteHeader">
     <div class="header-container">
       <a href="index.html" class="brand-logo" aria-label="Ivory Horizons Home">
-        <img src="assets/images/Ivory Dark No Bg.png" alt="Ivory Horizons Logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <img width="645" height="298" src="assets/images/ivory-dark-no-bg.png" alt="Ivory Horizons Logo" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <span class="logo-mark-text" style="display: none;"><span class="logo-accent">Ivory</span> Horizons</span>
       </a>
 
-      <nav class="main-nav" aria-label="Main Navigation">
+      <nav class="main-nav" id="mainNav" aria-label="Main Navigation">
         <ul class="nav-list">
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="index.html#destinations" class="nav-link">Destinations</a></li>
@@ -45,7 +49,7 @@
 
       <div class="header-actions">
         <button type="button" class="btn btn-header-cta concierge-trigger">Plan My Trip</button>
-        <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <button type="button" class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mainNav">
           <span></span>
           <span></span>
         </button>
@@ -53,7 +57,7 @@
     </div>
   </header>
 
-  <main class="container py-6">
+  <main id="main-content" tabindex="-1" class="container py-6">
     <a href="index.html#journeys" class="btn btn-outline back-to-home-btn">&larr; Back to Signature Tours</a>
     
     <div id="journeyPageContent">
@@ -74,7 +78,7 @@
           <div class="footer-contact-direct">
             <span class="contact-label">Contact Ivory Horizons at:</span>
             <a href="mailto:hello@ivoryhorizons.com" class="contact-email-link">hello@ivoryhorizons.com <span class="arrow-icon">↗</span></a>
-            <span class="contact-phone-item">Phone / WhatsApp: <a href="https://wa.me/254740199975" target="_blank" rel="noopener">+254 (0) 740 199 975</a></span>
+            <span class="contact-phone-item">Phone / WhatsApp: <a href="https://wa.me/254740199975" target="_blank" rel="noopener">+254 740 199 975</a></span>
           </div>
 
           <div class="footer-nav-menu">
@@ -84,7 +88,7 @@
             <a href="accommodation.html">Accommodation</a>
             <a href="blog.html">Blog Journal</a>
             <a href="index.html#about">About Us</a>
-            <a href="index.html#contact">Private Offices</a>
+            <a href="index.html#contact">Contact</a>
           </div>
         </div>
 
@@ -94,7 +98,7 @@
 
         <div class="footer-card-bottom">
           <div class="footer-copyright-text">
-            © 2026 Ivory Horizons Luxury Concierge. All Rights Reserved.
+            © 2026 Ivory Horizons Tours. All Rights Reserved.
           </div>
           <div class="footer-social-links">
             <a href="https://wa.me/254740199975" target="_blank" rel="noopener" class="footer-social-btn">WhatsApp Concierge</a>
@@ -105,15 +109,8 @@
     </footer>
   </div>
 
-  <!-- CONCIERGE MODAL -->
-  <dialog class="concierge-modal" id="conciergeModal">
-    <div class="concierge-modal-inner">
-      <div class="concierge-modal-header">
-        <div class="modal-brand-badge">
-          <span class="badge-icon">✦</span>
-          <span class="badge-text" id="stepBadge">Step 1 of 4</span>
   <!-- CONCIERGE MODAL / STEP-BY-STEP JOURNEY PLANNER -->
-  <dialog class="concierge-modal" id="conciergeModal">
+  <dialog class="concierge-modal" data-lenis-prevent id="conciergeModal" aria-labelledby="modalTitle">
     <div class="modal-content-wrapper">
       <button type="button" class="modal-close" id="closeConciergeBtn" aria-label="Close modal">&times;</button>
       
@@ -135,7 +132,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Safari Adventure" checked>
               <span class="card-box">
-                <img src="assets/Tour Icons/Safari Adventure Icon.svg" alt="Safari Adventure" class="option-svg-icon">
+                <img src="assets/tour-icons/safari-adventure-icon.svg" alt="Safari Adventure" class="option-svg-icon">
                 <span class="option-label">Safari Adventure</span>
               </span>
             </label>
@@ -143,7 +140,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Beach Escape">
               <span class="card-box">
-                <img src="assets/Tour Icons/Beach Escape Icon.svg" alt="Beach Escape" class="option-svg-icon">
+                <img src="assets/tour-icons/beach-escape-icon.svg" alt="Beach Escape" class="option-svg-icon">
                 <span class="option-label">Beach Escape</span>
               </span>
             </label>
@@ -151,7 +148,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Honeymoon">
               <span class="card-box">
-                <img src="assets/Tour Icons/Honeymoon Icon.svg" alt="Honeymoon" class="option-svg-icon">
+                <img src="assets/tour-icons/honeymoon-icon.svg" alt="Honeymoon" class="option-svg-icon">
                 <span class="option-label">Honeymoon</span>
               </span>
             </label>
@@ -159,7 +156,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Luxury Retreat">
               <span class="card-box">
-                <img src="assets/Tour Icons/Lucury Retreat Icon.svg" alt="Luxury Retreat" class="option-svg-icon">
+                <img src="assets/tour-icons/luxury-retreat-icon.svg" alt="Luxury Retreat" class="option-svg-icon">
                 <span class="option-label">Luxury Retreat</span>
               </span>
             </label>
@@ -167,7 +164,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Cultural Discoveries">
               <span class="card-box">
-                <img src="assets/Tour Icons/Cultural heritage Icon.svg" alt="Cultural Discoveries" class="option-svg-icon">
+                <img src="assets/tour-icons/cultural-heritage-icon.svg" alt="Cultural Discoveries" class="option-svg-icon">
                 <span class="option-label">Cultural Heritage</span>
               </span>
             </label>
@@ -175,7 +172,7 @@
             <label class="option-card">
               <input type="radio" name="journeyType" value="Wildlife Expedition">
               <span class="card-box">
-                <img src="assets/Tour Icons/Adventure Trek Icon.svg" alt="Wildlife Expedition" class="option-svg-icon">
+                <img src="assets/tour-icons/adventure-trek-icon.svg" alt="Wildlife Expedition" class="option-svg-icon">
                 <span class="option-label">Adventure Trek</span>
               </span>
             </label>
@@ -303,13 +300,13 @@
             <div class="form-group">
               <label>When do you want to travel?</label>
               <div class="travel-timing-inputs">
-                <select id="travelYear" class="timing-select">
+                <select id="travelYear" class="timing-select" aria-label="Travel year">
                   <option value="" disabled selected>Year</option>
                   <option value="2026">2026</option>
                   <option value="2027">2027</option>
                   <option value="2028">2028</option>
                 </select>
-                <select id="travelMonth" class="timing-select">
+                <select id="travelMonth" class="timing-select" aria-label="Travel month">
                   <option value="" disabled selected>Month</option>
                   <option value="January">January</option>
                   <option value="February">February</option>
@@ -324,7 +321,7 @@
                   <option value="November">November</option>
                   <option value="December">December</option>
                 </select>
-                <select id="travelDuration" class="timing-select">
+                <select id="travelDuration" class="timing-select" aria-label="Trip duration">
                   <option value="" disabled selected>For How long</option>
                   <option value="3-5 Days">3-5 Days</option>
                   <option value="7-10 Days">7-10 Days</option>
@@ -409,7 +406,7 @@
   </dialog>
 
   <!-- DEDICATED MULTI-STEP ACCOMMODATION BOOKING FLOW MODAL -->
-  <dialog class="concierge-modal" id="accomBookingModal">
+  <dialog class="concierge-modal" data-lenis-prevent id="accomBookingModal" aria-labelledby="accomModalTitle">
     <div class="modal-content-wrapper">
       <button type="button" class="modal-close" id="closeAccomModalBtn" aria-label="Close modal">&times;</button>
       
@@ -430,7 +427,7 @@
         <div class="accom-step step-active" data-step="1">
           <div class="accom-preview-card">
             <div class="accom-preview-img-wrap">
-              <img id="accomPreviewImg" src="assets/images/Accommodation Imgs/Angama-Mara-.webp" alt="Selected Hotel">
+              <img id="accomPreviewImg" width="1024" height="682" loading="lazy" decoding="async" src="assets/images/accommodation-imgs/angama-mara.webp" srcset="assets/images/accommodation-imgs/angama-mara-640.webp 640w, assets/images/accommodation-imgs/angama-mara.webp 1024w" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px" alt="Selected Hotel">
               <span class="badge-tag" id="accomPreviewBadge">Kenya</span>
             </div>
             <div class="accom-preview-info">
@@ -682,6 +679,7 @@
     </div>
   </dialog>
 
-  <script src="app.js"></script>
+  <script src="assets/vendor/lenis/lenis.min.js" defer></script>
+  <script src="app.js" defer></script>
 </body>
 </html>
