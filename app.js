@@ -154,7 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
       { src: 'assets/hero/hero-3.mp4', poster: 'assets/hero/hero-3-poster.webp' }
     ];
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) {
+    const saveData = !!(navigator.connection && navigator.connection.saveData);
+    if (reduceMotion || saveData) {
       heroVideo.removeAttribute('autoplay');
       heroVideo.pause();
     } else {

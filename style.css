@@ -7,6 +7,47 @@
    4. Semantic HTML & Luxury Editorial Styling
    ========================================================================== */
 
+/* Metric-matched fallbacks (one per weight) so the swap to Fraunces does not shift layout; calibrated against Times New Roman in Chrome */
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Times New Roman'), local('Times'), local('Liberation Serif');
+  font-weight: 300;
+  size-adjust: 109%;
+  ascent-override: 91.7%;
+  descent-override: 22.9%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Times New Roman'), local('Times'), local('Liberation Serif');
+  font-weight: 400;
+  size-adjust: 115%;
+  ascent-override: 87.0%;
+  descent-override: 21.7%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Times New Roman'), local('Times'), local('Liberation Serif');
+  font-weight: 500;
+  size-adjust: 117%;
+  ascent-override: 85.5%;
+  descent-override: 21.4%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Times New Roman'), local('Times'), local('Liberation Serif');
+  font-weight: 600;
+  size-adjust: 120%;
+  ascent-override: 83.3%;
+  descent-override: 20.8%;
+  line-gap-override: 0%;
+}
+
 :root {
   /* Colors */
   --bg-primary: #FDFBF7;
@@ -34,8 +75,8 @@
   --overlay-heavy: rgba(26, 15, 10, 0.75);
 
   /* Typography */
-  --font-heading: 'Fraunces', serif;
-  --font-body: 'Fraunces', serif;
+  --font-heading: 'Fraunces', 'Fraunces Fallback', serif;
+  --font-body: 'Fraunces', 'Fraunces Fallback', serif;
 
   /* 8px Spacing Grid System */
   --space-1: 8px;
