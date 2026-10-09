@@ -27,6 +27,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300&display=swap"></noscript>
   
+  <link rel="stylesheet" href="assets/vendor/lenis/lenis.css">
   <link rel="stylesheet" href="style.css">
   <script type="application/ld+json">
   {
@@ -217,7 +218,7 @@
   </div>
 
   <!-- CONCIERGE MODAL / STEP-BY-STEP JOURNEY PLANNER -->
-  <dialog class="concierge-modal" id="conciergeModal">
+  <dialog class="concierge-modal" data-lenis-prevent id="conciergeModal">
     <div class="modal-content-wrapper">
       <button type="button" class="modal-close" id="closeConciergeBtn" aria-label="Close modal">&times;</button>
       
@@ -513,7 +514,7 @@
   </dialog>
 
   <!-- DEDICATED MULTI-STEP ACCOMMODATION BOOKING FLOW MODAL -->
-  <dialog class="concierge-modal" id="accomBookingModal">
+  <dialog class="concierge-modal" data-lenis-prevent id="accomBookingModal">
     <div class="modal-content-wrapper">
       <button type="button" class="modal-close" id="closeAccomModalBtn" aria-label="Close modal">&times;</button>
       
@@ -786,6 +787,7 @@
     </div>
   </dialog>
 
+  <script src="assets/vendor/lenis/lenis.min.js" defer></script>
   <script src="app.js" defer></script>
 </body>
 </html>

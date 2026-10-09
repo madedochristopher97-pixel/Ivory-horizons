@@ -65,6 +65,77 @@ document.addEventListener('DOMContentLoaded', () => {
     updateHeaderState();
   }
 
+  // ----------------------------------------------------
+  // SMOOTH SCROLL (Lenis, self-hosted: assets/vendor/lenis, v1.3.26)
+  // Wheel smoothing only: touch keeps native scrolling, and nothing is initialised for reduced motion.
+  // ----------------------------------------------------
+  let lenis = null;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (typeof Lenis === 'function' && !prefersReducedMotion) {
+    lenis = new Lenis({ duration: 1.1, smoothWheel: true, syncTouch: false });
+    const lenisFrame = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(lenisFrame);
+    };
+    requestAnimationFrame(lenisFrame);
+  }
+
+  // Offset for the fixed (scrolled-state) header so anchored sections are not hidden beneath it
+  function getAnchorOffset() {
+    const container = siteHeader ? siteHeader.querySelector('.header-container') : null;
+    if (!container) return 0;
+    const compactPadding = 2 * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--space-2') || 16);
+    return -(container.offsetHeight + (parseFloat(compactPadding) || 32) + 1);
+  }
+
+  function scrollToAnchor(target, immediate) {
+    if (lenis) {
+      lenis.scrollTo(target, { offset: getAnchorOffset(), immediate: !!immediate });
+    } else {
+      const top = target.getBoundingClientRect().top + window.scrollY + getAnchorOffset();
+      window.scrollTo({ top, behavior: 'auto' });
+    }
+  }
+
+  // Same-page anchors (#section and index.html#section when already on the home page)
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href*="#"]');
+    if (!link || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    const url = new URL(link.getAttribute('href'), window.location.href);
+    if (!url.hash || url.hash === '#' || url.pathname.replace(/\/$/, '/index.html') !== window.location.pathname.replace(/\/$/, '/index.html')) return;
+    const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    if (!target) return;
+    e.preventDefault();
+    if (mainNav) mainNav.classList.remove('active');
+    scrollToAnchor(target);
+    history.pushState(null, '', url.hash);
+  });
+
+  // Arriving from another page via index.html#section: the browser's native jump ignores the header, so re-align
+  if (window.location.hash.length > 1) {
+    let userScrolled = false;
+    ['wheel', 'touchstart', 'keydown'].forEach(evt => window.addEventListener(evt, () => { userScrolled = true; }, { once: true, passive: true }));
+    const realign = () => {
+      if (userScrolled) return;
+      const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+      if (target) scrollToAnchor(target, true);
+    };
+    window.addEventListener('load', () => {
+      realign();
+      // Late font swaps can still move sections, so settle once more
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(realign);
+      setTimeout(realign, 800);
+    });
+  }
+
+  // Pause smooth scroll while a modal dialog is open
+  document.querySelectorAll('dialog').forEach(dlg => {
+    new MutationObserver(() => {
+      if (!lenis) return;
+      if (dlg.open) lenis.stop(); else if (![...document.querySelectorAll('dialog')].some(d => d.open)) lenis.start();
+    }).observe(dlg, { attributes: true, attributeFilter: ['open'] });
+  });
+
   // Mobile Navigation Toggle
   if (mobileToggle && mainNav) {
     mobileToggle.addEventListener('click', () => {
