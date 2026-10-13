@@ -1527,4 +1527,19 @@ I look forward to hearing from you.`;
       }
     });
   }
+
+  // Festive offers: hide an offer once its end date (data-offer-end, YYYY-MM-DD) has passed;
+  // drop the whole section and the hero teaser when none are left
+  const offersSection = document.getElementById('offers');
+  if (offersSection) {
+    const now = new Date();
+    document.querySelectorAll('[data-offer-end]').forEach((el) => {
+      const end = new Date(el.dataset.offerEnd + 'T23:59:59');
+      if (!isNaN(end) && now > end) el.remove();
+    });
+    if (!offersSection.querySelector('.offer-card')) {
+      offersSection.remove();
+      document.querySelectorAll('.hero-offer').forEach((el) => el.remove());
+    }
+  }
 });
