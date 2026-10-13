@@ -421,6 +421,13 @@ img {
   gap: var(--space-6);
 }
 
+/* Nine links: tighten the gap so the row fits between the logo and CTA down to the 1100px collapse */
+@media (max-width: 1320px) {
+  .main-nav .nav-list {
+    gap: var(--space-3);
+  }
+}
+
 .nav-link {
   color: var(--dark-primary);
   font-size: 0.9rem;

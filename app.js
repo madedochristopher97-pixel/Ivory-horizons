@@ -1540,6 +1540,7 @@ I look forward to hearing from you.`;
     if (!offersSection.querySelector('.offer-card')) {
       offersSection.remove();
       document.querySelectorAll('.hero-offer').forEach((el) => el.remove());
+      document.querySelectorAll('.nav-list a[href="#offers"]').forEach((a) => a.parentElement.remove());
     }
   }
 });
