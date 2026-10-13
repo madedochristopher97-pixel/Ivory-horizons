@@ -1027,6 +1027,7 @@ I look forward to hearing from you.`;
   // ----------------------------------------------------
 
   let currentStep = 1;
+  let firstStep = 1; // 3 only for offers that hide steps 1-2 and renumber the rest (data-compact-steps)
   const totalSteps = 4;
 
   const stepTitles = {
@@ -1036,7 +1037,7 @@ I look forward to hearing from you.`;
     4: { title: "Where should your private curator reach out?", subtitle: "Provide your details to receive your personalized proposal." }
   };
 
-  function openConcierge(preselectType = null, preselectDest = null, preselectJourney = null, preselectHotel = null, skipStep1 = false) {
+  function openConcierge(preselectType = null, preselectDest = null, preselectJourney = null, preselectHotel = null, skipStep1 = false, compactSteps = false) {
     if (!conciergeModal) return;
 
     if (preselectType && conciergeForm) {
@@ -1063,6 +1064,7 @@ I look forward to hearing from you.`;
       }
     }
 
+    firstStep = skipStep1 && compactSteps ? 3 : 1;
     currentStep = skipStep1 ? 3 : 1;
     updateStepView();
 
@@ -1108,8 +1110,9 @@ I look forward to hearing from you.`;
     const dest = btn.dataset.dest || null;
     const journey = btn.dataset.journey || null;
     const skip = btn.dataset.skipStep1 === 'true';
+    const compact = btn.dataset.compactSteps === 'true';
 
-    openConcierge(type, dest, journey, hotel, skip);
+    openConcierge(type, dest, journey, hotel, skip, compact);
   });
 
   const closeConciergeBtn = document.getElementById('closeConciergeBtn');
@@ -1132,12 +1135,12 @@ I look forward to hearing from you.`;
         activeStep.style.display = 'block';
       }
 
-      if (stepBadge) stepBadge.textContent = `Step ${currentStep} of ${totalSteps}`;
+      if (stepBadge) stepBadge.textContent = `Step ${currentStep - firstStep + 1} of ${totalSteps - firstStep + 1}`;
       if (modalTitle) modalTitle.textContent = stepTitles[currentStep].title;
       if (modalSubtitle) modalSubtitle.textContent = stepTitles[currentStep].subtitle;
-      if (progressFill) progressFill.style.width = `${(currentStep / totalSteps) * 100}%`;
+      if (progressFill) progressFill.style.width = `${((currentStep - firstStep + 1) / (totalSteps - firstStep + 1)) * 100}%`;
 
-      if (prevStepBtn) prevStepBtn.style.display = currentStep > 1 ? 'inline-flex' : 'none';
+      if (prevStepBtn) prevStepBtn.style.display = currentStep > firstStep ? 'inline-flex' : 'none';
       if (nextStepBtn) nextStepBtn.style.display = currentStep < totalSteps ? 'inline-flex' : 'none';
       if (submitConciergeBtn) submitConciergeBtn.style.display = currentStep === totalSteps ? 'inline-flex' : 'none';
     }
@@ -1154,7 +1157,7 @@ I look forward to hearing from you.`;
 
   if (prevStepBtn) {
     prevStepBtn.addEventListener('click', () => {
-      if (currentStep > 1) {
+      if (currentStep > firstStep) {
         currentStep--;
         updateStepView();
       }
