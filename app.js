@@ -1027,7 +1027,7 @@ I look forward to hearing from you.`;
   // ----------------------------------------------------
 
   let currentStep = 1;
-  let firstStep = 1; // 3 when the trip type and destination steps are skipped
+  let firstStep = 1; // 3 only for offers that hide steps 1-2 and renumber the rest (data-compact-steps)
   const totalSteps = 4;
 
   const stepTitles = {
@@ -1037,7 +1037,7 @@ I look forward to hearing from you.`;
     4: { title: "Where should your private curator reach out?", subtitle: "Provide your details to receive your personalized proposal." }
   };
 
-  function openConcierge(preselectType = null, preselectDest = null, preselectJourney = null, preselectHotel = null, skipStep1 = false) {
+  function openConcierge(preselectType = null, preselectDest = null, preselectJourney = null, preselectHotel = null, skipStep1 = false, compactSteps = false) {
     if (!conciergeModal) return;
 
     if (preselectType && conciergeForm) {
@@ -1064,8 +1064,8 @@ I look forward to hearing from you.`;
       }
     }
 
-    firstStep = skipStep1 ? 3 : 1;
-    currentStep = firstStep;
+    firstStep = skipStep1 && compactSteps ? 3 : 1;
+    currentStep = skipStep1 ? 3 : 1;
     updateStepView();
 
     if (conciergeModal.showModal) {
@@ -1110,8 +1110,9 @@ I look forward to hearing from you.`;
     const dest = btn.dataset.dest || null;
     const journey = btn.dataset.journey || null;
     const skip = btn.dataset.skipStep1 === 'true';
+    const compact = btn.dataset.compactSteps === 'true';
 
-    openConcierge(type, dest, journey, hotel, skip);
+    openConcierge(type, dest, journey, hotel, skip, compact);
   });
 
   const closeConciergeBtn = document.getElementById('closeConciergeBtn');
