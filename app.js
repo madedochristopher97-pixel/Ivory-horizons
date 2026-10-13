@@ -1027,6 +1027,7 @@ I look forward to hearing from you.`;
   // ----------------------------------------------------
 
   let currentStep = 1;
+  let firstStep = 1; // 3 when the trip type and destination steps are skipped
   const totalSteps = 4;
 
   const stepTitles = {
@@ -1063,7 +1064,8 @@ I look forward to hearing from you.`;
       }
     }
 
-    currentStep = skipStep1 ? 3 : 1;
+    firstStep = skipStep1 ? 3 : 1;
+    currentStep = firstStep;
     updateStepView();
 
     if (conciergeModal.showModal) {
@@ -1132,12 +1134,12 @@ I look forward to hearing from you.`;
         activeStep.style.display = 'block';
       }
 
-      if (stepBadge) stepBadge.textContent = `Step ${currentStep} of ${totalSteps}`;
+      if (stepBadge) stepBadge.textContent = `Step ${currentStep - firstStep + 1} of ${totalSteps - firstStep + 1}`;
       if (modalTitle) modalTitle.textContent = stepTitles[currentStep].title;
       if (modalSubtitle) modalSubtitle.textContent = stepTitles[currentStep].subtitle;
-      if (progressFill) progressFill.style.width = `${(currentStep / totalSteps) * 100}%`;
+      if (progressFill) progressFill.style.width = `${((currentStep - firstStep + 1) / (totalSteps - firstStep + 1)) * 100}%`;
 
-      if (prevStepBtn) prevStepBtn.style.display = currentStep > 1 ? 'inline-flex' : 'none';
+      if (prevStepBtn) prevStepBtn.style.display = currentStep > firstStep ? 'inline-flex' : 'none';
       if (nextStepBtn) nextStepBtn.style.display = currentStep < totalSteps ? 'inline-flex' : 'none';
       if (submitConciergeBtn) submitConciergeBtn.style.display = currentStep === totalSteps ? 'inline-flex' : 'none';
     }
@@ -1154,7 +1156,7 @@ I look forward to hearing from you.`;
 
   if (prevStepBtn) {
     prevStepBtn.addEventListener('click', () => {
-      if (currentStep > 1) {
+      if (currentStep > firstStep) {
         currentStep--;
         updateStepView();
       }
