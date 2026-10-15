@@ -1547,27 +1547,89 @@ I look forward to hearing from you.`;
     }
   }
 
-  // Offers carousel: scroll-snap track with arrows, dots and a scroll-driven fade/scale on the slides
+  // Offers carousel: scroll-snap track with arrows, dots, a scroll-driven fade/scale on the slides,
+  // and a slow eased autoplay that loops seamlessly and yields to hover, focus and touch
   const offersTrack = document.getElementById('offersTrack');
   if (offersTrack) {
     const slides = Array.from(offersTrack.querySelectorAll('.offer-card'));
+    const carouselEl = document.getElementById('offersCarousel') || offersTrack;
     const controls = document.getElementById('offersControls');
     const dotsWrap = document.getElementById('offersDots');
     const prevBtn = document.getElementById('offersPrev');
     const nextBtn = document.getElementById('offersNext');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DWELL = 5200;      // how long each package rests before the next glide
+    const GLIDE = 1700;      // length of the glide itself
     let active = 0;
 
-    // slide position inside the scrolled track (offsetLeft is relative to a different parent here)
-    const slideLeft = (slide) => slide.getBoundingClientRect().left - offersTrack.getBoundingClientRect().left + offersTrack.scrollLeft;
+    // a decorative copy of the first slide after the last one makes the loop seamless
+    let loopClone = null;
+    if (slides.length > 1) {
+      loopClone = slides[0].cloneNode(true);
+      loopClone.setAttribute('aria-hidden', 'true');
+      loopClone.setAttribute('inert', '');
+      loopClone.dataset.clone = 'true';
+      loopClone.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+      offersTrack.appendChild(loopClone);
+    }
+    const all = loopClone ? [...slides, loopClone] : slides;
+
+    // layout position inside the track (the track is position: relative); unlike getBoundingClientRect
+    // it ignores the fade/scale transform, so targets stay exact while neighbours shrink
+    const slideLeft = (slide) => slide.offsetLeft;
+    const targetFor = (slide) => {
+      const max = offersTrack.scrollWidth - offersTrack.clientWidth;
+      return Math.max(0, Math.min(max, slideLeft(slide) - (offersTrack.clientWidth - slide.clientWidth) / 2));
+    };
+
+    // Lenis-style glide: quick start, long soft landing (expo ease-out)
+    let anim = null;
+    const easeOutExpo = (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t));
+    function cancelAnim() {
+      if (anim) {
+        cancelAnimationFrame(anim);
+        anim = null;
+        offersTrack.style.scrollSnapType = '';
+      }
+    }
+    function animateTo(target, done) {
+      cancelAnim();
+      const from = offersTrack.scrollLeft;
+      if (Math.abs(target - from) < 1) { if (done) done(); return; }
+      const t0 = performance.now();
+      offersTrack.style.scrollSnapType = 'none'; // snapping would fight the per-frame movement
+      const step = (now) => {
+        const t = Math.min(1, (now - t0) / GLIDE);
+        offersTrack.scrollLeft = from + (target - from) * easeOutExpo(t);
+        if (t < 1) {
+          anim = requestAnimationFrame(step);
+        } else {
+          anim = null;
+          offersTrack.style.scrollSnapType = '';
+          if (done) done();
+        }
+      };
+      anim = requestAnimationFrame(step);
+    }
+
+    // after gliding onto the copy, jump back to the real first slide unseen
+    function rewind() {
+      offersTrack.style.scrollSnapType = 'none';
+      offersTrack.scrollLeft = targetFor(slides[0]);
+      requestAnimationFrame(() => { offersTrack.style.scrollSnapType = ''; });
+    }
 
     function goTo(i, instant = false) {
-      const slide = slides[Math.max(0, Math.min(slides.length - 1, i))];
+      const slide = all[Math.max(0, Math.min(all.length - 1, i))];
       if (!slide) return;
-      offersTrack.scrollTo({
-        left: slideLeft(slide) - (offersTrack.clientWidth - slide.clientWidth) / 2,
-        behavior: instant || reduceMotion ? 'auto' : 'smooth'
-      });
+      const toClone = slide === loopClone;
+      if (instant || reduceMotion) {
+        cancelAnim();
+        offersTrack.scrollLeft = targetFor(slide);
+        if (toClone) rewind();
+        return;
+      }
+      animateTo(targetFor(slide), toClone ? rewind : null);
     }
 
     if (slides.length < 2) {
@@ -1578,7 +1640,7 @@ I look forward to hearing from you.`;
         dot.type = 'button';
         dot.className = 'offers-dot';
         dot.setAttribute('aria-label', `Show ${slide.querySelector('.offer-title')?.textContent || 'offer'} (${i + 1} of ${slides.length})`);
-        dot.addEventListener('click', () => goTo(i));
+        dot.addEventListener('click', () => userGoTo(i));
         dotsWrap.appendChild(dot);
       });
     }
@@ -1590,35 +1652,97 @@ I look forward to hearing from you.`;
       const mid = offersTrack.scrollLeft + offersTrack.clientWidth / 2;
       let best = 0;
       let bestDist = Infinity;
-      slides.forEach((slide, i) => {
+      all.forEach((slide, i) => {
         const dist = Math.abs(slideLeft(slide) + slide.clientWidth / 2 - mid);
         if (dist < bestDist) { bestDist = dist; best = i; }
         // 0 when centred, 1 when a full slide-width away: drives the fade in CSS
         slide.style.setProperty('--p', Math.min(dist / slide.clientWidth, 1).toFixed(3));
       });
-      active = best;
+      active = best % slides.length; // the copy counts as the first slide
       dotsWrap.querySelectorAll('.offers-dot').forEach((dot, i) => {
-        if (i === best) dot.setAttribute('aria-current', 'true'); else dot.removeAttribute('aria-current');
+        if (i === active) dot.setAttribute('aria-current', 'true'); else dot.removeAttribute('aria-current');
       });
-      if (prevBtn) prevBtn.disabled = best === 0;
-      if (nextBtn) nextBtn.disabled = best === slides.length - 1;
+      if (prevBtn) prevBtn.disabled = active === 0;
+      if (nextBtn) nextBtn.disabled = false; // "next" from the last slide loops to the first
+    }
+
+    // ---- autoplay: runs on its own, yields to anything the visitor does
+    const holds = new Set(['offscreen']);
+    let timer = null;
+    function arm(delay = DWELL) {
+      clearTimeout(timer);
+      timer = null;
+      if (holds.size || slides.length < 2 || reduceMotion) return;
+      timer = setTimeout(tick, delay);
+    }
+    function tick() {
+      timer = null;
+      if (holds.size) return;
+      if (document.querySelector('dialog[open]')) { arm(); return; } // booking form is open
+      goTo(active + 1);
+      arm(DWELL + GLIDE);
+    }
+    function hold(reason) {
+      holds.add(reason);
+      clearTimeout(timer);
+      timer = null;
+    }
+    function release(reason, delay = 1200) {
+      holds.delete(reason);
+      if (!holds.size) arm(delay);
+    }
+    function userGoTo(i, instant = false) {
+      goTo(i, instant);
+      arm(DWELL + GLIDE);
     }
 
     offersTrack.addEventListener('scroll', () => {
       if (!ticking) { ticking = true; requestAnimationFrame(update); }
     }, { passive: true });
     window.addEventListener('resize', update);
-    if (prevBtn) prevBtn.addEventListener('click', () => goTo(active - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => goTo(active + 1));
+    if (prevBtn) prevBtn.addEventListener('click', () => userGoTo(active - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => userGoTo(active + 1));
     offersTrack.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(active + 1); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(active - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); userGoTo(active + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); userGoTo(active - 1); }
     });
+
+    // mouse: resting the pointer on the packages holds the slide so it can be read and clicked
+    carouselEl.addEventListener('mouseenter', () => hold('hover'));
+    carouselEl.addEventListener('mouseleave', () => release('hover', 1400));
+    // keyboard focus inside the carousel holds it too
+    carouselEl.addEventListener('focusin', (e) => { if (e.target.matches(':focus-visible')) hold('focus'); });
+    carouselEl.addEventListener('focusout', () => release('focus', 2000));
+    // touch: the finger takes over at once; autoplay resumes a few seconds after it lifts
+    offersTrack.addEventListener('touchstart', () => { cancelAnim(); hold('touch'); }, { passive: true });
+    ['touchend', 'touchcancel'].forEach((ev) => {
+      offersTrack.addEventListener(ev, () => release('touch', 7000), { passive: true });
+    });
+    // trackpad / wheel scrolling counts as the visitor taking over
+    let wheelTimer = null;
+    offersTrack.addEventListener('wheel', () => {
+      cancelAnim();
+      hold('wheel');
+      clearTimeout(wheelTimer);
+      wheelTimer = setTimeout(() => release('wheel', 4000), 400);
+    }, { passive: true });
+    // only run while the carousel is on screen and the tab is visible
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) hold('hidden'); else release('hidden', 1500);
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) release('offscreen', 3200); else hold('offscreen');
+        });
+      }, { threshold: 0.35 }).observe(carouselEl);
+    }
+
     update();
 
     // Hero teasers open the carousel on the matching offer
     document.querySelectorAll('.hero-offer[data-offer-slide]').forEach((link) => {
-      link.addEventListener('click', () => goTo(Number(link.dataset.offerSlide) || 0, true));
+      link.addEventListener('click', () => userGoTo(Number(link.dataset.offerSlide) || 0, true));
     });
   }
 

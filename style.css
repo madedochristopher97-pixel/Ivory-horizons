@@ -3006,6 +3006,7 @@ main.container.py-6 {
 }
 
 .offers-track {
+  position: relative;
   display: flex;
   gap: var(--space-6);
   overflow-x: auto;
