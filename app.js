@@ -1542,8 +1542,98 @@ I look forward to hearing from you.`;
     });
     if (!offersSection.querySelector('.offer-card')) {
       offersSection.remove();
-      document.querySelectorAll('.hero-offer').forEach((el) => el.remove());
+      document.querySelectorAll('.hero-offers, .hero-offer').forEach((el) => el.remove());
       document.querySelectorAll('.nav-list a[href="#offers"]').forEach((a) => a.parentElement.remove());
     }
+  }
+
+  // Offers carousel: scroll-snap track with arrows, dots and a scroll-driven fade/scale on the slides
+  const offersTrack = document.getElementById('offersTrack');
+  if (offersTrack) {
+    const slides = Array.from(offersTrack.querySelectorAll('.offer-card'));
+    const controls = document.getElementById('offersControls');
+    const dotsWrap = document.getElementById('offersDots');
+    const prevBtn = document.getElementById('offersPrev');
+    const nextBtn = document.getElementById('offersNext');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let active = 0;
+
+    // slide position inside the scrolled track (offsetLeft is relative to a different parent here)
+    const slideLeft = (slide) => slide.getBoundingClientRect().left - offersTrack.getBoundingClientRect().left + offersTrack.scrollLeft;
+
+    function goTo(i, instant = false) {
+      const slide = slides[Math.max(0, Math.min(slides.length - 1, i))];
+      if (!slide) return;
+      offersTrack.scrollTo({
+        left: slideLeft(slide) - (offersTrack.clientWidth - slide.clientWidth) / 2,
+        behavior: instant || reduceMotion ? 'auto' : 'smooth'
+      });
+    }
+
+    if (slides.length < 2) {
+      if (controls) controls.hidden = true;
+    } else {
+      slides.forEach((slide, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'offers-dot';
+        dot.setAttribute('aria-label', `Show ${slide.querySelector('.offer-title')?.textContent || 'offer'} (${i + 1} of ${slides.length})`);
+        dot.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(dot);
+      });
+    }
+
+    let ticking = false;
+    function update() {
+      ticking = false;
+      if (!offersTrack.clientWidth) return; // not laid out (hidden tab/pane)
+      const mid = offersTrack.scrollLeft + offersTrack.clientWidth / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      slides.forEach((slide, i) => {
+        const dist = Math.abs(slideLeft(slide) + slide.clientWidth / 2 - mid);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+        // 0 when centred, 1 when a full slide-width away: drives the fade in CSS
+        slide.style.setProperty('--p', Math.min(dist / slide.clientWidth, 1).toFixed(3));
+      });
+      active = best;
+      dotsWrap.querySelectorAll('.offers-dot').forEach((dot, i) => {
+        if (i === best) dot.setAttribute('aria-current', 'true'); else dot.removeAttribute('aria-current');
+      });
+      if (prevBtn) prevBtn.disabled = best === 0;
+      if (nextBtn) nextBtn.disabled = best === slides.length - 1;
+    }
+
+    offersTrack.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(active - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(active + 1));
+    offersTrack.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(active + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(active - 1); }
+    });
+    update();
+
+    // Hero teasers open the carousel on the matching offer
+    document.querySelectorAll('.hero-offer[data-offer-slide]').forEach((link) => {
+      link.addEventListener('click', () => goTo(Number(link.dataset.offerSlide) || 0, true));
+    });
+  }
+
+  // "How to book" poster viewer
+  const offerGuide = document.getElementById('offerGuide');
+  if (offerGuide) {
+    const guideImg = document.getElementById('offerGuideImg');
+    document.querySelectorAll('.offer-guide-link').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        guideImg.src = btn.dataset.guideSrc;
+        guideImg.alt = btn.dataset.guideAlt || 'How to book';
+        if (offerGuide.showModal) offerGuide.showModal(); else offerGuide.setAttribute('open', '');
+      });
+    });
+    document.getElementById('offerGuideClose')?.addEventListener('click', () => offerGuide.close());
+    offerGuide.addEventListener('click', (e) => { if (e.target === offerGuide) offerGuide.close(); });
   }
 });
