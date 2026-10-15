@@ -1622,18 +1622,45 @@ I look forward to hearing from you.`;
     });
   }
 
-  // "How to book" poster viewer
-  const offerGuide = document.getElementById('offerGuide');
-  if (offerGuide) {
-    const guideImg = document.getElementById('offerGuideImg');
-    document.querySelectorAll('.offer-guide-link').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        guideImg.src = btn.dataset.guideSrc;
-        guideImg.alt = btn.dataset.guideAlt || 'How to book';
-        if (offerGuide.showModal) offerGuide.showModal(); else offerGuide.setAttribute('open', '');
-      });
+  // Festive countdown: "Starts in N days" before the offer, "Running now" during it, hidden after
+  document.querySelectorAll('[data-countdown]').forEach((el) => {
+    const start = new Date(el.dataset.countdown + 'T00:00:00');
+    const end = new Date((el.dataset.countdownEnd || el.dataset.countdown) + 'T23:59:59');
+    const now = new Date();
+    if (isNaN(start) || now > end) return;
+    if (now < start) {
+      const days = Math.ceil((start - now) / 86400000);
+      el.textContent = days === 1 ? 'Starts tomorrow' : `Starts in ${days} days`;
+    } else {
+      el.textContent = 'Running now';
+    }
+    el.hidden = false;
+  });
+
+  // Package pages: reveal chapters as they scroll in, and show the sticky Book now bar mid-page
+  const revealEls = document.querySelectorAll('.reveal');
+  if (revealEls.length) {
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('has-reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach((el) => io.observe(el));
+    }
+  }
+
+  const packageBar = document.getElementById('packageBar');
+  if (packageBar && 'IntersectionObserver' in window) {
+    const watched = ['packageHeroActions', 'packageFinal'].map((id) => document.getElementById(id)).filter(Boolean);
+    const visible = new Set();
+    const barIo = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) visible.add(entry.target); else visible.delete(entry.target); });
+      const show = visible.size === 0 && window.scrollY > 200;
+      packageBar.classList.toggle('is-shown', show);
+      packageBar.setAttribute('aria-hidden', show ? 'false' : 'true');
     });
-    document.getElementById('offerGuideClose')?.addEventListener('click', () => offerGuide.close());
-    offerGuide.addEventListener('click', (e) => { if (e.target === offerGuide) offerGuide.close(); });
+    watched.forEach((el) => barIo.observe(el));
   }
 });

@@ -3171,22 +3171,6 @@ main.container.py-6 {
   color: var(--dark-primary);
 }
 
-.offer-guide-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin-top: var(--space-2);
-  padding: 0;
-  background: none;
-  border: 0;
-  font: inherit;
-  font-weight: 600;
-  color: var(--brown-accent-deep);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-}
-
 /* Carousel controls */
 .offers-controls {
   display: flex;
@@ -3251,46 +3235,6 @@ main.container.py-6 {
 .offers-dot[aria-current="true"]::before {
   width: 28px;
   background-color: var(--brown-accent-deep);
-}
-
-/* How-to-book poster viewer */
-.offer-guide {
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  max-width: min(92vw, 520px);
-  max-height: 92vh;
-  padding: 0;
-  border: 0;
-  border-radius: var(--radius-md);
-  background: var(--dark-primary);
-  overflow: hidden;
-}
-
-.offer-guide::backdrop {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.offer-guide img {
-  display: block;
-  width: 100%;
-  max-height: 92vh;
-  object-fit: contain;
-}
-
-.offer-guide-close {
-  position: absolute;
-  top: var(--space-1);
-  right: var(--space-1);
-  width: 44px;
-  height: 44px;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--dark-primary);
-  font-size: 1.75rem;
-  line-height: 1;
-  cursor: pointer;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3375,5 +3319,320 @@ main.container.py-6 {
   .offer-actions .btn {
     width: 100%;
     white-space: normal;
+  }
+}
+
+/* ==========================================================================
+   OFFER CARDS: whole card opens the package page; urgency badges
+   ========================================================================== */
+.offer-card {
+  position: relative;
+}
+
+.offer-media a {
+  display: block;
+  height: 100%;
+}
+
+.offer-link {
+  color: inherit;
+}
+
+/* stretched link: the title's anchor covers the card, buttons sit above it */
+.offer-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.offer-actions,
+.offer-contact {
+  position: relative;
+  z-index: 2;
+}
+
+.offer-card:hover .offer-title {
+  color: var(--brown-accent-deep);
+}
+
+.offer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+.offer-badges .offer-date {
+  margin-bottom: 0;
+}
+
+.offer-countdown,
+.package-countdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px var(--space-2);
+  border: 1px solid var(--brown-accent-deep);
+  border-radius: 999px;
+  color: var(--brown-accent-deep);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.offer-countdown::before,
+.package-countdown::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--brown-accent-deep);
+  animation: offer-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes offer-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.7); }
+}
+
+/* ==========================================================================
+   PACKAGE PAGES (diani / samburu / masai-mara)
+   ========================================================================== */
+.package-hero .section-subtitle {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.package-countdown {
+  margin-top: var(--space-3);
+}
+
+.package-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.package-container {
+  max-width: 1040px;
+}
+
+.package-chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: center;
+  margin: var(--space-10) 0;
+}
+
+.package-chapter--flip .package-poster {
+  order: 2;
+}
+
+.package-poster {
+  margin: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-deep);
+  background-color: var(--bg-secondary);
+}
+
+.package-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.package-chapter:not(:has(.package-poster)) {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.package-kicker {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brown-accent-deep);
+}
+
+.package-copy .article-h2 {
+  margin-top: 0;
+}
+
+.package-includes,
+.package-steps {
+  margin: var(--space-3) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.package-includes li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-2) 0 var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--brown-light);
+  position: relative;
+  color: var(--text-mid);
+}
+
+.package-includes li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: calc(var(--space-2) + 0.45em);
+  width: 12px;
+  height: 7px;
+  border-left: 2px solid var(--brown-accent-deep);
+  border-bottom: 2px solid var(--brown-accent-deep);
+  transform: rotate(-45deg);
+}
+
+.package-includes li strong {
+  color: var(--dark-primary);
+}
+
+.package-close {
+  font-style: italic;
+}
+
+.package-inline-cta {
+  margin-top: var(--space-3);
+}
+
+.package-steps {
+  counter-reset: step;
+}
+
+.package-steps li {
+  position: relative;
+  padding: var(--space-2) 0 var(--space-2) 52px;
+  color: var(--text-mid);
+  counter-increment: step;
+}
+
+.package-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: var(--space-2);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--brown-accent-deep);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.package-steps li strong {
+  color: var(--dark-primary);
+}
+
+.package-steps a {
+  color: var(--brown-accent-deep);
+  font-weight: 600;
+}
+
+.package-final {
+  margin-top: var(--space-10);
+}
+
+.article-container .package-final-note,
+.package-final-note {
+  color: var(--brown-light);
+  margin-bottom: var(--space-3);
+}
+
+/* Sticky Book now bar, shown mid-page */
+.package-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background-color: rgba(253, 251, 247, 0.97);
+  border-top: 1px solid var(--brown-light);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(110%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.package-bar.is-shown {
+  transform: translateY(0);
+}
+
+.package-bar-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.package-bar-text strong {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--dark-primary);
+}
+
+.package-bar-text span {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/* Chapters fade up as they scroll into view */
+.has-reveal .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.has-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 860px) {
+  .package-chapter {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    margin: var(--space-8) 0;
+  }
+
+  .package-chapter--flip .package-poster {
+    order: 0;
+  }
+
+  .package-poster {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offer-countdown::before,
+  .package-countdown::before {
+    animation: none;
+  }
+
+  .package-bar {
+    transition: none;
   }
 }
