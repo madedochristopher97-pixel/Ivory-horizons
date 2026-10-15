@@ -3350,9 +3350,17 @@ main.container.py-6 {
   }
 
   /* two hero teasers stacked: keep them short so the headline stays above the fold */
+  .hero-offers {
+    gap: var(--space-1);
+  }
+
   .hero-offer-thumb {
-    flex-basis: 64px;
-    width: 64px;
+    flex-basis: 52px;
+    width: 52px;
+  }
+
+  .hero-offer-date {
+    font-size: 0.8rem;
   }
 
   .hero-offer-kicker,
@@ -3361,7 +3369,7 @@ main.container.py-6 {
   }
 
   .hero-offer-title {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
   }
 
   .offer-actions .btn {
