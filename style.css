@@ -3171,22 +3171,6 @@ main.container.py-6 {
   color: var(--dark-primary);
 }
 
-.offer-guide-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin-top: var(--space-2);
-  padding: 0;
-  background: none;
-  border: 0;
-  font: inherit;
-  font-weight: 600;
-  color: var(--brown-accent-deep);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-}
-
 /* Carousel controls */
 .offers-controls {
   display: flex;
@@ -3251,46 +3235,6 @@ main.container.py-6 {
 .offers-dot[aria-current="true"]::before {
   width: 28px;
   background-color: var(--brown-accent-deep);
-}
-
-/* How-to-book poster viewer */
-.offer-guide {
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  max-width: min(92vw, 520px);
-  max-height: 92vh;
-  padding: 0;
-  border: 0;
-  border-radius: var(--radius-md);
-  background: var(--dark-primary);
-  overflow: hidden;
-}
-
-.offer-guide::backdrop {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.offer-guide img {
-  display: block;
-  width: 100%;
-  max-height: 92vh;
-  object-fit: contain;
-}
-
-.offer-guide-close {
-  position: absolute;
-  top: var(--space-1);
-  right: var(--space-1);
-  width: 44px;
-  height: 44px;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--dark-primary);
-  font-size: 1.75rem;
-  line-height: 1;
-  cursor: pointer;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3375,5 +3319,497 @@ main.container.py-6 {
   .offer-actions .btn {
     width: 100%;
     white-space: normal;
+  }
+}
+
+/* ==========================================================================
+   OFFER CARDS: whole card opens the package page; urgency badges
+   ========================================================================== */
+.offer-card {
+  position: relative;
+}
+
+.offer-media a {
+  display: block;
+  height: 100%;
+}
+
+.offer-link {
+  color: inherit;
+}
+
+/* stretched link: the title's anchor covers the card, buttons sit above it */
+.offer-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.offer-actions,
+.offer-contact {
+  position: relative;
+  z-index: 2;
+}
+
+.offer-card:hover .offer-title {
+  color: var(--brown-accent-deep);
+}
+
+.offer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+.offer-badges .offer-date {
+  margin-bottom: 0;
+}
+
+.offer-countdown,
+.package-countdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px var(--space-2);
+  border: 1px solid var(--brown-accent-deep);
+  border-radius: 999px;
+  color: var(--brown-accent-deep);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   PACKAGE PAGES (diani / samburu / masai-mara)
+   ========================================================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Wide header cropped from the poster, so the package name in the artwork becomes the page title */
+.package-banner {
+  padding-top: 88px;
+  background-color: var(--bg-secondary);
+}
+
+.package-banner-frame {
+  position: relative;
+  aspect-ratio: 2.6 / 1;
+  max-height: 540px;
+  overflow: hidden;
+}
+
+.package-banner-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: var(--banner-filter, none);
+}
+
+/* deepens the backdrop behind the artwork so the package name stays readable */
+.package-banner-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--banner-tint, transparent);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* blends the image into the page above and below, leaving the artwork text clear */
+.package-banner-frame::after {
+  z-index: 2;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, var(--bg-secondary) 0%, rgba(247, 242, 232, 0) 9%),
+    linear-gradient(to top, var(--bg-secondary) 0%, rgba(247, 242, 232, 0) 10%);
+  pointer-events: none;
+}
+
+.package-intro {
+  padding: var(--space-2) 0 var(--space-6);
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--brown-light);
+}
+
+.package-intro .section-subtitle {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.package-countdown {
+  margin-top: var(--space-3);
+}
+
+.package-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.package-container {
+  max-width: 1040px;
+}
+
+.package-chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: center;
+  margin: var(--space-10) 0;
+}
+
+.package-chapter--flip .package-poster {
+  order: 2;
+}
+
+.package-poster {
+  margin: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-deep);
+  background-color: var(--bg-secondary);
+}
+
+.package-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.package-chapter:not(:has(.package-poster)) {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.package-kicker {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brown-accent-deep);
+}
+
+.package-copy .article-h2 {
+  margin-top: 0;
+}
+
+.package-includes,
+.package-steps {
+  margin: var(--space-3) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.package-includes li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-2) 0 var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--brown-light);
+  position: relative;
+  color: var(--text-mid);
+}
+
+.package-includes li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: calc(var(--space-2) + 0.45em);
+  width: 12px;
+  height: 7px;
+  border-left: 2px solid var(--brown-accent-deep);
+  border-bottom: 2px solid var(--brown-accent-deep);
+  transform: rotate(-45deg);
+}
+
+.package-includes li strong {
+  color: var(--dark-primary);
+}
+
+.package-close {
+  font-style: italic;
+}
+
+.package-inline-cta {
+  margin-top: var(--space-3);
+}
+
+.package-steps {
+  counter-reset: step;
+}
+
+.package-steps li {
+  position: relative;
+  padding: var(--space-2) 0 var(--space-2) 52px;
+  color: var(--text-mid);
+  counter-increment: step;
+}
+
+.package-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: var(--space-2);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--brown-accent-deep);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.package-steps li strong {
+  color: var(--dark-primary);
+}
+
+.package-steps a {
+  color: var(--brown-accent-deep);
+  font-weight: 600;
+}
+
+.package-final {
+  margin-top: var(--space-10);
+}
+
+.article-container .package-final-note,
+.package-final-note {
+  color: var(--brown-light);
+  margin-bottom: var(--space-3);
+}
+
+/* Sticky Book now bar, shown mid-page */
+.package-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background-color: rgba(253, 251, 247, 0.97);
+  border-top: 1px solid var(--brown-light);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(110%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.package-bar.is-shown {
+  transform: translateY(0);
+}
+
+.package-bar-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.package-bar-text strong {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--dark-primary);
+}
+
+.package-bar-text span {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/* Chapters fade up as they scroll into view */
+.has-reveal .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.has-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 860px) {
+  .package-chapter {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    margin: var(--space-8) 0;
+  }
+
+  .package-chapter--flip .package-poster {
+    order: 0;
+  }
+
+  .package-poster {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .package-bar {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   PREMIUM 3D BUTTONS: top light, glossy face, solid lower edge, hover glint
+   ========================================================================== */
+.btn-inspo-primary,
+.btn-header-cta,
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid #6E3410;
+  background-color: #A9561C;
+  background-image: linear-gradient(180deg, #C26A2B 0%, #A9561C 48%, #8E4516 100%);
+  color: var(--white);
+  text-shadow: 0 1px 0 rgba(60, 25, 5, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -2px 0 rgba(60, 25, 5, 0.28),
+    0 4px 0 #6E3410,
+    0 10px 18px rgba(60, 25, 5, 0.32);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), filter 0.25s ease;
+}
+
+/* soft light falling on the upper half of the face */
+.btn-inspo-primary::before,
+.btn-header-cta::before,
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 50% 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.04));
+  pointer-events: none;
+}
+
+/* light glint that sweeps across on hover */
+.btn-inspo-primary::after,
+.btn-header-cta::after,
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: -70%;
+  width: 45%;
+  z-index: -1;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  transform: skewX(-20deg);
+  transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.btn-inspo-primary:hover,
+.btn-header-cta:hover,
+.btn-primary:hover {
+  background-color: #A9561C;
+  background-image: linear-gradient(180deg, #CC7332 0%, #B05C20 48%, #94491A 100%);
+  border-color: #6E3410;
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -2px 0 rgba(60, 25, 5, 0.28),
+    0 6px 0 #6E3410,
+    0 14px 22px rgba(60, 25, 5, 0.36);
+}
+
+.btn-inspo-primary:hover::after,
+.btn-header-cta:hover::after,
+.btn-primary:hover::after {
+  left: 130%;
+}
+
+.btn-inspo-primary:active,
+.btn-header-cta:active,
+.btn-primary:active {
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(60, 25, 5, 0.28),
+    0 1px 0 #6E3410,
+    0 3px 6px rgba(60, 25, 5, 0.3);
+}
+
+/* on the cream hero of the package pages the dark Book now stays dark, with the same 3D finish */
+.package-intro .btn-primary,
+.package-bar .btn-primary {
+  border-color: #080402;
+  background-color: #25170F;
+  background-image: linear-gradient(180deg, #4A3023 0%, #2C1B12 48%, #1A0F09 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.4),
+    0 4px 0 #080402,
+    0 10px 18px rgba(20, 10, 4, 0.35);
+}
+
+.package-intro .btn-primary:hover,
+.package-bar .btn-primary:hover {
+  background-image: linear-gradient(180deg, #5A3A2A 0%, #34211A 48%, #1F120B 100%);
+  border-color: #080402;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.4),
+    0 6px 0 #080402,
+    0 14px 22px rgba(20, 10, 4, 0.4);
+}
+
+.package-intro .btn-primary:active,
+.package-bar .btn-primary:active {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 1px 0 #080402,
+    0 3px 6px rgba(20, 10, 4, 0.35);
+}
+
+/* the terracotta block at the foot of the page keeps the terracotta face */
+.article-cta .btn-primary {
+  border-color: #6E3410;
+  background-color: #A9561C;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-inspo-primary,
+  .btn-header-cta,
+  .btn-primary,
+  .btn-inspo-primary::after,
+  .btn-header-cta::after,
+  .btn-primary::after {
+    transition: none;
   }
 }
