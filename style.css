@@ -2927,8 +2927,16 @@ main.container.py-6 {
 /* ==========================================================================
    FESTIVE OFFERS (hero teaser + #offers section)
    ========================================================================== */
-.hero-offer {
+.hero-offers {
   justify-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-offer {
   display: flex;
   align-items: stretch;
   gap: var(--space-2);
@@ -2997,13 +3005,38 @@ main.container.py-6 {
   background-color: var(--bg-secondary);
 }
 
-.offers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.offers-track {
+  display: flex;
   gap: var(--space-6);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  /* side padding lets the first and last slide sit centred (auto margins collapse in an overflowing flex row) */
+  padding: var(--space-2) max(0px, calc((100% - 1000px) / 2)) var(--space-4);
+}
+
+.offers-track::-webkit-scrollbar {
+  display: none;
+}
+
+.offers-track:focus-visible {
+  outline: 2px solid var(--brown-accent-deep);
+  outline-offset: 4px;
 }
 
 .offer-card {
+  --p: 0;
+  flex: 0 0 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  /* the slide fades, shrinks and softens as it leaves the centre (--p set in app.js) */
+  opacity: calc(1 - var(--p) * 0.9);
+  transform: scale(calc(1 - var(--p) * 0.08));
+  filter: blur(calc(var(--p) * 3px));
+  will-change: opacity, transform;
   display: flex;
   flex-direction: column;
   background-color: var(--white);
@@ -3125,22 +3158,174 @@ main.container.py-6 {
   color: var(--bg-primary);
 }
 
-/* A single offer reads as a featured row; two or more fall back to the card grid */
+.offer-price {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+  padding: 2px var(--space-3);
+  border: 2px solid var(--dark-primary);
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--dark-primary);
+}
+
+.offer-guide-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--space-2);
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--brown-accent-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+/* Carousel controls */
+.offers-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.offers-arrow {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--dark-primary);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--dark-primary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+}
+
+.offers-arrow:hover:not(:disabled) {
+  background-color: var(--dark-primary);
+  color: var(--bg-primary);
+}
+
+.offers-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.offers-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.offers-dot {
+  position: relative;
+  width: 28px;
+  height: 44px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.offers-dot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background-color: var(--brown-light);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.offers-dot[aria-current="true"]::before {
+  width: 28px;
+  background-color: var(--brown-accent-deep);
+}
+
+/* How-to-book poster viewer */
+.offer-guide {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  max-width: min(92vw, 520px);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--dark-primary);
+  overflow: hidden;
+}
+
+.offer-guide::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.offer-guide img {
+  display: block;
+  width: 100%;
+  max-height: 92vh;
+  object-fit: contain;
+}
+
+.offer-guide-close {
+  position: absolute;
+  top: var(--space-1);
+  right: var(--space-1);
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--dark-primary);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offer-card {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Featured-row layout: poster/photo left, details right */
 @media (min-width: 769px) {
-  .offer-card:only-child {
+  .offer-card {
     flex-direction: row;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
   }
 
-  .offer-card:only-child .offer-media {
+  .offer-media {
     flex: 0 0 min(40%, 400px);
     aspect-ratio: auto;
     min-height: 480px;
   }
 
-  .offer-card:only-child .offer-body {
+  /* poster artwork carries its own text: show it uncropped at its native 3:4 */
+  .offer-card--poster .offer-media {
+    flex: 0 0 min(40%, 400px);
+    align-self: flex-start;
+    aspect-ratio: 3 / 4;
+    min-height: 0;
+  }
+
+  .offer-card--poster .offer-body {
+    padding: var(--space-4);
+  }
+
+  .offer-body {
     justify-content: center;
     padding: var(--space-6);
   }
@@ -3153,7 +3338,7 @@ main.container.py-6 {
 }
 
 @media (max-width: 992px) {
-  .hero-offer {
+  .hero-offers {
     order: -1;
     justify-self: start;
   }
@@ -3162,6 +3347,29 @@ main.container.py-6 {
 @media (max-width: 600px) {
   .offer-body {
     padding: var(--space-3);
+  }
+
+  /* two hero teasers stacked: keep them short so the headline stays above the fold */
+  .hero-offers {
+    gap: var(--space-1);
+  }
+
+  .hero-offer-thumb {
+    flex-basis: 52px;
+    width: 52px;
+  }
+
+  .hero-offer-date {
+    font-size: 0.8rem;
+  }
+
+  .hero-offer-kicker,
+  .hero-offer-link {
+    display: none;
+  }
+
+  .hero-offer-title {
+    font-size: 1.1rem;
   }
 
   .offer-actions .btn {
