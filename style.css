@@ -3382,25 +3382,74 @@ main.container.py-6 {
   letter-spacing: 0.02em;
 }
 
-.offer-countdown::before,
-.package-countdown::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--brown-accent-deep);
-  animation: offer-pulse 1.8s ease-in-out infinite;
-}
-
-@keyframes offer-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.35; transform: scale(0.7); }
-}
-
 /* ==========================================================================
    PACKAGE PAGES (diani / samburu / masai-mara)
    ========================================================================== */
-.package-hero .section-subtitle {
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Wide header cropped from the poster, so the package name in the artwork becomes the page title */
+.package-banner {
+  padding-top: 88px;
+  background-color: var(--bg-secondary);
+}
+
+.package-banner-frame {
+  position: relative;
+  aspect-ratio: 2.6 / 1;
+  max-height: 540px;
+  overflow: hidden;
+}
+
+.package-banner-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: var(--banner-filter, none);
+}
+
+/* deepens the backdrop behind the artwork so the package name stays readable */
+.package-banner-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--banner-tint, transparent);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* blends the image into the page above and below, leaving the artwork text clear */
+.package-banner-frame::after {
+  z-index: 2;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, var(--bg-secondary) 0%, rgba(247, 242, 232, 0) 9%),
+    linear-gradient(to top, var(--bg-secondary) 0%, rgba(247, 242, 232, 0) 10%);
+  pointer-events: none;
+}
+
+.package-intro {
+  padding: var(--space-2) 0 var(--space-6);
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--brown-light);
+}
+
+.package-intro .section-subtitle {
   max-width: 640px;
   margin-left: auto;
   margin-right: auto;
@@ -3627,12 +3676,140 @@ main.container.py-6 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .offer-countdown::before,
-  .package-countdown::before {
-    animation: none;
-  }
-
   .package-bar {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   PREMIUM 3D BUTTONS: top light, glossy face, solid lower edge, hover glint
+   ========================================================================== */
+.btn-inspo-primary,
+.btn-header-cta,
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid #6E3410;
+  background-color: #A9561C;
+  background-image: linear-gradient(180deg, #C26A2B 0%, #A9561C 48%, #8E4516 100%);
+  color: var(--white);
+  text-shadow: 0 1px 0 rgba(60, 25, 5, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -2px 0 rgba(60, 25, 5, 0.28),
+    0 4px 0 #6E3410,
+    0 10px 18px rgba(60, 25, 5, 0.32);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), filter 0.25s ease;
+}
+
+/* soft light falling on the upper half of the face */
+.btn-inspo-primary::before,
+.btn-header-cta::before,
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 50% 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.04));
+  pointer-events: none;
+}
+
+/* light glint that sweeps across on hover */
+.btn-inspo-primary::after,
+.btn-header-cta::after,
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: -70%;
+  width: 45%;
+  z-index: -1;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  transform: skewX(-20deg);
+  transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.btn-inspo-primary:hover,
+.btn-header-cta:hover,
+.btn-primary:hover {
+  background-color: #A9561C;
+  background-image: linear-gradient(180deg, #CC7332 0%, #B05C20 48%, #94491A 100%);
+  border-color: #6E3410;
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -2px 0 rgba(60, 25, 5, 0.28),
+    0 6px 0 #6E3410,
+    0 14px 22px rgba(60, 25, 5, 0.36);
+}
+
+.btn-inspo-primary:hover::after,
+.btn-header-cta:hover::after,
+.btn-primary:hover::after {
+  left: 130%;
+}
+
+.btn-inspo-primary:active,
+.btn-header-cta:active,
+.btn-primary:active {
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(60, 25, 5, 0.28),
+    0 1px 0 #6E3410,
+    0 3px 6px rgba(60, 25, 5, 0.3);
+}
+
+/* on the cream hero of the package pages the dark Book now stays dark, with the same 3D finish */
+.package-intro .btn-primary,
+.package-bar .btn-primary {
+  border-color: #080402;
+  background-color: #25170F;
+  background-image: linear-gradient(180deg, #4A3023 0%, #2C1B12 48%, #1A0F09 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.4),
+    0 4px 0 #080402,
+    0 10px 18px rgba(20, 10, 4, 0.35);
+}
+
+.package-intro .btn-primary:hover,
+.package-bar .btn-primary:hover {
+  background-image: linear-gradient(180deg, #5A3A2A 0%, #34211A 48%, #1F120B 100%);
+  border-color: #080402;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.4),
+    0 6px 0 #080402,
+    0 14px 22px rgba(20, 10, 4, 0.4);
+}
+
+.package-intro .btn-primary:active,
+.package-bar .btn-primary:active {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 1px 0 #080402,
+    0 3px 6px rgba(20, 10, 4, 0.35);
+}
+
+/* the terracotta block at the foot of the page keeps the terracotta face */
+.article-cta .btn-primary {
+  border-color: #6E3410;
+  background-color: #A9561C;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-inspo-primary,
+  .btn-header-cta,
+  .btn-primary,
+  .btn-inspo-primary::after,
+  .btn-header-cta::after,
+  .btn-primary::after {
     transition: none;
   }
 }
